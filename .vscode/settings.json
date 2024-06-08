@@ -1,27 +1,16 @@
 {
-  "Lua.runtime.nonstandardSymbol": ["continue", "!="],
+  "Lua.runtime.version": "Lua 5.1",
+  "Lua.runtime.path": ["?.lua", "?/init.lua", "/?"],
   "Lua.completion.showWord": "Disable",
   "Lua.runtime.special": {
     "import": "require",
-    "doscript": "require",
-    "lazyimport": "require"
+    "doscript": "require"
   },
-  "Lua.runtime.version": "Lua 5.1",
-  "Lua.telemetry.enable": false,
-  "Lua.workspace.checkThirdParty": false,
-  "Lua.runtime.path": ["/?"],
-  "Lua.runtime.plugin": ".vscode/fa-plugin.lua",
-  "Lua.workspace.ignoreDir": [".vscode", "loc", "*.bp"],
-  "[lua]": {
-    "editor.wordBasedSuggestions": "off"
-  },
-  "files.associations": {
-    "*.bp": "lua"
-  },
+  "Lua.runtime.nonstandardSymbol": ["!="],
   "Lua.completion.requireSeparator": "/",
-  "Lua.diagnostics.enable": true,
-  "Lua.runtime.pathStrict": false,
   "Lua.runtime.exportEnvDefault": true,
-  "Lua.completion.autoRequire": false,
-  "Lua.diagnostics.globals": ["ScenarioInfo"],
+  "Lua.diagnostics.globals": ["moho"],
+  "Lua.runtime.plugin": "${3rd}/fa/plugin.lua",
+  "Lua.workspace.library": ["${3rd}/fa/library"],
+  "Lua.workspace.checkThirdParty": false
 }
