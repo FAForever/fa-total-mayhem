@@ -1,0 +1,62 @@
+name: Total Mayhem Wiki - Generate Unit Pages
+
+on: [workflow_dispatch]
+
+jobs:
+
+    Generate-Blueprints:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                shell: bash
+        
+        steps:
+            #checkout repos
+
+            - name: Checkout Brewlan Wikigen Repo
+              uses: actions/checkout@v4
+              with:
+                repository: The-Balthazar/BrewWikiGen
+                path: ./brew-wiki-gen
+            
+            - name: FAF Repo
+              uses: actions/checkout@v4
+              with:
+                path: ./fa-total-mayhem
+                sparse-checkout-cone-mode: |
+                    wiki
+                    loc
+                    lua/ui/help/unitscription.lua
+                    lua/ui/help/tooltips.lua
+                    lua/sim/AdjacencyBuffs.lua
+                    lua/system/Blueprints.lua
+                    units/*_unit.bp
+                    units/*_LOD0.scm
+                    projectiles
+
+            - name: checkout wiki
+              uses: actions/checkout@v4
+              with:
+                repository: FAForever/fa-total-mayhem.wiki
+                path: ./fa-total-mayhem.wiki
+
+            - name: Install Lua 5.4
+              uses: leafo/gh-actions-lua@v10
+              with:
+                luaVersion: "5.4"
+
+            - name: Replace run.lua
+              run: |
+                sudo mv fa-total-mayhem/wiki/Run.lua brew-wiki-gen/Run.lua
+
+            - name: Execute lua run
+              run: |
+                lua brew-wiki-gen/Run.lua --OutputDirectory="fa-total-mayhem.wiki/" --WikiGeneratorDirectory="brew-wiki-gen/" --FADirectory="fa-total-mayhem/"
+            
+            - name: Upload as artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: Wiki
+                path: fa.wiki
+
+              
