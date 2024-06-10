@@ -1,0 +1,2 @@
+UefBRNT1ADVBOTproj = import('/lua/sim/projectiles/UEF/UEFBRNT1ADVBOT.lua').UefBRNT1ADVBOTproj
+UefBRNST2ADVBATTLESHIPproj = import('/lua/sim/projectiles/UEF/UefBRNST2ADVBATTLESHIP.lua').UefBRNST2ADVBATTLESHIPproj

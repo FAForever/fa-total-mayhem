@@ -1,15 +1,13 @@
--- ****************************************************************************
 EmtBpPath = '/effects/emitters/'
 EmtBpPathAlt = '/mods/fa-total-mayhem/effects/emitters/'
 EmtBpPathTM = '/mods/fa-total-mayhem/effects/emitters/'
 EmitterTempEmtBpPath = '/effects/emitters/temp/'
 
-PrideFlyingEmitter =
-	{
-		EmtBpPathAlt .. 'prideflying_emit.bp',
-		EmtBpPathAlt .. 'prideflying_emit2.bp',
-		EmtBpPathAlt .. 'prideflying_emit3.bp',
-	}
+PrideFlyingEmitter = {
+	EmtBpPathAlt .. 'prideflying_emit.bp',
+	EmtBpPathAlt .. 'prideflying_emit2.bp',
+	EmtBpPathAlt .. 'prideflying_emit3.bp',
+}
 
 PrideHit01 = {
 	EmtBpPathAlt .. 'pridehit01.bp',
@@ -38,22 +36,21 @@ PrideHit01 = {
 	EmtBpPathAlt .. 'mayhemmk4blueglowlong_emit.bp', --
 }
 
-ValiantHit =
-	{
-		EmtBpPathAlt .. 'aeon_valianthit_01.bp',
-		EmtBpPathAlt .. 'aeon_valianthit_02.bp',
-		EmtBpPathAlt .. 'aeon_valianthit_03.bp',
-		EmtBpPathAlt .. 'aeon_valianthit_04.bp',
-		EmtBpPathAlt .. 'aeon_valianthit_05.bp',
-		EmtBpPathAlt .. 'aeon_valianthit_06.bp',
-		EmtBpPathAlt .. 'aeon_valianthit_07.bp',
-		EmtBpPathAlt .. 'aeon_valianthit_08.bp',
-		EmtBpPathAlt .. 'aeon_valianthit_09.bp',
-		EmtBpPathAlt .. 'aeon_valianthit_10.bp',
-		EmtBpPathAlt .. 'aeon_valianthit_11.bp',
-		EmtBpPathAlt .. 'aeon_valianthit_12.bp',
-		EmtBpPathAlt .. 'aeon_valianthit_13.bp',
-	}
+ValiantHit = {
+	EmtBpPathAlt .. 'aeon_valianthit_01.bp',
+	EmtBpPathAlt .. 'aeon_valianthit_02.bp',
+	EmtBpPathAlt .. 'aeon_valianthit_03.bp',
+	EmtBpPathAlt .. 'aeon_valianthit_04.bp',
+	EmtBpPathAlt .. 'aeon_valianthit_05.bp',
+	EmtBpPathAlt .. 'aeon_valianthit_06.bp',
+	EmtBpPathAlt .. 'aeon_valianthit_07.bp',
+	EmtBpPathAlt .. 'aeon_valianthit_08.bp',
+	EmtBpPathAlt .. 'aeon_valianthit_09.bp',
+	EmtBpPathAlt .. 'aeon_valianthit_10.bp',
+	EmtBpPathAlt .. 'aeon_valianthit_11.bp',
+	EmtBpPathAlt .. 'aeon_valianthit_12.bp',
+	EmtBpPathAlt .. 'aeon_valianthit_13.bp',
+}
 
 HadesHit01 = {
 	EmtBpPathAlt .. 'aeon_hadeshit01.bp',

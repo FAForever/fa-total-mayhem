@@ -1,8 +1,8 @@
 local CollisionBeam = import('/lua/sim/CollisionBeam.lua').CollisionBeam
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
-local Util = import('/lua/utilities.lua')
 
+---@class TMCollisionBeam : CollisionBeam
 TMCollisionBeam = Class(CollisionBeam){
 	FxImpactUnit = EffectTemplate.DefaultProjectileLandUnitImpact,
 	FxImpactLand = {}, -- EffectTemplate.DefaultProjectileLandImpact,
@@ -14,6 +14,7 @@ TMCollisionBeam = Class(CollisionBeam){
 	FxImpactNone = {},
 }
 
+---@class TMNovaCatBlueLaserBeam : TMCollisionBeam
 TMNovaCatBlueLaserBeam = Class(TMCollisionBeam){
 	TerrainImpactType = 'LargeBeam01',
 	TerrainImpactScale = 0.2,
@@ -26,6 +27,7 @@ TMNovaCatBlueLaserBeam = Class(TMCollisionBeam){
 	ScorchSplatDropTime = 0.25,
 }
 
+---@class TMCougarBlueLaserBeam : TMCollisionBeam
 TMCougarBlueLaserBeam = Class(TMCollisionBeam){
 	TerrainImpactType = 'LargeBeam01',
 	TerrainImpactScale = 0.2,
@@ -38,6 +40,7 @@ TMCougarBlueLaserBeam = Class(TMCollisionBeam){
 	ScorchSplatDropTime = 0.25,
 }
 
+---@class TMNovaCatGreenLaserBeam : TMCollisionBeam
 TMNovaCatGreenLaserBeam = Class(TMCollisionBeam){
 	TerrainImpactType = 'LargeBeam01',
 	TerrainImpactScale = 0.2,
@@ -50,6 +53,7 @@ TMNovaCatGreenLaserBeam = Class(TMCollisionBeam){
 	ScorchSplatDropTime = 0.25,
 }
 
+---@class TMSpiderBeam : TMCollisionBeam
 TMSpiderBeam = Class(TMCollisionBeam){
 	TerrainImpactType = 'LargeBeam01',
 	TerrainImpactScale = 0.8,
@@ -62,6 +66,7 @@ TMSpiderBeam = Class(TMCollisionBeam){
 	ScorchSplatDropTime = 0.4,
 }
 
+---@class TMMizuraBlueLaserBeam : TMCollisionBeam
 TMMizuraBlueLaserBeam = Class(TMCollisionBeam){
 	TerrainImpactType = 'LargeBeam01',
 	TerrainImpactScale = 0.2,
@@ -74,6 +79,7 @@ TMMizuraBlueLaserBeam = Class(TMCollisionBeam){
 	ScorchSplatDropTime = 0.25,
 }
 
+---@class TMMadCatmk4Beam : TMCollisionBeam
 TMMadCatmk4Beam = Class(TMCollisionBeam){
 	TerrainImpactType = 'LargeBeam01',
 	TerrainImpactScale = 0.2,

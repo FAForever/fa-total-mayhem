@@ -1,351 +1,48 @@
--- ****************************************************************************
--- **
--- **  File     : /cdimage/lua/modules/BlackOpsARprojectiles.lua
--- **  Author(s):
--- **
--- **  Summary  :
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
--- ------------------------------------------------------------------------
---
--- ------------------------------------------------------------------------
-local Projectile = import('/lua/sim/projectile.lua').Projectile
+-----------------------------------------------------------------------
+-- File : /cdimage/lua/modules/BlackOpsARprojectiles.lua
+-- Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
+------------------------------------------------------------------------
+
 local DefaultProjectileFile = import('/lua/sim/defaultprojectiles.lua')
 local EmitterProjectile = DefaultProjectileFile.EmitterProjectile
-local OnWaterEntryEmitterProjectile = DefaultProjectileFile.OnWaterEntryEmitterProjectile
 local SingleBeamProjectile = DefaultProjectileFile.SingleBeamProjectile
 local SinglePolyTrailProjectile = DefaultProjectileFile.SinglePolyTrailProjectile
 local MultiPolyTrailProjectile = DefaultProjectileFile.MultiPolyTrailProjectile
 local SingleCompositeEmitterProjectile = DefaultProjectileFile.SingleCompositeEmitterProjectile
-local Explosion = import('/lua/defaultexplosions.lua')
+local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
 local NullShell = DefaultProjectileFile.NullShell
 local EffectTemplate = import('/lua/EffectTemplates.lua')
-local DefaultExplosion = import('/lua/defaultexplosions.lua')
-local DepthCharge = import('/lua/defaultantiprojectile.lua').DepthCharge
-local util = import('/lua/utilities.lua')
-local EffectTemplate = import('/lua/EffectTemplates.lua')
 
-local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
-local DepthCharge = import('/lua/defaultantiprojectile.lua').DepthCharge
-local util = import('/lua/utilities.lua')
+-- Base Projectiles
+EXNullShell = import('/lua/sim/projectiles/EXNullShell.lua').EXNullShell
 
--- ----------------
--- Null Shell
--- ----------------
-EXNullShell = Class(Projectile){}
+-- UEF Projectiles
+UefBRNT1ADVBOTproj = import('/lua/sim/projectiles/UEF/UEFBRNT1ADVBOT.lua').UefBRNT1ADVBOTproj
+UefBRNST2ADVBATTLESHIPproj = import('/lua/sim/projectiles/UEF/UefBRNST2ADVBATTLESHIP.lua').UefBRNST2ADVBATTLESHIPproj
 
--- ----------------------------------------------------------------
--- 			AEON PROJECTILES
--- ----------------------------------------------------------------
+-- Seraphim Projectiles
+SerBRPT3SHBMproj = import('/lua/sim/projectiles/Seraphim/SeraBRPT3SHBM.lua').SerBRPT3SHBMproj
+SerBRPT1EXTANK2proj = import('/lua/sim/projectiles/Seraphim/SerBRPT1EXTANK2.lua').SerBRPT1EXTANK2
 
--- ----------------
--- UEF T1 Advanced Battle Bot Weapon
--- ----------------
-UefBRNT1ADVBOTproj = Class(EmitterProjectile){
-	FxTrails = TMEffectTemplate.BRNT1ADVBOTFXTrails01,
-	FxImpactUnit = TMEffectTemplate.UEFT1ADVBOThit1,
-	FxUnitHitScale = 0.5,
-	FxImpactProp = TMEffectTemplate.UEFT1ADVBOThit1,
-	FxPropHitScale = 0.5,
-	FxImpactLand = TMEffectTemplate.UEFT1ADVBOThit1,
-	FxLandHitScale = 0.5,
-	FxTrailOffset = 0,
-	FxImpactUnderWater = {},
-}
 
--- ----------------
--- Seraphim Experimental Mega Bot Projectile
--- ----------------
-SerBRPT3SHBMproj = Class(EmitterProjectile){
-	FxTrails = EffectTemplate.SDFSinnutheWeaponFXTrails01,
-	FxImpactUnit = TMEffectTemplate.SerT3SHBMHit01,
-	FxUnitHitScale = 1.6,
-	FxImpactProp = TMEffectTemplate.SerT3SHBMHit01,
-	FxPropHitScale = 1.6,
-	FxImpactLand = TMEffectTemplate.SerT3SHBMHit01,
-	FxLandHitScale = 1.6,
-	FxTrailOffset = 0,
-	FxImpactUnderWater = {},
-}
+-- Aeon Projectiles
+AeonBROT3NCNlaserproj = import('/lua/sim/projectiles/Aeon/AeonBROT3NCNlaser.lua').AeonBROT3NCNlaserproj
+AeonT3SHPDproj = import('/lua/sim/projectiles/Aeon/AeonT3SHPD.lua').AeonT3SHPDproj
+AeonBROT1EXMOBARTproj = import('/lua/sim/projectiles/Aeon/AeonBROT1EXMOBART.lua').AeonBROT1EXMOBARTproj
+AeonBROT1EXMOBART2proj = import('/lua/sim/projectiles/Aeon/AeonBROT1EXMOBART2.lua').AeonBROT1EXMOBART2proj
+AeonBROT3NCMproj = import('/lua/sim/projectiles/Aeon/AeonBROT3NCM.lua').AeonBROT3NCMproj
+AeonBROT3PDROproj = import('/lua/sim/projectiles/Aeon/AeonBROT3PDRO.lua').AeonBROT3PDROproj
+AeonBROST2ADVBATTLESHIPproj = import('/lua/sim/projectiles/Aeon/AeonBROST2ADVBATTLESHIP.lua').AeonBROST2ADVBATTLESHIPproj
+AeonBROT1EXM1proj = import('/lua/sim/projectiles/Aeon/AeonBROT1EXM1.lua').AeonBROT1EXM1proj
+AeonBROT3THproj = import('/lua/sim/projectiles/Aeon/AeonBROT3TH.lua').AeonBROT3THproj
+AeonBROT1BTCLAWproj = import('/lua/sim/projectiles/Aeon/AeonBROT1BTCLAW.lua').AeonBROT1BTCLAWproj
+AeonHvyClawproj = import('/lua/sim/projectiles/Aeon/AeonHvyClaw.lua').AeonHvyClawproj
 
--- ----------------
--- Seraphim Tech 1 Advanced Assault Tank
--- ----------------
-SerBRPT1EXTANK2proj = Class(MultiPolyTrailProjectile){
-	FxImpactTrajectoryAligned = false,
-	FxTrails = EffectTemplate.SChronotronCannonProjectileFxTrails,
-	PolyTrails = EffectTemplate.SChronotronCannonProjectileTrails,
-	PolyTrailOffset = { 0, 0, 0 },
-	FxImpactUnit = TMEffectTemplate.SerT1AdvancedTankHit01,
-	FxUnitHitScale = 1.6,
-	FxImpactProp = TMEffectTemplate.SerT1AdvancedTankHit01,
-	FxPropHitScale = 1.6,
-	FxImpactLand = TMEffectTemplate.SerT1AdvancedTankHit01,
-	FxLandHitScale = 1.6,
-	FxTrailOffset = 0,
-	FxImpactUnderWater = {},
-}
 
--- ----------------
--- Aeon NovaCat Blue laser
--- ----------------
 
-AeonBROT3NCNlaserproj = Class(MultiPolyTrailProjectile){
-	PolyTrails = { '/mods/fa-total-mayhem/effects/emitters/novacat_bluelaser_emit.bp' },
-	PolyTrailOffset = { 0, 0 },
-	-- Hit Effects
-	FxImpactUnit = EffectTemplate.CLaserHitUnit01,
-	FxImpactProp = EffectTemplate.CLaserHitUnit01,
-	FxImpactLand = EffectTemplate.CLaserHitLand01,
-	FxImpactUnderWater = {},
-}
 
--- ----------------
--- Aeon Tech 3 Super Heavy Point Defense
--- ----------------
-AeonT3SHPDproj = Class(MultiPolyTrailProjectile){
-	FxImpactTrajectoryAligned = false,
-	FxTrails = EffectTemplate.TIonizedPlasmaGatlingCannonFxTrails,
-	PolyTrails = {},
-	PolyTrailOffset = { 0, 0 },
-	FxImpactUnit = EffectTemplate.TIonizedPlasmaGatlingCannonHit01,
-	FxUnitHitScale = 7,
-	FxImpactProp = EffectTemplate.TIonizedPlasmaGatlingCannonHit01,
-	FxPropHitScale = 7,
-	FxImpactLand = EffectTemplate.TIonizedPlasmaGatlingCannonHit01,
-	FxLandHitScale = 7,
-	FxTrailOffset = 0,
-	FxImpactUnderWater = {},
-}
 
--- ----------------
--- Aeon Tech 1 Experimental Mobile Artillery Main projectile
--- ----------------
-AeonBROT1EXMOBARTproj = Class(MultiPolyTrailProjectile){
-	FxImpactTrajectoryAligned = false,
-	FxTrails = EffectTemplate.TIonizedPlasmaGatlingCannonFxTrails,
-	PolyTrails = {},
-	PolyTrailOffset = { 0, 0 },
-	FxImpactUnit = EffectTemplate.TIonizedPlasmaGatlingCannonHit01,
-	FxUnitHitScale = 7,
-	FxImpactProp = EffectTemplate.TIonizedPlasmaGatlingCannonHit01,
-	FxPropHitScale = 7,
-	FxImpactLand = EffectTemplate.TIonizedPlasmaGatlingCannonHit01,
-	FxLandHitScale = 7,
-	FxTrailOffset = 0,
-	FxImpactUnderWater = {},
-}
 
--- ----------------
--- Aeon Tech 1 Experimental Mobile Artillery Child projectile
--- ----------------
-AeonBROT1EXMOBART2proj = Class(MultiPolyTrailProjectile){
-	FxImpactTrajectoryAligned = false,
-	FxTrails = EffectTemplate.TIonizedPlasmaGatlingCannonFxTrails,
-	PolyTrails = {},
-	PolyTrailOffset = { 0, 0 },
-	FxImpactUnit = TMEffectTemplate.AeonExpT1ArtilleryHit,
-	FxUnitHitScale = 1,
-	FxImpactProp = TMEffectTemplate.AeonExpT1ArtilleryHit,
-	FxPropHitScale = 1,
-	FxImpactLand = TMEffectTemplate.AeonExpT1ArtilleryHit,
-	FxLandHitScale = 1,
-	FxTrailOffset = 0,
-	FxImpactUnderWater = {},
-}
-
--- ----------------
--- Aeon Tech 3 NovaCat Quantum Charge
--- ----------------
-AeonBROT3NCMproj = Class(SinglePolyTrailProjectile){
-	FxTrails = {
-		'/effects/emitters/quantum_cannon_munition_03_emit.bp',
-		'/effects/emitters/quantum_cannon_munition_04_emit.bp',
-	},
-	PolyTrail = '/effects/emitters/quantum_cannon_polytrail_01_emit.bp',
-	FxImpactUnit = TMEffectTemplate.AeonQuantumChargeHit01,
-	FxUnitHitScale = 2,
-	FxImpactProp = TMEffectTemplate.AeonQuantumChargeHit01,
-	FxPropHitScale = 2,
-	FxImpactLand = TMEffectTemplate.AeonQuantumChargeHit01,
-	FxLandHitScale = 2,
-	FxTrailOffset = 0,
-	FxImpactUnderWater = {},
-}
-
--- ----------------
--- Aeon Tech 3 NovaCat Rapid Pulsegun
--- ----------------
-AeonBROT3NCMPproj = Class(SinglePolyTrailProjectile){
-	FxImpactTrajectoryAligned = false,
-	FxTrails = EffectTemplate.TIonizedPlasmaGatlingCannonFxTrails,
-	PolyTrails = {},
-	PolyTrailOffset = { 0, 0 },
-	FxImpactUnit = EffectTemplate.AMercyGuidedMissileSplitMissileHitUnit,
-	FxUnitHitScale = 1,
-	FxImpactProp = EffectTemplate.AMercyGuidedMissileSplitMissileHitUnit,
-	FxPropHitScale = 1,
-	FxImpactLand = EffectTemplate.AMercyGuidedMissileSplitMissileHitUnit,
-	FxLandHitScale = 1,
-	FxTrailOffset = 0,
-	FxImpactUnderWater = {},
-}
-
--- ----------------
--- Aeon Tech 3 Rocket Defense
--- ----------------
-AeonBROT3PDROproj = Class(EmitterProjectile){
-	FxTrails = EffectTemplate.AOblivionCannonFXTrails02,
-	FxImpactUnit = TMEffectTemplate.AeonBattleShipHit01,
-	FxUnitHitScale = 2.4,
-	FxImpactProp = TMEffectTemplate.AeonBattleShipHit01,
-	FxPropHitScale = 2.4,
-	FxImpactLand = TMEffectTemplate.AeonBattleShipHit01,
-	FxLandHitScale = 2.4,
-	FxTrailOffset = 0,
-	FxImpactUnderWater = {},
-}
-
--- ----------------
--- Aeon Tech 2 Advanced Battleship main cannons
--- ----------------
-AeonBROST2ADVBATTLESHIPproj = Class(EmitterProjectile){
-	FxTrails = TMEffectTemplate.BROST2ADVBATTLESHIPTRAILS,
-	FxImpactUnit = TMEffectTemplate.BROST2ADVBATTLESHIPHIT,
-	FxUnitHitScale = 2,
-	FxImpactProp = TMEffectTemplate.BROST2ADVBATTLESHIPHIT,
-	FxPropHitScale = 2,
-	FxImpactLand = TMEffectTemplate.BROST2ADVBATTLESHIPHIT,
-	FxLandHitScale = 2,
-	FxTrailOffset = 0,
-	FxImpactWater = EffectTemplate.TNapalmHvyCarpetBombHitWater01,
-	FxWaterHitScale = 2,
-	FxImpactUnderWater = {},
-	OnImpact = function(self, TargetType, TargetEntity)
-		local army = self:GetArmy()
-
-		if TargetType == 'Terrain' then
-			CreateSplat(self:GetPosition(), 0, 'scorch_004_albedo', 11, 11, 250, 200, army)
-
-			-- local blanketSides = 12
-			-- local blanketAngle = (2*math.pi) / blanketSides
-			-- local blanketStrength = 1
-			-- local blanketVelocity = 2.25
-
-			-- for i = 0, (blanketSides-1) do
-			--    local blanketX = math.sin(i*blanketAngle)
-			--    local blanketZ = math.cos(i*blanketAngle)
-			--    local Blanketparts = self:CreateProjectile('/effects/entities/DestructionDust01/DestructionDust01_proj.bp', blanketX, 0.5, blanketZ, blanketX, 0, blanketZ)
-			--        :SetVelocity(blanketVelocity):SetAcceleration(-0.3)
-			-- end
-		end
-		MultiPolyTrailProjectile.OnImpact(self, TargetType, TargetEntity)
-	end,
-}
-
--- ----------------
--- UEF Tech 2 Advanced Battleship main cannons
--- ----------------
-UefBRNST2ADVBATTLESHIPproj = Class(MultiPolyTrailProjectile){
-	FxTrails = {},
-	PolyTrails = EffectTemplate.TGaussCannonPolyTrail,
-	PolyTrailOffset = { 0, 0 },
-	FxImpactUnit = TMEffectTemplate.BRNST2ADVBATTLESHIPHIT,
-	FxUnitHitScale = 1.4,
-	FxImpactProp = TMEffectTemplate.BRNST2ADVBATTLESHIPHIT,
-	FxPropHitScale = 1.4,
-	FxImpactLand = TMEffectTemplate.BRNST2ADVBATTLESHIPHIT,
-	FxLandHitScale = 1.4,
-	FxTrailOffset = 0,
-	FxImpactWater = EffectTemplate.TNapalmHvyCarpetBombHitWater01,
-	FxWaterHitScale = 2,
-	FxImpactUnderWater = {},
-	OnImpact = function(self, TargetType, TargetEntity)
-		local army = self:GetArmy()
-
-		if TargetType == 'Terrain' then
-			CreateSplat(self:GetPosition(), 0, 'scorch_004_albedo', 7, 7, 250, 200, army)
-
-			-- local blanketSides = 12
-			-- local blanketAngle = (2*math.pi) / blanketSides
-			-- local blanketStrength = 1
-			-- local blanketVelocity = 2.25
-
-			-- for i = 0, (blanketSides-1) do
-			--    local blanketX = math.sin(i*blanketAngle)
-			--    local blanketZ = math.cos(i*blanketAngle)
-			--    local Blanketparts = self:CreateProjectile('/effects/entities/DestructionDust01/DestructionDust01_proj.bp', blanketX, 0.5, blanketZ, blanketX, 0, blanketZ)
-			--        :SetVelocity(blanketVelocity):SetAcceleration(-0.3)
-			-- end
-		end
-		MultiPolyTrailProjectile.OnImpact(self, TargetType, TargetEntity)
-	end,
-}
-
--- ----------------
--- Aeon Tech 1 Experimental Quadrobot maingun
--- ----------------
-AeonBROT1EXM1proj = Class(MultiPolyTrailProjectile){
-	PolyTrails = { '/effects/emitters/aeon_laser_trail_02_emit.bp', '/effects/emitters/default_polytrail_03_emit.bp' },
-	PolyTrailOffset = { 0, 0 },
-	FxImpactUnit = TMEffectTemplate.AeonT1EXM1MainHit01,
-	FxUnitHitScale = 2,
-	FxImpactProp = TMEffectTemplate.AeonT1EXM1MainHit01,
-	FxPropHitScale = 2,
-	FxImpactLand = TMEffectTemplate.AeonT1EXM1MainHit01,
-	FxLandHitScale = 2,
-	FxTrailOffset = 0,
-	FxImpactUnderWater = {},
-}
-
--- ----------------
--- Aeon Tech 3 Tank Hunter
--- ----------------
-AeonBROT3THproj = Class(MultiPolyTrailProjectile){
-	FxImpactTrajectoryAligned = false,
-	FxTrails = EffectTemplate.TIonizedPlasmaGatlingCannonFxTrails,
-	PolyTrails = {},
-	PolyTrailOffset = { 0, 0 },
-	FxImpactUnit = TMEffectTemplate.AeonT3HeavyRocketHit01,
-	FxUnitHitScale = 1,
-	FxImpactProp = TMEffectTemplate.AeonT3HeavyRocketHit01,
-	FxPropHitScale = 1,
-	FxImpactLand = TMEffectTemplate.AeonT3HeavyRocketHit01,
-	FxLandHitScale = 1,
-	FxTrailOffset = 0,
-	FxImpactUnderWater = {},
-}
-
--- ----------------
--- Aeon Tech 1 Battle Tank Clawgun
--- ----------------
-AeonBROT1BTCLAWproj = Class(SinglePolyTrailProjectile){
-	PolyTrail = '/effects/emitters/aeon_laser_trail_01_emit.bp',
-	FxImpactUnit = TMEffectTemplate.AeonClawHit01,
-	FxUnitHitScale = 0.35,
-	FxImpactProp = TMEffectTemplate.AeonClawHit01,
-	FxPropHitScale = 0.35,
-	FxImpactLand = TMEffectTemplate.AeonClawHit01,
-	FxLandHitScale = 0.35,
-	FxTrailOffset = 0,
-	FxImpactUnderWater = {},
-}
-
--- ----------------
--- Aeon Heavy Clawgun
--- ----------------
-AeonHvyClawproj = Class(MultiPolyTrailProjectile){
-	FxTrails = { '/effects/emitters/oblivion_cannon_munition_01_emit.bp' },
-	FxImpactUnit = TMEffectTemplate.AeonHvyClawHit01,
-	FxUnitHitScale = 1.35,
-	FxImpactProp = TMEffectTemplate.AeonHvyClawHit01,
-	FxPropHitScale = 1.35,
-	FxImpactLand = TMEffectTemplate.AeonHvyClawHit01,
-	FxLandHitScale = 1.35,
-	FxTrailOffset = 0,
-	FxImpactUnderWater = {},
-}
 
 -- ----------------
 -- Aeon Anti-Air Missile
@@ -368,6 +65,10 @@ AeonAAmissile01 = Class(EmitterProjectile){
 	FxImpactLand = {},
 	FxImpactUnderWater = {},
 	DestroyOnImpact = false,
+
+	---@param self AeonAAmissile01
+	---@param TargetType string
+	---@param targetEntity Unit
 	OnImpact = function(self, TargetType, targetEntity)
 		EmitterProjectile.OnImpact(self, TargetType, targetEntity)
 		if TargetType == 'Terrain' or TargetType == 'Water' or TargetType == 'Prop' then
