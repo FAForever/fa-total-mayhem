@@ -1,6 +1,8 @@
 name: Total Mayhem Wiki - Generate Unit Pages
 
 on: [workflow_dispatch]
+pull_request:
+branches: [WikiUnitPageGeneration]
 
 jobs:
 
