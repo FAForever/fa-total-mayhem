@@ -19,7 +19,6 @@ body:
     attributes:
       value: |
         Provide a clear & concise description of the bug. Please follow our guide on [How To Create Good Issues](#) which explains how to apply formatting, adding references, resources and/or screenshots.
-
   - type: textarea
     id: what-happened
     attributes:
@@ -28,7 +27,6 @@ body:
       placeholder: Tell us what you see!
     validations:
       required: true
-
   - type: textarea
     id: steps
     attributes:
@@ -40,7 +38,6 @@ body:
         3.
     validations:
       required: true
-
   - type: textarea
     id: expected
     attributes:
