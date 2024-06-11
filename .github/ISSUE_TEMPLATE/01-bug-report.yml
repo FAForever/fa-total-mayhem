@@ -1,6 +1,6 @@
 name: Bug report
-title: '[Bug]: '
 description: A template you can use to report bugs and/or unexpected behavior.
+title: '[Bug]: '
 labels: ['bug']
 
 body:
@@ -15,13 +15,10 @@ body:
         - We accept pull requets. If you know how to fix it - go ahead!
 
         Please provide the following details about the issue you encountered.  *Issues that do not provide the information requested in this form will be flagged as **incomplete** & automatically closed.*
-
   - type: markdown
     attributes:
-    value: |
-      Provide a clear & concise description of the bug. Please follow our guide on [How To Create Good Issues](#) which explains how to apply formatting, adding references, resources and/or screenshots.
-    validation:
-      required: true
+      value: |
+        Provide a clear & concise description of the bug. Please follow our guide on [How To Create Good Issues](#) which explains how to apply formatting, adding references, resources and/or screenshots.
 
   - type: textarea
     id: what-happened
