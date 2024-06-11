@@ -18,10 +18,8 @@ body:
 
   - type: markdown
     attributes:
-    value: |
-      Provide a clear & concise description of the bug. Please follow our guide on [How To Create Good Issues](#) which explains how to apply formatting, adding references, resources and/or screenshots.
-    validation:
-      required: true
+      value: |
+        Provide a clear & concise description of the bug. Please follow our guide on [How To Create Good Issues](#) which explains how to apply formatting, adding references, resources and/or screenshots.
 
   - type: textarea
     id: what-happened
