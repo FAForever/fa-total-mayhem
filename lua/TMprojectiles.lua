@@ -1,15 +1,7 @@
--- ****************************************************************************
--- **
--- **  File     : /cdimage/lua/modules/BlackOpsARprojectiles.lua
--- **  Author(s):
--- **
--- **  Summary  :
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
--- ------------------------------------------------------------------------
---
--- ------------------------------------------------------------------------
+-- File     : /cdimage/lua/modules/BlackOpsARprojectiles.lua
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+---------------------------------------------------------------------------
+
 local Projectile = import('/lua/sim/projectile.lua').Projectile
 local DefaultProjectileFile = import('/lua/sim/defaultprojectiles.lua')
 local EmitterProjectile = DefaultProjectileFile.EmitterProjectile
@@ -33,6 +25,7 @@ local util = import('/lua/utilities.lua')
 -- ----------------
 -- Null Shell
 -- ----------------
+
 EXNullShell = Class(Projectile){}
 
 -- ----------------------------------------------------------------
