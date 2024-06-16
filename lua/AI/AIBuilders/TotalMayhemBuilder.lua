@@ -21,7 +21,11 @@ BuilderGroup{
 			UCBC,
 			'HaveGreaterThanUnitsWithCategory',
 			{ 1, categories.STRUCTURE * categories.ENERGYPRODUCTION - categories.TECH1 },
-		}, { EBC, 'GreaterThanEconTrend', { 0.4, 15.0 } }, { -- relative income -- Have we the eco to build it ? -- Do we need additional conditions to build it ?
+		}, {
+			EBC,
+			'GreaterThanEconTrend',
+			{ 0.4, 15.0 },
+		}, { -- relative income -- Have we the eco to build it ? -- Do we need additional conditions to build it ?
 		EBC, 'GreaterThanEconStorageRatio', { 0.30, 0.90 } }, { -- Don't build it if... -- Ratio from 0 to 1. (1=100%)
 		UCBC, 'HaveLessThanUnitsWithCategory', {
 			3,
@@ -50,7 +54,11 @@ BuilderGroup{
 			UCBC,
 			'HaveGreaterThanUnitsWithCategory',
 			{ 3, categories.STRUCTURE * categories.LAND * categories.FACTORY },
-		}, { EBC, 'GreaterThanEconTrend', { 0.4, 15.0 } }, { -- relative income -- Have we the eco to build it ? -- Do we need additional conditions to build it ?
+		}, {
+			EBC,
+			'GreaterThanEconTrend',
+			{ 0.4, 15.0 },
+		}, { -- relative income -- Have we the eco to build it ? -- Do we need additional conditions to build it ?
 		EBC, 'GreaterThanEconStorageRatio', { 0.30, 0.90 } }, { -- Don't build it if... -- Ratio from 0 to 1. (1=100%)
 		UCBC, 'HaveLessThanUnitsWithCategory', {
 			3,
@@ -113,8 +121,7 @@ BuilderGroup{
 		PlatoonTemplate = 'T3 Tech1 Mayhem Tank',
 		Priority = 18700,
 		BuilderConditions = { -- When do we want to build this ?
-		{ TBC, 'EnemyThreatGreaterThanValueAtBase', { 'LocationType', 5, 'Land' } },
-		-- Respect UnitCap
+		{ TBC, 'EnemyThreatGreaterThanValueAtBase', { 'LocationType', 5, 'Land' } }, -- Respect UnitCap
 		{ UCBC, 'UnitCapCheckLess', { 0.97 } } },
 		BuilderType = 'Land',
 	},
