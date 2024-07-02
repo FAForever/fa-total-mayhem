@@ -1,0 +1,73 @@
+name: Total Mayhem Wiki Generator for icons
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+
+  generate-icons:
+      runs-on: ubuntu-latest
+      defaults:
+        run:
+          shell: bash
+
+      steps:
+        # Checkout repos
+
+        - name: Checkout Total Mayhem repository
+          uses: actions/checkout@v4
+          with:
+              repository: relent0r/fa-total-mayhem
+              path: mods/fa-total-mayhem
+              ref: feat/workflow-generate
+              sparse-checkout-cone-mode: |
+                icons/units
+
+        - name: Checkout FAF Wiki Repository
+          uses: actions/checkout@v4
+          with:
+            repository: relent0r/fa-total-mayhem.wiki
+            ref: master
+            path: ./mods/fa-total-mayhem.wiki
+
+        - name: Install Image Magick
+          run: |
+            sudo apt-get install -y imagemagick
+
+        # copy strategic and unit icons and convert them to PNGs. Assume this should be going to the wiki location not the fa repo
+        - name: Convert Strategic Icons
+          working-directory: mods/fa-total-mayhem
+          run: |
+            wiki/icons-convert-unit.sh
+
+        - name: Move Generated Icons
+          run: |
+            [ ! -d "mods/fa-total-mayhem/wiki/icons/units" ] && mkdir -p "mods/fa-total-mayhem/wiki/icons/units"
+            mv -f mods/fa-total-mayhem/wiki/generated/units/*.png mods/fa-total-mayhem/wiki/icons/units
+
+        - name: Upload as artifact
+          uses: actions/upload-artifact@v4
+          with:
+            name: Wiki
+            path: |
+              mods/fa-total-mayhem/wiki
+              !./mods/fa-total-mayhem/wiki/Run.lua
+              !./mods/fa-total-mayhem/wiki/icons-convert-unit.sh
+      
+        # - name: Store the game version
+        #   id: gameVersionJSON # but it is a string here!
+        #   working-directory: app/data
+        #   run: |
+        #       json=`cat ./version.json`
+        #       echo "json=$json" >> $GITHUB_OUTPUT
+
+        # - name: Update Wiki repository # but it is a string here!
+        #   working-directory: fa.wiki
+        #   run: |
+        #       git config user.email "administrator@faforever.com"
+        #       git config user.name "FAForever"
+
+        #       git stage .
+        #       git commit -m "Update generated data to game version ${{ fromJson(steps.gameVersionJSON.outputs.json).version}}"
+        #       git push origin HEAD:master

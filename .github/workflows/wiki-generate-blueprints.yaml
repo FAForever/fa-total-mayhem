@@ -1,0 +1,99 @@
+# Copyright (c) 2024 Aaron 'relent0r' Warner
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+name: Total Mayhem Generator for Blueprints
+
+on:
+    push:
+    workflow_dispatch:
+    workflow_call:
+
+jobs:
+    generate-blueprints:
+        name: generate
+        permissions: write-all
+        runs-on: ubuntu-latest
+        defaults:
+          run:
+            shell: bash
+
+        steps:
+            # Checking repositories
+            - name: Checkout Brewlan Wikigen Repository
+              uses: actions/checkout@v4
+              with:
+                repository: The-Balthazar/BrewWikiGen
+                path: ./brew-wiki-gen
+            # FA repo is sparse checkout as it is quite large and we dont won't to incur higher action minutes for no reason
+            - name: Checkout FAF Repository
+              uses: actions/checkout@v4
+              with:
+                repository: FAForever/fa
+                path: fa
+                ref: develop
+                sparse-checkout-cone-mode: |
+                  wiki
+                  loc
+                  lua/ui/help/unitscription.lua
+                  lua/ui/help/tooltips.lua
+                  lua/sim/AdjacencyBuffs.lua
+                  lua/system/Blueprints.lua
+
+            - name: Checkout Total Mayhem repository
+              uses: actions/checkout@v4
+              with:
+                  repository: relent0r/fa-total-mayhem
+                  path: mods/fa-total-mayhem
+                  ref: feat/workflow-generate
+                  sparse-checkout-cone-mode: |
+                      mod_info.lua
+                      wiki
+                      units/*_unit.bp
+                      units/*_LOD0.scm
+                      projectiles
+
+            # Prepare the Lua context
+
+            - name: Install Lua
+              uses: leafo/gh-actions-lua@v10
+              with:
+                  luaVersion: "5.3"
+
+            - uses: leafo/gh-actions-luarocks@v4
+
+            - name: Install JSON module for Lua
+              run: luarocks install dkjson
+
+            - name: Create wiki directory
+              run: |
+                ls mods/fa-total-mayhem/wiki
+  
+            - name: Execute lua run
+              run: |
+                lua mods/fa-total-mayhem/wiki/Run.lua --OutputDirectory="mods/fa-total-mayhem/wiki/" --WikiGeneratorDirectory="brew-wiki-gen/" --FADirectory="fa"
+
+            # Store the created files
+
+            - name: Create artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: fa-total-mayhem-generated-wiki-files
+                  path: |
+                      mods/fa-total-mayhem/wiki
