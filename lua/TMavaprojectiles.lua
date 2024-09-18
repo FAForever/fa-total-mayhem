@@ -1,28 +1,16 @@
 -------------------------------------------------------------------------
 -- File : /cdimage/lua/modules/BlackOpsARprojectiles.lua
 -- Copyright (c) 2005 Gas Powered Games, Inc.  All rights reserved.
--------------------------------------------------------------------------
-
+------------------------------------------------------------------------
 local Projectile = import('/lua/sim/projectile.lua').Projectile
 local DefaultProjectileFile = import('/lua/sim/defaultprojectiles.lua')
-local EmitterProjectile = DefaultProjectileFile.EmitterProjectile
-local OnWaterEntryEmitterProjectile = DefaultProjectileFile.OnWaterEntryEmitterProjectile
-local SingleBeamProjectile = DefaultProjectileFile.SingleBeamProjectile
-local SinglePolyTrailProjectile = DefaultProjectileFile.SinglePolyTrailProjectile
-local MultiPolyTrailProjectile = DefaultProjectileFile.MultiPolyTrailProjectile
-local SingleCompositeEmitterProjectile = DefaultProjectileFile.SingleCompositeEmitterProjectile
-local Explosion = import('/lua/defaultexplosions.lua')
-local NullShell = DefaultProjectileFile.NullShell
 local EffectTemplate = import('/lua/EffectTemplates.lua')
-local DefaultExplosion = import('/lua/defaultexplosions.lua')
-local DepthCharge = import('/lua/defaultantiprojectile.lua').DepthCharge
-local util = import('/lua/utilities.lua')
-local EffectTemplate = import('/lua/EffectTemplates.lua')
-
 local TMavaEffectTemplate = import('/mods/fa-total-mayhem/lua/TMavaEffectTemplates.lua')
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
-local DepthCharge = import('/lua/defaultantiprojectile.lua').DepthCharge
-local util = import('/lua/utilities.lua')
+local EmitterProjectile = DefaultProjectileFile.EmitterProjectile
+local SingleBeamProjectile = DefaultProjectileFile.SingleBeamProjectile
+local MultiPolyTrailProjectile = DefaultProjectileFile.MultiPolyTrailProjectile
+
 
 --- Null Shell
 ---@class EXNullShell : Projectile
@@ -408,3 +396,15 @@ UefBRNT3SHBMNEWRL2Aproj = Class(SingleBeamProjectile){
 	FxImpactUnderWater = TMavaEffectTemplate.UEFmayhemRocketHit2A,
 	FxImpactWater = TMavaEffectTemplate.UEFmayhemRocketHit2A,
 }
+
+--#region Mod Compatibility
+local OnWaterEntryEmitterProjectile = DefaultProjectileFile.OnWaterEntryEmitterProjectile
+local SinglePolyTrailProjectile = DefaultProjectileFile.SinglePolyTrailProjectile
+local SingleCompositeEmitterProjectile = DefaultProjectileFile.SingleCompositeEmitterProjectile
+local Explosion = import('/lua/defaultexplosions.lua')
+local NullShell = DefaultProjectileFile.NullShell
+local EffectTemplate = import('/lua/EffectTemplates.lua')
+local DefaultExplosion = import('/lua/defaultexplosions.lua')
+local util = import('/lua/utilities.lua')
+local DepthCharge = import('/lua/defaultantiprojectile.lua').DepthCharge
+--#endregion

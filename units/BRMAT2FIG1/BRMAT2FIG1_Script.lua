@@ -5,7 +5,7 @@
 -- **
 -- **  Summary  :  Cybran Unit Script
 -- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+-- **  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 -- ****************************************************************************
 --
 --
@@ -13,6 +13,7 @@ local CAirUnit = import('/lua/cybranunits.lua').CAirUnit
 local CWeapons = import('/lua/cybranweapons.lua')
 local CDFHeavyDisintegratorWeapon = CWeapons.CDFHeavyDisintegratorWeapon
 
+---@class BRMAT2FIG1 :CAirUnit
 BRMAT2FIG1 = Class(CAirUnit){
 	Weapons = {
 		aircraft = Class(CDFHeavyDisintegratorWeapon){ FxMuzzleFlashScale = 0 },

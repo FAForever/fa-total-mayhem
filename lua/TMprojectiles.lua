@@ -1,40 +1,43 @@
 -- File     : /cdimage/lua/modules/BlackOpsARprojectiles.lua
--- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+-- Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 ---------------------------------------------------------------------------
-
 local Projectile = import('/lua/sim/projectile.lua').Projectile
 local DefaultProjectileFile = import('/lua/sim/defaultprojectiles.lua')
+local EffectTemplate = import('/lua/EffectTemplates.lua')
+local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
 local EmitterProjectile = DefaultProjectileFile.EmitterProjectile
-local OnWaterEntryEmitterProjectile = DefaultProjectileFile.OnWaterEntryEmitterProjectile
 local SingleBeamProjectile = DefaultProjectileFile.SingleBeamProjectile
 local SinglePolyTrailProjectile = DefaultProjectileFile.SinglePolyTrailProjectile
 local MultiPolyTrailProjectile = DefaultProjectileFile.MultiPolyTrailProjectile
 local SingleCompositeEmitterProjectile = DefaultProjectileFile.SingleCompositeEmitterProjectile
-local Explosion = import('/lua/defaultexplosions.lua')
 local NullShell = DefaultProjectileFile.NullShell
-local EffectTemplate = import('/lua/EffectTemplates.lua')
-local DefaultExplosion = import('/lua/defaultexplosions.lua')
-local DepthCharge = import('/lua/defaultantiprojectile.lua').DepthCharge
-local util = import('/lua/utilities.lua')
-local EffectTemplate = import('/lua/EffectTemplates.lua')
 
-local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
-local DepthCharge = import('/lua/defaultantiprojectile.lua').DepthCharge
-local util = import('/lua/utilities.lua')
-
--- ----------------
 -- Null Shell
--- ----------------
-
+---@class EXNullShell : Projectile
 EXNullShell = Class(Projectile){}
 
--- ----------------------------------------------------------------
--- 			AEON PROJECTILES
--- ----------------------------------------------------------------
+--#region AEON PROJECTILES
 
--- ----------------
+-- Aeon NovaCat Blue laser
+---@class AeonBROT3NCNlaserproj : MultiPolyTrailProjectile
+AeonBROT3NCNlaserproj = Class(MultiPolyTrailProjectile){
+	PolyTrails = { '/mods/fa-total-mayhem/effects/emitters/novacat_bluelaser_emit.bp' },
+	PolyTrailOffset = { 0, 0 },
+	-- Hit Effects
+	FxImpactUnit = EffectTemplate.CLaserHitUnit01,
+	FxImpactProp = EffectTemplate.CLaserHitUnit01,
+	FxImpactLand = EffectTemplate.CLaserHitLand01,
+	FxImpactUnderWater = {},
+}
+
+--#endregion
+
+-------------------------------------------------------
+
+--#region UEF PROJECTILES
+
 -- UEF T1 Advanced Battle Bot Weapon
--- ----------------
+---@class UefBRNT1ADVBOTproj : EmitterProjectile
 UefBRNT1ADVBOTproj = Class(EmitterProjectile){
 	FxTrails = TMEffectTemplate.BRNT1ADVBOTFXTrails01,
 	FxImpactUnit = TMEffectTemplate.UEFT1ADVBOThit1,
@@ -47,9 +50,14 @@ UefBRNT1ADVBOTproj = Class(EmitterProjectile){
 	FxImpactUnderWater = {},
 }
 
--- ----------------
+--#endregion
+
+-------------------------------------------------------
+
+--#region SERA PROJECTILES
+
 -- Seraphim Experimental Mega Bot Projectile
--- ----------------
+---@class SerBRPT3SHBMproj : EmitterProjectile
 SerBRPT3SHBMproj = Class(EmitterProjectile){
 	FxTrails = EffectTemplate.SDFSinnutheWeaponFXTrails01,
 	FxImpactUnit = TMEffectTemplate.SerT3SHBMHit01,
@@ -62,9 +70,8 @@ SerBRPT3SHBMproj = Class(EmitterProjectile){
 	FxImpactUnderWater = {},
 }
 
--- ----------------
 -- Seraphim Tech 1 Advanced Assault Tank
--- ----------------
+---@class SerBRPT1EXTANK2proj : MultiPolyTrailProjectile
 SerBRPT1EXTANK2proj = Class(MultiPolyTrailProjectile){
 	FxImpactTrajectoryAligned = false,
 	FxTrails = EffectTemplate.SChronotronCannonProjectileFxTrails,
@@ -80,19 +87,20 @@ SerBRPT1EXTANK2proj = Class(MultiPolyTrailProjectile){
 	FxImpactUnderWater = {},
 }
 
--- ----------------
--- Aeon NovaCat Blue laser
+--#endregion
+
+-------------------------------------------------------
+
+--#region CYBRAN PROJECTILES
+
+
+
+--#endregion
+
+-------------------------------------------------------
+
 -- ----------------
 
-AeonBROT3NCNlaserproj = Class(MultiPolyTrailProjectile){
-	PolyTrails = { '/mods/fa-total-mayhem/effects/emitters/novacat_bluelaser_emit.bp' },
-	PolyTrailOffset = { 0, 0 },
-	-- Hit Effects
-	FxImpactUnit = EffectTemplate.CLaserHitUnit01,
-	FxImpactProp = EffectTemplate.CLaserHitUnit01,
-	FxImpactLand = EffectTemplate.CLaserHitLand01,
-	FxImpactUnderWater = {},
-}
 
 -- ----------------
 -- Aeon Tech 3 Super Heavy Point Defense
@@ -2009,3 +2017,14 @@ CybBRMT3ADVBTBOTproj = Class(MultiPolyTrailProjectile){
 	PolyTrailOffset = { 0, 0, 0, 0 },
 	FxImpactUnderWater = {},
 }
+
+---------------------------------------------
+--#region Mod Compatibility
+local OnWaterEntryEmitterProjectile = DefaultProjectileFile.OnWaterEntryEmitterProjectile
+local Explosion = import('/lua/defaultexplosions.lua')
+local EffectTemplate = import('/lua/EffectTemplates.lua')
+local DefaultExplosion = import('/lua/defaultexplosions.lua')
+local DepthCharge = import('/lua/defaultantiprojectile.lua').DepthCharge
+local util = import('/lua/utilities.lua')
+
+--#endregion

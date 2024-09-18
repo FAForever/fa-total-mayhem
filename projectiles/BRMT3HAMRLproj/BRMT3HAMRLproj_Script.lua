@@ -5,7 +5,7 @@
 -- **
 -- **  Summary  :  Cybran Iridium Rocket Tubes, DRL0204
 -- **
--- **  Copyright � 2007 Gas Powered Games, Inc.  All rights reserved.
+-- **  Copyright © 2007 Gas Powered Games, Inc.  All rights reserved.
 -- ****************************************************************************
 local CybBRMT3HAMRLproj = import('/mods/fa-total-mayhem/lua/TMprojectiles.lua').CybBRMT3HAMRLproj
 BRMT3HAMRLproj = Class(CybBRMT3HAMRLproj){}

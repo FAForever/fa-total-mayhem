@@ -5,7 +5,7 @@
 -- **
 -- **  Summary  :
 -- **
--- **  Copyright � 2007 Gas Powered Games, Inc.  All rights reserved.
+-- **  Copyright © 2007 Gas Powered Games, Inc.  All rights reserved.
 -- ****************************************************************************
 local UefBRNT3SHBMproj = import('/mods/fa-total-mayhem/lua/TMprojectiles.lua').UefBRNT3SHBMproj
 BRNT3SHBMproj = Class(UefBRNT3SHBMproj){}

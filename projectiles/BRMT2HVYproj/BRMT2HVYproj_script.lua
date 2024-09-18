@@ -5,7 +5,7 @@
 -- **
 -- **  Summary  :
 -- **
--- **  Copyright � 2007 Gas Powered Games, Inc.  All rights reserved.
+-- **  Copyright © 2007 Gas Powered Games, Inc.  All rights reserved.
 -- ****************************************************************************
 local CybBRMT2HVYproj = import('/mods/fa-total-mayhem/lua/TMprojectiles.lua').CybBRMT2HVYproj
 BRMT2HVYproj = Class(CybBRMT2HVYproj){}

@@ -5,7 +5,7 @@
 --
 --  Summary  :  BRN Tiger Light Tank
 --
---  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 ----------------------------------------------------------------------------
 
 local TLandUnit = import('/lua/terranunits.lua').TLandUnit

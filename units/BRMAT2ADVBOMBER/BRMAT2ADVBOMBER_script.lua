@@ -5,7 +5,7 @@
 --
 --  Summary  :  UEF Spy Plane Script
 --
---  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 ----------------------------------------------------------------------------
 
 local TAirUnit = import('/lua/terranunits.lua').TAirUnit
@@ -13,6 +13,7 @@ local WeaponsFile = import('/lua/terranweapons.lua')
 local TIFSmallYieldNuclearBombWeapon = WeaponsFile.TIFSmallYieldNuclearBombWeapon
 local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 
+---@class BRMAT2ADVBOMBER : TAirUnit
 BRMAT2ADVBOMBER = Class(TAirUnit){
 	Weapons = {
 		aamissiles1 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },

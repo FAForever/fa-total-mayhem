@@ -1,13 +1,9 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UAA0203/UAA0203_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  Aeon Gunship Script
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+----------------------------------------------------------------------
+-- File     :  /cdimage/units/UAA0203/UAA0203_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  Aeon Gunship Script
+-- Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
+----------------------------------------------------------------------
 local AAirUnit = import('/lua/aeonunits.lua').AAirUnit
 local WeaponsFile = import('/lua/terranweapons.lua')
 local CybranWeaponsFile = import('/lua/cybranweapons.lua')
@@ -18,6 +14,11 @@ local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua
 local util = import('/lua/utilities.lua')
 local fxutil = import('/lua/effectutilities.lua')
 
+
+
+
+
+---@class BRMAT1EXGS : AAirUnit
 BRMAT1EXGS = Class(AAirUnit){
 	Weapons = {
 		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
@@ -42,6 +43,10 @@ BRMAT1EXGS = Class(AAirUnit){
 	MovementAmbientExhaustBones = { 'ex01', 'ex02' },
 	DestructionPartsChassisToss = { 'BRMAT1EXGS' },
 	DestroyNoFallRandomChance = 1.1,
+
+	---@param self BRMAT1EXGS
+	---@param builder Unit
+	---@param layer string
 	OnStopBeingBuilt = function(self, builder, layer)
 		AAirUnit.OnStopBeingBuilt(self, builder, layer)
 
@@ -53,6 +58,10 @@ BRMAT1EXGS = Class(AAirUnit){
 			self:SetWeaponEnabledByLabel('autoattack', true)
 		end
 	end,
+
+	---@param self BRMAT1EXGS
+	---@param new any
+	---@param old any
 	OnMotionHorzEventChange = function(self, new, old)
 		AAirUnit.OnMotionHorzEventChange(self, new, old)
 
@@ -71,6 +80,8 @@ BRMAT1EXGS = Class(AAirUnit){
 			self.ThrustExhaustTT1 = nil
 		end
 	end,
+
+	---@param self BRMAT1EXGS
 	MovementAmbientExhaustThread = function(self)
 		while not self.Dead do
 			local ExhaustEffects =
@@ -91,33 +102,44 @@ BRMAT1EXGS = Class(AAirUnit){
 			WaitSeconds(util.GetRandomFloat(1, 7))
 		end
 	end,
+
+	---@param self BRMAT1EXGS
 	CreatTheEffects = function(self)
-		local army = self:GetArmy()
+		local army = self.Army
+		local trash = self.Trash
+
 		for k, v in EffectTemplate['SmokePlumeLightDensityMed01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'eff01', army, v):ScaleEmitter(0.7))
+			trash:Add(CreateAttachedEmitter(self, 'eff01', army, v):ScaleEmitter(0.7))
 		end
 		for k, v in EffectTemplate['SmokePlumeLightDensityMed01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'eff02', army, v):ScaleEmitter(0.7))
+			trash:Add(CreateAttachedEmitter(self, 'eff02', army, v):ScaleEmitter(0.7))
 		end
 		for k, v in EffectTemplate['CMicrowaveLaserMuzzle01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'eff01', army, v):ScaleEmitter(0.8))
+			trash:Add(CreateAttachedEmitter(self, 'eff01', army, v):ScaleEmitter(0.8))
 		end
 		for k, v in EffectTemplate['CMicrowaveLaserMuzzle01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'eff02', army, v):ScaleEmitter(0.8))
+			trash:Add(CreateAttachedEmitter(self, 'eff02', army, v):ScaleEmitter(0.8))
 		end
 		for k, v in EffectTemplate['CMicrowaveLaserMuzzle01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'eff03', army, v):ScaleEmitter(0.8))
+			trash:Add(CreateAttachedEmitter(self, 'eff03', army, v):ScaleEmitter(0.8))
 		end
 		for k, v in EffectTemplate['CMicrowaveLaserMuzzle01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'eff04', army, v):ScaleEmitter(0.8))
+			trash:Add(CreateAttachedEmitter(self, 'eff04', army, v):ScaleEmitter(0.8))
 		end
 	end,
+
+	---@param self BRMAT1EXGS
+	---@param instigator Unit
+	---@param damagetype string
+	---@param overkillRatio number
 	OnKilled = function(self, instigator, damagetype, overkillRatio)
 		AAirUnit.OnKilled(self, instigator, damagetype, overkillRatio)
 		self:CreatTheEffectsDeath()
 	end,
+
+	---@param self BRMAT1EXGS
 	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
+		local army = self.Army
 		for k, v in TMEffectTemplate['CybranT2BeetleHit01'] do
 			self.Trash:Add(CreateAttachedEmitter(self, 'BRMAT1EXGS', army, v):ScaleEmitter(2.35))
 		end

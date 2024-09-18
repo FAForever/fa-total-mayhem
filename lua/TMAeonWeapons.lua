@@ -57,7 +57,7 @@ TMMadCatmk4laserweapon = Class(DefaultBeamWeapon){
 	FxUpackingChargeEffectScale = 1,
 }
 ---------------------------------------------
---#region Mod Compatability
+--#region Mod Compatibility
 
 local DefaultProjectileWeapon = WeaponFile.DefaultProjectileWeapon
 local BareBonesWeapon = WeaponFile.BareBonesWeapon
