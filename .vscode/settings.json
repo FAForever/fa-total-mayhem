@@ -1,16 +1,44 @@
 {
-  "Lua.runtime.version": "Lua 5.1",
+  "Lua.runtime.version": "Lua 5.3",
   "Lua.runtime.path": ["?.lua", "?/init.lua", "/?"],
   "Lua.completion.showWord": "Disable",
   "Lua.runtime.special": {
     "import": "require",
-    "doscript": "require"
+    "doscript": "require",
+    "LazyImport": "require"
   },
-  "Lua.runtime.nonstandardSymbol": ["!="],
+  "Lua.runtime.nonstandardSymbol": ["continue", "!="],
   "Lua.completion.requireSeparator": "/",
   "Lua.runtime.exportEnvDefault": true,
-  "Lua.diagnostics.globals": ["moho"],
   "Lua.runtime.plugin": "${3rd}/fa/plugin.lua",
-  "Lua.workspace.library": ["${3rd}/fa/library"],
-  "Lua.workspace.checkThirdParty": false
+  "Lua.diagnostics.globals": ["moho", "ScenarioInfo"],
+  "Lua.workspace.library": ["F:\\GitRepos\\fa"],
+  "Lua.workspace.checkThirdParty": false,
+  "cSpell.words": [
+    "aeonweapons",
+    "autoattack",
+    "BRMT3EXBMPOWEREFFECT",
+    "BRNAT1ADVFIG",
+    "BRNAT1EXGS",
+    "BRNAT1INTC",
+    "BRNAT2FIGHTER",
+    "BRNAT3AIRSUP",
+    "BRNAT3BOMBER",
+    "BRNBAAFAC",
+    "BRNBT1AIRST",
+    "BRNBT1HART",
+    "BRNBT1PERI",
+    "BRNST1ARTILLERY",
+    "BRNST1BATTLESHIP",
+    "BRNST2ADVBATTLESHIP",
+    "BRNT1ADVNAVYGUN",
+    "BRNT1EXART",
+    "BRNT1EXMOB",
+    "BRNT1EXPDT2",
+    "perieffect",
+    "SetAIAutoattackWeapon",
+    "smallgun",
+    "TAAGinsuRapidPulseWeapon",
+    "terranunits"
+  ]
 }

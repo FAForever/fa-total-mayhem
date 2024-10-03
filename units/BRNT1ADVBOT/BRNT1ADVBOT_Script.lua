@@ -1,20 +1,18 @@
 ----------------------------------------------------------------------------
---
---  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
---  Author(s):  John Comes, David Tomandl, Jessica St. Croix
---
---  Summary  :  BRN Scavenger Medium Tank
---
---  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Scavenger Medium Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
 ----------------------------------------------------------------------------
-
 local TWalkingLandUnit = import('/lua/terranunits.lua').TWalkingLandUnit
 local WeaponsFile = import('/lua/terranweapons.lua')
-local TAAGinsuRapidPulseWeapon = WeaponsFile.TAAGinsuRapidPulseWeapon
-local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local SCUDeathWeapon = import('/lua/sim/defaultweapons.lua').SCUDeathWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 
+local TAAGinsuRapidPulseWeapon = WeaponsFile.TAAGinsuRapidPulseWeapon
+local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
+
+---@class BRNT1ADVBOT: TWalkingLandUnit
 BRNT1ADVBOT = Class(TWalkingLandUnit){
 	Weapons = {
 		RightBeam = Class(TAAGinsuRapidPulseWeapon){},
@@ -30,14 +28,24 @@ BRNT1ADVBOT = Class(TWalkingLandUnit){
 			FxMuzzleFlash = EffectTemplate.OhCannonMuzzleFlash02,
 		},
 	},
+
+	---@param self BRNT1ADVBOT
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		TWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BRNT1ADVBOT
+	---@param transport Unit
+	---@param bone Bone
 	OnDetachedFromTransport = function(self, transport, bone)
 		TWalkingLandUnit.OnDetachedFromTransport(self, transport, bone)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BRNT1ADVBOT
 	SetAIAutoattackWeapon = function(self)
 		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
 			self:SetWeaponEnabledByLabel('autoattack', false)
