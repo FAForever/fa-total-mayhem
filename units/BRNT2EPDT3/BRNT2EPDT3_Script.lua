@@ -1,18 +1,19 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UEB2301/UEB2301_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  UEF Heavy Gun Tower Script
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+--------------------------------------------------------------
+-- File     :  /cdimage/units/UEB2301/UEB2301_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  UEF Heavy Gun Tower Script
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--------------------------------------------------------------
 local TStructureUnit = import('/lua/terranunits.lua').TStructureUnit
 local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local SCUDeathWeapon = import('/lua/sim/defaultweapons.lua').SCUDeathWeapon
 
+-- upvalue for performance
+local CreateAttachedEmitter = CreateAttachedEmitter
+local TrashBagAdd = TrashBag.Add
+
+---@class BRNT2EPDT3 : TStructureUnit
 BRNT2EPDT3 = Class(TStructureUnit){
 	Weapons = {
 		Gauss01 = Class(TDFGaussCannonWeapon){

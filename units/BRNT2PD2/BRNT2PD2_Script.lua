@@ -1,18 +1,19 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  BRN Scavenger Medium Tank
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+--------------------------------------------------------------------------------
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Scavenger Medium Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--------------------------------------------------------------------------------
 local TStructureUnit = import('/lua/terranunits.lua').TStructureUnit
 local WeaponsFile = import('/lua/terranweapons.lua')
-local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
+local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 
+-- upvalue for performance
+local CreateAttachedEmitter = CreateAttachedEmitter
+local TrashBagAdd = TrashBag.Add
+
+---@class BRNT2PD2 : TStructureUnit
 BRNT2PD2 = Class(TStructureUnit){
 	Weapons = { MainGun = Class(TDFGaussCannonWeapon){
 		IdleState = State(TDFGaussCannonWeapon.IdleState){
@@ -42,14 +43,23 @@ BRNT2PD2 = Class(TStructureUnit){
 			TDFGaussCannonWeapon.OnLostTarget(self)
 		end,
 	} },
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		TStructureUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
+
+	---@param self BRNT2PD2
+	---@param instigator Unit
+	---@param damageType DamageType
+	---@param overkillRatio number
+	OnKilled = function(self, instigator, damageType, overkillRatio)
+		TStructureUnit.OnKilled(self, instigator, damageType, overkillRatio)
+		self:CreateTheEffectsDeath()
 	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['UEFDeath02'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'Turret', army, v):ScaleEmitter(1.05))
+
+	---@param self BRNT2PD2
+	CreateTheEffectsDeath = function(self)
+		local army = self.Army
+		local trash = self.Trash
+
+		for _, v in TMEffectTemplate['UEFDeath02'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'Turret', army, v):ScaleEmitter(1.05))
 		end
 	end,
 }

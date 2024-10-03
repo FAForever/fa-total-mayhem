@@ -1,21 +1,19 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  BRN Scavenger Medium Tank
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+--------------------------------------------------------------------------------
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Scavenger Medium Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--------------------------------------------------------------------------------
 local TWalkingLandUnit = import('/lua/terranunits.lua').TWalkingLandUnit
 local WeaponsFile = import('/lua/terranweapons.lua')
-local TOrbitalDeathLaserBeamWeapon = WeaponsFile.TOrbitalDeathLaserBeamWeapon
-local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local SCUDeathWeapon = import('/lua/sim/defaultweapons.lua').SCUDeathWeapon
-local TDFRiotWeapon = WeaponsFile.TDFRiotWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 
+local TOrbitalDeathLaserBeamWeapon = WeaponsFile.TOrbitalDeathLaserBeamWeapon
+local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
+local TDFRiotWeapon = WeaponsFile.TDFRiotWeapon
+
+---@class BRNT3BLASP : TWalkingLandUnit
 BRNT3BLASP = Class(TWalkingLandUnit){
 	Weapons = {
 		Riotgun = Class(TDFRiotWeapon){
@@ -34,6 +32,10 @@ BRNT3BLASP = Class(TWalkingLandUnit){
 		gauss1 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 1.2 },
 		gauss2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 1.2 },
 	},
+
+	---@param self BRNT3BLASP
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		TWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
 
