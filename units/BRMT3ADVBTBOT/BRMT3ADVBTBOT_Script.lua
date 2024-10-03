@@ -1,21 +1,23 @@
 ----------------------------------------------------------------------------
---
---  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
---  Author(s):  John Comes, David Tomandl, Jessica St. Croix
---
---  Summary  :  BRN Scavenger Medium Tank
---
---  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Scavenger Medium Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
 ----------------------------------------------------------------------------
 
 local CWalkingLandUnit = import('/lua/cybranunits.lua').CWalkingLandUnit
 local WeaponsFile = import('/lua/cybranweapons.lua')
 local WeaponsFile2 = import('/lua/terranweapons.lua')
-local TDFGaussCannonWeapon = WeaponsFile2.TDFLandGaussCannonWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
+local TDFGaussCannonWeapon = WeaponsFile2.TDFLandGaussCannonWeapon
 local CDFParticleCannonWeapon = WeaponsFile.CDFParticleCannonWeapon
 
+-- upvalues for performance
+local CreateAttachedEmitter = CreateAttachedEmitter
+local TrashBagAdd = TrashBag.Add
+
+---@class BRMT3ADVBTBOT : CWalkingLandUnit
 BRMT3ADVBTBOT = Class(CWalkingLandUnit){
 	Weapons = {
 		MainGun = Class(CDFParticleCannonWeapon){},
@@ -50,15 +52,25 @@ BRMT3ADVBTBOT = Class(CWalkingLandUnit){
 		rocket2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.7 },
 		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
 	},
+
+	---@param self BRMT3ADVBTBOT
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		CWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
-		self:CreatTheEffects()
+		self:CreateTheEffects()
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BRMT3ADVBTBOT
+	---@param transport Unit
+	---@param bone Bone
 	OnDetachedFromTransport = function(self, transport, bone)
 		CWalkingLandUnit.OnDetachedFromTransport(self, transport, bone)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BRMT3ADVBTBOT
 	SetAIAutoattackWeapon = function(self)
 		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
 			self:SetWeaponEnabledByLabel('autoattack', false)
@@ -66,50 +78,63 @@ BRMT3ADVBTBOT = Class(CWalkingLandUnit){
 			self:SetWeaponEnabledByLabel('autoattack', true)
 		end
 	end,
-	CreatTheEffects = function(self)
-		local army = self:GetArmy()
-		for k, v in EffectTemplate['GenericTeleportCharge01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'eff01', army, v):ScaleEmitter(0.2))
+
+	---@param self BRMT3ADVBTBOT
+	CreateTheEffects = function(self)
+		local army = self.Army
+		local trash = self.Trash
+
+		for _, v in EffectTemplate['GenericTeleportCharge01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'eff01', army, v):ScaleEmitter(0.2))
 		end
-		for k, v in EffectTemplate['GenericTeleportCharge01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'eff02', army, v):ScaleEmitter(0.25))
+		for _, v in EffectTemplate['GenericTeleportCharge01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'eff02', army, v):ScaleEmitter(0.25))
 		end
-		for k, v in EffectTemplate['GenericTeleportCharge01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'eff03', army, v):ScaleEmitter(0.3))
+		for _, v in EffectTemplate['GenericTeleportCharge01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'eff03', army, v):ScaleEmitter(0.3))
 		end
-		for k, v in EffectTemplate['SDFSinnutheWeaponFXTrails01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'eff04', army, v):ScaleEmitter(0.25))
+		for _, v in EffectTemplate['SDFSinnutheWeaponFXTrails01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'eff04', army, v):ScaleEmitter(0.25))
 		end
-		for k, v in EffectTemplate['GenericTeleportCharge01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'muzzle01', army, v):ScaleEmitter(0.2))
+		for _, v in EffectTemplate['GenericTeleportCharge01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'muzzle01', army, v):ScaleEmitter(0.2))
 		end
-		for k, v in EffectTemplate['GenericTeleportCharge01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'Object42', army, v):ScaleEmitter(0.2))
+		for _, v in EffectTemplate['GenericTeleportCharge01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'Object42', army, v):ScaleEmitter(0.2))
 		end
-		for k, v in EffectTemplate['GenericTeleportCharge01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'Object41', army, v):ScaleEmitter(0.2))
+		for _, v in EffectTemplate['GenericTeleportCharge01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'Object41', army, v):ScaleEmitter(0.2))
 		end
-		for k, v in EffectTemplate['GenericTeleportCharge01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'Object18', army, v):ScaleEmitter(0.2))
+		for _, v in EffectTemplate['GenericTeleportCharge01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'Object18', army, v):ScaleEmitter(0.2))
 		end
-		for k, v in EffectTemplate['GenericTeleportCharge01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'Object39', army, v):ScaleEmitter(0.2))
+		for _, v in EffectTemplate['GenericTeleportCharge01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'Object39', army, v):ScaleEmitter(0.2))
 		end
-		for k, v in EffectTemplate['GenericTeleportCharge01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'Object28', army, v):ScaleEmitter(0.2))
+		for _, v in EffectTemplate['GenericTeleportCharge01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'Object28', army, v):ScaleEmitter(0.2))
 		end
-		for k, v in EffectTemplate['GenericTeleportCharge01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'Object38', army, v):ScaleEmitter(0.2))
+		for _, v in EffectTemplate['GenericTeleportCharge01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'Object38', army, v):ScaleEmitter(0.2))
 		end
 	end,
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		CWalkingLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
+
+	---@param self BRMT3ADVBTBOT
+	---@param instigator Unit
+	---@param damageType DamageType
+	---@param overkillRatio any
+	OnKilled = function(self, instigator, damageType, overkillRatio)
+		CWalkingLandUnit.OnKilled(self, instigator, damageType, overkillRatio)
+		self:CreateTheEffectsDeath()
 	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['CybranT3AdvancedBattleBotDeath01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'BRMT3ADVBTBOT', army, v):ScaleEmitter(2.3))
+
+	---@param self BRMT3ADVBTBOT
+	CreateTheEffectsDeath = function(self)
+		local army = self.Army
+		local trash = self.Trash
+
+		for _, v in TMEffectTemplate['CybranT3AdvancedBattleBotDeath01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'BRMT3ADVBTBOT', army, v):ScaleEmitter(2.3))
 		end
 	end,
 }

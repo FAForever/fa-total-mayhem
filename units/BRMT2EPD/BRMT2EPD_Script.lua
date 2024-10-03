@@ -1,20 +1,21 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UEB2301/UEB2301_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  UEF Heavy Gun Tower Script
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+------------------------------------------------------------------------ 
+-- File     :  /cdimage/units/UEB2301/UEB2301_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  UEF Heavy Gun Tower Script
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+------------------------------------------------------------------------
 local TStructureUnit = import('/lua/terranunits.lua').TStructureUnit
 local WeaponsFile = import('/lua/terranweapons.lua')
-local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local SCUDeathWeapon = import('/lua/sim/defaultweapons.lua').SCUDeathWeapon
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
+local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 
+-- upvalues for performance
+local CreateAttachedEmitter = CreateAttachedEmitter
+local TrashBagAdd = TrashBag.Add
+
+---@class BRMT2EPD : TStructureUnit
 BRMT2EPD = Class(TStructureUnit){
 	Weapons = {
 		MainGun = Class(TDFGaussCannonWeapon){
@@ -30,37 +31,52 @@ BRMT2EPD = Class(TStructureUnit){
 			FxVentEffect2 = EffectTemplate.WeaponSteam01,
 			FxMuzzleEffect = EffectTemplate.CElectronBolterMuzzleFlash01,
 			FxCoolDownEffect = EffectTemplate.CDisruptorCoolDownEffect,
-			PlayFxMuzzleSequence = function(self, muzzle)
-				local army = self.unit:GetArmy()
 
-				for k, v in self.FxVentEffect3 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'BRMT2EPD', army, v):ScaleEmitter(1.35))
+			---@param self TDFGaussCannonWeapon
+			---@param muzzle string Unused
+			PlayFxMuzzleSequence = function(self, muzzle)
+				local army = self.Army
+				local unit = self.unit
+				local trash = self.Trash
+
+				for _, v in self.FxVentEffect3 do
+					TrashBagAdd(trash, CreateAttachedEmitter(unit, 'BRMT2EPD', army, v):ScaleEmitter(1.35))
 				end
-				for k, v in self.FxMuzzleEffect do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'Turret_Muzzle', army, v):ScaleEmitter(3.15))
+				for _, v in self.FxMuzzleEffect do
+					TrashBagAdd(trash, CreateAttachedEmitter(unit, 'Turret_Muzzle', army, v):ScaleEmitter(3.15))
 				end
-				for k, v in self.FxVentEffect do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'vent01', army, v):ScaleEmitter(1))
+				for _, v in self.FxVentEffect do
+					TrashBagAdd(trash, CreateAttachedEmitter(unit, 'vent01', army, v):ScaleEmitter(1))
 				end
-				for k, v in self.FxVentEffect do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'vent02', army, v):ScaleEmitter(1))
+				for _, v in self.FxVentEffect do
+					TrashBagAdd(trash, CreateAttachedEmitter(unit, 'vent02', army, v):ScaleEmitter(1))
 				end
-				for k, v in self.FxVentEffect2 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'smoke01', army, v):ScaleEmitter(1))
+				for _, v in self.FxVentEffect2 do
+					TrashBagAdd(trash, CreateAttachedEmitter(unit, 'smoke01', army, v):ScaleEmitter(1))
 				end
 			end,
 		},
 		DeathWeapon = Class(SCUDeathWeapon){},
 	},
+
+	---@param self any
+	---@param builder any
+	---@param layer any
 	OnStopBeingBuilt = function(self, builder, layer)
 		TStructureUnit.OnStopBeingBuilt(self, builder, layer)
-		self.Trash:Add(CreateRotator(self, 'radar', 'y', nil, 110, 0, 0))
-		self:CreatTheEffects()
+		local trash = self.Trash
+
+		TrashBagAdd(trash,CreateRotator(self, 'radar', 'y', nil, 110, 0, 0))
+		self:CreateTheEffects()
 	end,
-	CreatTheEffects = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['BRMT3EXBMPOWEREFFECT'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'effect01', army, v):ScaleEmitter(3.30))
+
+	---@param self any
+	CreateTheEffects = function(self)
+		local army = self.Army
+		local trash = self.Trash
+
+		for _, v in TMEffectTemplate['BRMT3EXBMPOWEREFFECT'] do
+			TrashBagAdd(trash,CreateAttachedEmitter(self, 'effect01', army, v):ScaleEmitter(3.30))
 		end
 	end,
 }

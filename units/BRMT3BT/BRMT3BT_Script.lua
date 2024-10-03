@@ -1,19 +1,20 @@
 ----------------------------------------------------------------------------
---
---  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
---  Author(s):  John Comes, David Tomandl, Jessica St. Croix
---
---  Summary  :  BRN Scavenger Medium Tank
---
---  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Scavenger Medium Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
 ----------------------------------------------------------------------------
-
 local TLandUnit = import('/lua/terranunits.lua').TLandUnit
 local WeaponsFile = import('/lua/terranweapons.lua')
-local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
+local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 
+-- upvalues for performance
+local CreateAttachedEmitter = CreateAttachedEmitter
+local TrashBagAdd = TrashBag.Add
+
+---@class BRMT3BT : TLandUnit
 BRMT3BT = Class(TLandUnit){
 	Weapons = {
 		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
@@ -60,14 +61,24 @@ BRMT3BT = Class(TLandUnit){
 		rocket = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.4 },
 		rocket2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.4 },
 	},
+
+	---@param self BRMT3BT
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		TLandUnit.OnStopBeingBuilt(self, builder, layer)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BRMT3BT
+	---@param transport Unit
+	---@param bone Bone
 	OnDetachedFromTransport = function(self, transport, bone)
 		TLandUnit.OnDetachedFromTransport(self, transport, bone)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BRMT3BT
 	SetAIAutoattackWeapon = function(self)
 		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
 			self:SetWeaponEnabledByLabel('autoattack', false)
@@ -75,14 +86,22 @@ BRMT3BT = Class(TLandUnit){
 			self:SetWeaponEnabledByLabel('autoattack', true)
 		end
 	end,
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		TLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
+
+	---@param self BRMT3BT
+	---@param instigator Unit
+	---@param damageType DamageType
+	OnKilled = function(self, instigator, damageType, overkillRatio)
+		TLandUnit.OnKilled(self, instigator, damageType, overkillRatio)
+		self:CreateTheEffectsDeath()
 	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['CybranT3BattleTankDeath'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'BRMT3BT', army, v):ScaleEmitter(6.0))
+
+	---@param self BRMT3BT
+	CreateTheEffectsDeath = function(self)
+		local army = self.Army
+		local trash = self.Trash
+
+		for _, v in TMEffectTemplate['CybranT3BattleTankDeath'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'BRMT3BT', army, v):ScaleEmitter(6.0))
 		end
 	end,
 }
