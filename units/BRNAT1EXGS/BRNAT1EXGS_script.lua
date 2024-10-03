@@ -1,21 +1,25 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UAA0203/UAA0203_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  Aeon Gunship Script
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+--------------------------------------------------------------------------------
+-- File     :  /cdimage/units/UAA0203/UAA0203_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  Aeon Gunship Script
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--------------------------------------------------------------------------------
 local AAirUnit = import('/lua/aeonunits.lua').AAirUnit
 local WeaponsFile = import('/lua/terranweapons.lua')
-local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
 local util = import('/lua/utilities.lua')
 local fxutil = import('/lua/effectutilities.lua')
+local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 
+-- upvalue for performance
+local CreateRotator = CreateRotator
+local CreateAttachedEmitter = CreateAttachedEmitter
+local KillThread = KillThread
+local IsUnit = IsUnit
+local TrashBagAdd = TrashBag.Add
+
+---@class BRNAT1EXGS: AAirUnit
 BRNAT1EXGS = Class(AAirUnit){
 	Weapons = {
 		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
@@ -38,16 +42,25 @@ BRNAT1EXGS = Class(AAirUnit){
 	MovementAmbientExhaustBones = { 'ex01', 'ex02', 'ex03', 'ex04' },
 	DestructionPartsChassisToss = { 'BRNAT1EXGS' },
 	DestroyNoFallRandomChance = 1.1,
+
+	---@param self BRNAT1EXGS
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		AAirUnit.OnStopBeingBuilt(self, builder, layer)
-		self.Trash:Add(CreateRotator(self, 'Object13', 'y', nil, -750, 0, 0))
-		self:CreatTheEffects()
+		local trash = self.Trash
+		TrashBagAdd(trash, CreateRotator(self, 'Object13', 'y', nil, -750, 0, 0))
+		self:CreateTheEffects()
 		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
 			self:SetWeaponEnabledByLabel('autoattack', false)
 		else
 			self:SetWeaponEnabledByLabel('autoattack', true)
 		end
 	end,
+
+	---@param self BRNAT1EXGS
+	---@param new VerticalMovementState
+	---@param old VerticalMovementState
 	OnMotionHorzEventChange = function(self, new, old)
 		AAirUnit.OnMotionHorzEventChange(self, new, old)
 
@@ -66,15 +79,17 @@ BRNAT1EXGS = Class(AAirUnit){
 			self.ThrustExhaustTT1 = nil
 		end
 	end,
+
+	---@param self BRNAT1EXGS
 	MovementAmbientExhaustThread = function(self)
 		while not self.Dead do
 			local ExhaustEffects =
 				{ '/effects/emitters/dirty_exhaust_smoke_01_emit.bp', '/effects/emitters/dirty_exhaust_sparks_01_emit.bp' }
 			local ExhaustBeam = '/effects/emitters/missile_exhaust_fire_beam_03_emit.bp'
-			local army = self:GetArmy()
+			local army = self.Army
 
-			for kE, vE in ExhaustEffects do
-				for kB, vB in self.MovementAmbientExhaustBones do
+			for _, vE in ExhaustEffects do
+				for _, vB in self.MovementAmbientExhaustBones do
 					table.insert(self.MovementAmbientExhaustEffectsBag, CreateAttachedEmitter(self, vB, army, vE))
 					table.insert(self.MovementAmbientExhaustEffectsBag, CreateBeamEmitterOnEntity(self, vB, army, ExhaustBeam))
 				end
@@ -86,26 +101,39 @@ BRNAT1EXGS = Class(AAirUnit){
 			WaitSeconds(util.GetRandomFloat(1, 7))
 		end
 	end,
-	CreatTheEffects = function(self)
-		local army = self:GetArmy()
-		for k, v in EffectTemplate['SeraphimAirStagePlat01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'eff03', army, v):ScaleEmitter(1.5))
+
+	---@param self BRNAT1EXGS
+	CreateTheEffects = function(self)
+		local army = self.Army
+		local trash = self.Trash
+
+		for _, v in EffectTemplate['SeraphimAirStagePlat01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'eff03', army, v):ScaleEmitter(1.5))
 		end
-		for k, v in EffectTemplate['SeraphimAirStagePlat01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'eff01', army, v):ScaleEmitter(1.3))
+		for _, v in EffectTemplate['SeraphimAirStagePlat01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'eff01', army, v):ScaleEmitter(1.3))
 		end
-		for k, v in EffectTemplate['SeraphimAirStagePlat01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'eff02', army, v):ScaleEmitter(1.3))
+		for _, v in EffectTemplate['SeraphimAirStagePlat01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'eff02', army, v):ScaleEmitter(1.3))
 		end
 	end,
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		AAirUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
+
+	---@param self BRNAT1EXGS
+	---@param instigator Unit
+	---@param damageType DamageType
+	---@param overkillRatio number
+	OnKilled = function(self, instigator, damageType, overkillRatio)
+		AAirUnit.OnKilled(self, instigator, damageType, overkillRatio)
+		self:CreateTheEffectsDeath()
 	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['UEFDeath02'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'BRNAT1EXGS', army, v):ScaleEmitter(1.25))
+
+	---@param self BRNAT1EXGS
+	CreateTheEffectsDeath = function(self)
+		local army = self.Army
+		local trash = self.Trash
+
+		for _, v in TMEffectTemplate['UEFDeath02'] do
+			TrashBagAdd(trash,CreateAttachedEmitter(self, 'BRNAT1EXGS', army, v):ScaleEmitter(1.25))
 		end
 	end,
 }

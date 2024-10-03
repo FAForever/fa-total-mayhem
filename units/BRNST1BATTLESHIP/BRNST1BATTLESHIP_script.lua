@@ -1,13 +1,9 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UES0201/UES0201_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  Terran Destroyer Script
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+--------------------------------------------------------------------------------
+-- File     :  /cdimage/units/UES0201/UES0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  Terran Destroyer Script
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--------------------------------------------------------------------------------
 local TSeaUnit = import('/lua/terranunits.lua').TSeaUnit
 local WeaponFile = import('/lua/terranweapons.lua')
 local TAALinkedRailgun = WeaponFile.TAALinkedRailgun
@@ -15,6 +11,12 @@ local TDFGaussCannonWeapon = WeaponFile.TDFGaussCannonWeapon
 local TANTorpedoAngler = WeaponFile.TANTorpedoAngler
 local TIFSmartCharge = WeaponFile.TIFSmartCharge
 
+-- upvalue for performance
+local CreateRotator = CreateRotator
+local IsUnit = IsUnit
+local TrashBagAdd = TrashBag.Add
+
+---@class BRNST1BATTLESHIP: TSeaUnit
 BRNST1BATTLESHIP = Class(TSeaUnit){
 	DestructionTicks = 200,
 	Weapons = {
@@ -38,9 +40,15 @@ BRNST1BATTLESHIP = Class(TSeaUnit){
 		AntiTorpedo = Class(TIFSmartCharge){},
 		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
 	},
+
+	---@param self BRNST1BATTLESHIP
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		TSeaUnit.OnStopBeingBuilt(self, builder, layer)
-		self.Trash:Add(CreateRotator(self, 'Spinner02', 'y', nil, 90, 0, 0))
+		local trash = self.Trash
+
+		TrashBagAdd(trash, CreateRotator(self, 'Spinner02', 'y', nil, 90, 0, 0))
 
 		TSeaUnit.OnStopBeingBuilt(self, builder, layer)
 

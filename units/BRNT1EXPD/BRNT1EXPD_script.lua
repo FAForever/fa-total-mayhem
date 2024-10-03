@@ -1,19 +1,19 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UEB2304/UEB2304_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  UEF Advanced AA System Script
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+--------------------------------------------------------------------------------
+-- File     :  /cdimage/units/UEB2304/UEB2304_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  UEF Advanced AA System Script
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--------------------------------------------------------------------------------
 local TStructureUnit = import('/lua/terranunits.lua').TStructureUnit
 local WeaponsFile = import('/lua/terranweapons.lua')
-local TAMPhalanxWeapon = WeaponsFile.TAMPhalanxWeapon
 local Effects = import('/lua/EffectTemplates.lua')
 local EffectUtils = import('/lua/effectutilities.lua')
+local TAMPhalanxWeapon = WeaponsFile.TAMPhalanxWeapon
 
+-- upvalue for performance
+local CreateRotator = CreateRotator
+
+---@class BRNT1EXPD: TStructureUnit
 BRNT1EXPD = Class(TStructureUnit){
 	Weapons = {
 		gatling1 = Class(TAMPhalanxWeapon){
