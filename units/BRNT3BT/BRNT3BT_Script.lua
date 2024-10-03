@@ -1,19 +1,21 @@
 ----------------------------------------------------------------------------
---
---  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
---  Author(s):  John Comes, David Tomandl, Jessica St. Croix
---
---  Summary  :  BRN Scavenger Medium Tank
---
---  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Scavenger Medium Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
 ----------------------------------------------------------------------------
-
 local TLandUnit = import('/lua/terranunits.lua').TLandUnit
 local WeaponsFile = import('/lua/terranweapons.lua')
-local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
-local TDFMachineGunWeapon = WeaponsFile.TDFMachineGunWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 
+local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
+local TDFMachineGunWeapon = WeaponsFile.TDFMachineGunWeapon
+
+-- upvalue for performance
+local CreateAttachedEmitter = CreateAttachedEmitter
+local TrashBagAdd = TrashBag.Add
+
+---@class BRNT3BT : TLandUnit
 BRNT3BT = Class(TLandUnit){
 	Weapons = {
 		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
@@ -68,14 +70,24 @@ BRNT3BT = Class(TLandUnit){
 		rocket3 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.25 },
 		rocket4 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.25 },
 	},
+
+	---@param self BRNT3BT
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		TLandUnit.OnStopBeingBuilt(self, builder, layer)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BRNT3BT
+	---@param transport Unit
+	---@param bone Bone
 	OnDetachedFromTransport = function(self, transport, bone)
 		TLandUnit.OnDetachedFromTransport(self, transport, bone)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BRNT3BT
 	SetAIAutoattackWeapon = function(self)
 		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
 			self:SetWeaponEnabledByLabel('autoattack', false)

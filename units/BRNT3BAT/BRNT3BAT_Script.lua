@@ -1,23 +1,24 @@
 ----------------------------------------------------------------------------
---
---  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
---  Author(s):  John Comes, David Tomandl, Jessica St. Croix
---
---  Summary  :  BRN Scavenger Medium Tank
---
---  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Scavenger Medium Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
 ----------------------------------------------------------------------------
-
 local TLandUnit = import('/lua/terranunits.lua').TLandUnit
 local WeaponsFile = import('/lua/terranweapons.lua')
 local AWeaponsFile = import('/lua/aeonweapons.lua')
-local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
+local SCUDeathWeapon = import('/lua/sim/defaultweapons.lua').SCUDeathWeapon
+
+local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local TDFLightPlasmaCannonWeapon = WeaponsFile.TDFLightPlasmaCannonWeapon
 local TAMPhalanxWeapon = WeaponsFile.TAMPhalanxWeapon
 local ACruiseMissileWeapon = AWeaponsFile.ACruiseMissileWeapon
-local SCUDeathWeapon = import('/lua/sim/defaultweapons.lua').SCUDeathWeapon
 
+-- upvalue for performance
+local CreateAttachedEmitter = CreateAttachedEmitter
+
+---@class BRNT3BAT : TLandUnit
 BRNT3BAT = Class(TLandUnit){
 	Weapons = {
 		rocket = Class(ACruiseMissileWeapon){
@@ -97,14 +98,24 @@ BRNT3BAT = Class(TLandUnit){
 		},
 		DeathWeapon = Class(SCUDeathWeapon){},
 	},
+
+	---@param self BRNT3BAT
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		TLandUnit.OnStopBeingBuilt(self, builder, layer)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BRNT3BAT
+	---@param transport Unit
+	---@param bone Bone
 	OnDetachedFromTransport = function(self, transport, bone)
 		TLandUnit.OnDetachedFromTransport(self, transport, bone)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BRNT3BAT
 	SetAIAutoattackWeapon = function(self)
 		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
 			self:SetWeaponEnabledByLabel('autoattack', false)

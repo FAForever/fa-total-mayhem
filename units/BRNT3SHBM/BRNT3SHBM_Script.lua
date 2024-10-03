@@ -1,21 +1,24 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  BRN Scavenger Medium Tank
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
+--------------------------------------------------------------------------------
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Scavenger Medium Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--------------------------------------------------------------------------------
 
 local TWalkingLandUnit = import('/lua/terranunits.lua').TWalkingLandUnit
 local WeaponsFile = import('/lua/terranweapons.lua')
-local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
-local TDFGaussCannonWeapon3 = WeaponsFile.TDFLandGaussCannonWeapon
 local SCUDeathWeapon = import('/lua/sim/defaultweapons.lua').SCUDeathWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
 
+local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
+local TDFGaussCannonWeapon3 = WeaponsFile.TDFLandGaussCannonWeapon
+
+-- upvalue for performance
+local CreateAttachedEmitter = CreateAttachedEmitter
+local TrashBagAdd = TrashBag.Add
+
+---@class BRNT3SHBM : TWalkingLandUnit
 BRNT3SHBM = Class(TWalkingLandUnit){
 	Weapons = {
 		mainrockets = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0 },
@@ -122,6 +125,10 @@ BRNT3SHBM = Class(TWalkingLandUnit){
 		robottalk = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0 },
 		DeathWeapon = Class(SCUDeathWeapon){},
 	},
+
+	---@param self BRNT3SHBM
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		TWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
 
@@ -131,14 +138,23 @@ BRNT3SHBM = Class(TWalkingLandUnit){
 			self:SetWeaponEnabledByLabel('robottalk', true)
 		end
 	end,
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		TWalkingLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
+
+	---@param self BRNT3SHBM
+	---@param instigator Unit
+	---@param damageType DamageType
+	---@param overkillRatio number
+	OnKilled = function(self, instigator, damageType, overkillRatio)
+		TWalkingLandUnit.OnKilled(self, instigator, damageType, overkillRatio)
+		self:CreateTheEffectsDeath()
 	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['UEFDeath02'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'Turret', army, v):ScaleEmitter(2.25))
+
+	---@param self BRNT3SHBM
+	CreateTheEffectsDeath = function(self)
+		local army = self.Army
+		local trash = self.Trash
+
+		for _, v in TMEffectTemplate['UEFDeath02'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'Turret', army, v):ScaleEmitter(2.25))
 		end
 	end,
 }

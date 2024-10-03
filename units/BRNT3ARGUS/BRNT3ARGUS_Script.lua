@@ -1,19 +1,20 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  BRN Scavenger Medium Tank
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+--------------------------------------------------------------------------------
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Scavenger Medium Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--------------------------------------------------------------------------------
 local TWalkingLandUnit = import('/lua/terranunits.lua').TWalkingLandUnit
 local WeaponsFile = import('/lua/terranweapons.lua')
-local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local SCUDeathWeapon = import('/lua/sim/defaultweapons.lua').SCUDeathWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 
+local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
+
+-- upvalue for performance
+local TrashBagAdd = TrashBag.Add
+
+---@class BRNT3ARGUS : TWalkingLandUnit
 BRNT3ARGUS = Class(TWalkingLandUnit){
 	Weapons = {
 		robottalk = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
@@ -47,6 +48,10 @@ BRNT3ARGUS = Class(TWalkingLandUnit){
 		},
 		DeathWeapon = Class(SCUDeathWeapon){},
 	},
+
+	---@param self BRNT3ARGUS
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		TWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
 
