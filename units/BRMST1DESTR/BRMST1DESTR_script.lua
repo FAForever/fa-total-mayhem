@@ -1,13 +1,9 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/URS0103/URS0103_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  Cybran Frigate Script
--- **
--- **  Copyright � 2006 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+--------------------------------------------------------------------------
+-- File     :  /cdimage/units/URS0103/URS0103_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  Cybran Frigate Script
+-- Copyright � 2006 Gas Powered Games, Inc.  All rights reserved.
+--------------------------------------------------------------------------
 local CSeaUnit = import('/lua/cybranunits.lua').CSeaUnit
 local CybranWeaponsFile = import('/lua/cybranweapons.lua')
 local WeaponFile = import('/lua/terranweapons.lua')
@@ -16,6 +12,11 @@ local CDFProtonCannonWeapon = CybranWeaponsFile.CDFProtonCannonWeapon
 local TDFGaussCannonWeapon = WeaponFile.TDFGaussCannonWeapon
 local CANNaniteTorpedoWeapon = CybranWeaponsFile.CANNaniteTorpedoWeapon
 
+-- Upvalue for Perfomance
+local TrashBagAdd = TrashBag.Add
+local CreateRotator = CreateRotator
+
+---@class BRMST1DESTR : CSeaUnit
 BRMST1DESTR = Class(CSeaUnit){
 	DestructionTicks = 200,
 	Weapons = {
@@ -29,9 +30,15 @@ BRMST1DESTR = Class(CSeaUnit){
 		AAGun4 = Class(CAAAutocannon){},
 		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
 	},
+
+	---@param self BRMST1DESTR
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		CSeaUnit.OnStopBeingBuilt(self, builder, layer)
-		self.Trash:Add(CreateRotator(self, 'Object11', 'y', nil, 120, 0, 0))
+
+		local trash = self.Trash
+		TrashBagAdd(trash,CreateRotator(self, 'Object11', 'y', nil, 120, 0, 0))
 
 		CSeaUnit.OnStopBeingBuilt(self, builder, layer)
 
@@ -42,5 +49,4 @@ BRMST1DESTR = Class(CSeaUnit){
 		end
 	end,
 }
-
 TypeClass = BRMST1DESTR

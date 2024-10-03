@@ -8,7 +8,7 @@ TMAnovacatbluelaserweapon = Class(DefaultBeamWeapon){
 	BeamType = TMCollisionBeamFile.TMNovaCatBlueLaserBeam,
 	FxMuzzleFlash = {},
 	FxChargeMuzzleFlash = {},
-	FxUpackingChargeEffects = EffectTemplate.CMicrowaveLaserCharge01,
+	FxUnpackingChargeEffects = EffectTemplate.CMicrowaveLaserCharge01,
 	FxUpackingChargeEffectScale = 1,
 }
 

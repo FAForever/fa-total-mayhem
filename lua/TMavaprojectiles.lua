@@ -263,7 +263,6 @@ AeonBROT3NCM2proj = Class(MultiPolyTrailProjectile){
 ---@class UefBRNAT1ADVFIGproj : SingleBeamProjectile
 UefBRNAT1ADVFIGproj = Class(SingleBeamProjectile){
 	FxTrails = EffectTemplate.TMissileExhaust02,
-	FxTrailOffset = -0.5,
 	BeamName = '/effects/emitters/missile_munition_exhaust_beam_01_emit.bp',
 	FxImpactUnit = EffectTemplate.TShipGaussCannonHit02,
 	FxUnitHitScale = 0.55,

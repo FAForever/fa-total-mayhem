@@ -1,22 +1,23 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/URS0103/URS0103_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  Cybran Frigate Script
--- **
--- **  Copyright � 2006 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+--------------------------------------------------------------------------
+-- File     :  /cdimage/units/URS0103/URS0103_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  Cybran Frigate Script
+-- Copyright � 2006 Gas Powered Games, Inc.  All rights reserved.
+--------------------------------------------------------------------------
 local CSeaUnit = import('/lua/cybranunits.lua').CSeaUnit
 local CybranWeaponsFile = import('/lua/cybranweapons.lua')
 local WeaponFile = import('/lua/terranweapons.lua')
+local EffectTemplate = import('/lua/EffectTemplates.lua')
 local CAAAutocannon = CybranWeaponsFile.CAAAutocannon
 local CDFProtonCannonWeapon = CybranWeaponsFile.CDFProtonCannonWeapon
 local TDFGaussCannonWeapon = WeaponFile.TDFGaussCannonWeapon
 local CIFMissileLoaWeapon = CybranWeaponsFile.CIFMissileLoaWeapon
-local EffectTemplate = import('/lua/EffectTemplates.lua')
 
+-- Upvalue for Perfomance
+local TrashBagAdd = TrashBag.Add
+local CreateRotator = CreateRotator
+
+---@class BRMST1BATTLECRUISER : CSeaUnit
 BRMST1BATTLECRUISER = Class(CSeaUnit){
 	DestructionTicks = 200,
 	Weapons = {
@@ -43,9 +44,15 @@ BRMST1BATTLECRUISER = Class(CSeaUnit){
 		AAGun5 = Class(CAAAutocannon){},
 		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
 	},
+
+	---@param self BRMST1BATTLECRUISER
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		CSeaUnit.OnStopBeingBuilt(self, builder, layer)
-		self.Trash:Add(CreateRotator(self, 'Cybran_Radar', 'y', nil, 90, 0, 0))
+
+		local trash = self.Trash
+		TrashBagAdd(trash, CreateRotator(self, 'Cybran_Radar', 'y', nil, 90, 0, 0))
 
 		CSeaUnit.OnStopBeingBuilt(self, builder, layer)
 
@@ -56,5 +63,4 @@ BRMST1BATTLECRUISER = Class(CSeaUnit){
 		end
 	end,
 }
-
 TypeClass = BRMST1BATTLECRUISER
