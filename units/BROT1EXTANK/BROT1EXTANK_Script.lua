@@ -1,12 +1,9 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  BRN Scavenger Medium Tank
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
+--------------------------------------------------------------------------------
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Scavenger Medium Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+------------------------------------------------------------------------------	
 
 local TLandUnit = import('/lua/terranunits.lua').TLandUnit
 local WeaponsFile = import('/lua/terranweapons.lua')
@@ -18,6 +15,11 @@ local WeaponsFileAutoAttack = import('/lua/terranweapons.lua')
 local AutoAttackWeapon = WeaponsFileAutoAttack.TDFLandGaussCannonWeapon
 local SDFChronotronCannonWeapon = SWeapons.SDFChronotronCannonWeapon
 
+-- Upvale for performance
+local CreateAttachedEmitter = CreateAttachedEmitter
+local TrashBagAdd = TrashBag.Add
+
+---@class BROT1EXTANK : TLandUnit
 BROT1EXTANK = Class(TLandUnit){
 	Weapons = {
 		autoattack = Class(AutoAttackWeapon){ FxMuzzleFlashScale = 0.0 },
@@ -54,6 +56,10 @@ BROT1EXTANK = Class(TLandUnit){
 			FxMuzzleFlash = EffectTemplate.ASDisruptorCannonMuzzle01,
 		},
 	},
+
+	---@param self BROT1EXTANK
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		TLandUnit.OnStopBeingBuilt(self, builder, layer)
 
@@ -63,17 +69,26 @@ BROT1EXTANK = Class(TLandUnit){
 			self:SetWeaponEnabledByLabel('autoattack', true)
 		end
 	end,
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		TLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
+
+	---@param self BROT1EXTANK
+	---@param instigator Unit
+	---@param damageType DamageType
+	---@param overkillRatio number
+	OnKilled = function(self, instigator, damageType, overkillRatio)
+		TLandUnit.OnKilled(self, instigator, damageType, overkillRatio)
+		self:CreateTheEffectsDeath()
 	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['AeonUnitDeathRing02'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'engine01', army, v):ScaleEmitter(1.10))
+
+	---@param self BROT1EXTANK
+	CreateTheEffectsDeath = function(self)
+		local army = self.Army
+		local trash = self.Trash
+
+		for _, v in TMEffectTemplate['AeonUnitDeathRing02'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'engine01', army, v):ScaleEmitter(1.10))
 		end
-		for k, v in TMEffectTemplate['UEFHEAVYROCKET02'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'engine01', army, v):ScaleEmitter(1.0))
+		for _, v in TMEffectTemplate['UEFHEAVYROCKET02'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'engine01', army, v):ScaleEmitter(1.0))
 		end
 	end,
 }

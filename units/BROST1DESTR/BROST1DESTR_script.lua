@@ -1,21 +1,23 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UAS0202/UAS0202_script.lua
--- **  Author(s):  David Tomandl
--- **
--- **  Summary  :  Aeon Cruiser Script
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+--------------------------------------------------------------------------------
+-- File     :  /cdimage/units/UAS0202/UAS0202_script.lua
+-- Author(s):  David Tomandl
+-- Summary  :  Aeon Cruiser Script
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--------------------------------------------------------------------------------
 local AeonWeapons = import('/lua/aeonweapons.lua')
 local ASeaUnit = import('/lua/aeonunits.lua').ASeaUnit
 local WeaponFile = import('/lua/terranweapons.lua')
+
 local ADFCannonOblivionWeapon = AeonWeapons.ADFCannonOblivionWeapon
 local TDFGaussCannonWeapon = WeaponFile.TDFGaussCannonWeapon
 local AANChronoTorpedoWeapon = AeonWeapons.AANChronoTorpedoWeapon
 local AAASonicPulseBatteryWeapon = AeonWeapons.AAASonicPulseBatteryWeapon
 
+-- Upvalue for performance
+local CreateRotator = CreateRotator
+local TrashBagAdd = TrashBag.Add
+
+---@class BROST1DESTR : ASeaUnit
 BROST1DESTR = Class(ASeaUnit){
 	Weapons = {
 		AAGun = Class(AAASonicPulseBatteryWeapon){ FxMuzzleScale = 2.25 },
@@ -26,10 +28,16 @@ BROST1DESTR = Class(ASeaUnit){
 		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
 	},
 	BackWakeEffect = {},
+
+	---@param self BROST1DESTR
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		ASeaUnit.OnStopBeingBuilt(self, builder, layer)
-		self.Trash:Add(CreateRotator(self, 'Sonar', 'y', nil, 90, 0, 0))
-		self.Trash:Add(CreateRotator(self, 'Sonar01', 'y', nil, 130, 0, 0))
+		local trash = self.Trash
+
+		TrashBagAdd(trash, CreateRotator(self, 'Sonar', 'y', nil, 90, 0, 0))
+		TrashBagAdd(trash, CreateRotator(self, 'Sonar01', 'y', nil, 130, 0, 0))
 
 		ASeaUnit.OnStopBeingBuilt(self, builder, layer)
 

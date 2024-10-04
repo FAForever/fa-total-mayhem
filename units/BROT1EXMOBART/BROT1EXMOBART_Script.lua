@@ -1,21 +1,23 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  BRN Scavenger Medium Tank
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+------------------------------------------------------------------------------
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Scavenger Medium Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+------------------------------------------------------------------------------
 local AHoverLandUnit = import('/lua/aeonunits.lua').AHoverLandUnit
 local SWeapons = import('/lua/seraphimweapons.lua')
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
 local WeaponsFileAutoAttack = import('/lua/terranweapons.lua')
+
 local AutoAttackWeapon = WeaponsFileAutoAttack.TDFLandGaussCannonWeapon
 local SDFChronotronCannonWeapon = SWeapons.SDFChronotronCannonWeapon
 
+-- Upvale for performance
+local CreateAttachedEmitter = CreateAttachedEmitter
+local TrashBagAdd = TrashBag.Add
+
+---@class BROT1EXMOBART : AHoverLandUnit
 BROT1EXMOBART = Class(AHoverLandUnit){
 	Weapons = {
 		autoattack = Class(AutoAttackWeapon){ FxMuzzleFlashScale = 0.0 },
@@ -24,6 +26,10 @@ BROT1EXMOBART = Class(AHoverLandUnit){
 			FxMuzzleFlash = EffectTemplate.ASDisruptorCannonMuzzle01,
 		},
 	},
+
+	---@param self BROT1EXMOBART
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		AHoverLandUnit.OnStopBeingBuilt(self, builder, layer)
 
@@ -33,17 +39,26 @@ BROT1EXMOBART = Class(AHoverLandUnit){
 			self:SetWeaponEnabledByLabel('autoattack', true)
 		end
 	end,
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		AHoverLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
+
+	---@param self BROT1EXMOBART
+	---@param instigator Unit
+	---@param damageType DamageType
+	---@param overkillRatio number
+	OnKilled = function(self, instigator, damageType, overkillRatio)
+		AHoverLandUnit.OnKilled(self, instigator, damageType, overkillRatio)
+		self:CreateTheEffectsDeath()
 	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['AeonUnitDeathRing02'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'BROT1EXMOBART', army, v):ScaleEmitter(1.10))
+
+	---@param self BROT1EXMOBART
+	CreateTheEffectsDeath = function(self)
+		local army = self.Army
+		local trash = self.Trash
+
+		for _, v in TMEffectTemplate['AeonUnitDeathRing02'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'BROT1EXMOBART', army, v):ScaleEmitter(1.10))
 		end
-		for k, v in TMEffectTemplate['UEFHEAVYROCKET02'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'BROT1EXMOBART', army, v):ScaleEmitter(1.0))
+		for _, v in TMEffectTemplate['UEFHEAVYROCKET02'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'BROT1EXMOBART', army, v):ScaleEmitter(1.0))
 		end
 	end,
 }

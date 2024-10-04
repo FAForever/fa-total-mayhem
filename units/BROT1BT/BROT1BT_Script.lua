@@ -1,21 +1,22 @@
 ----------------------------------------------------------------------------
---
---  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
---  Author(s):  John Comes, David Tomandl, Jessica St. Croix
---
---  Summary  :  BRN Tiger Light Tank
---
---  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Tiger Light Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
 ----------------------------------------------------------------------------
-
 local AHoverLandUnit = import('/lua/aeonunits.lua').AHoverLandUnit
-local AWeapons = import('/lua/aeonweapons.lua')
 local WeaponsFile = import('/lua/terranweapons.lua')
-local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
+
+local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local TDFHeavyPlasmaCannonWeapon = WeaponsFile.TDFHeavyPlasmaGatlingCannonWeapon
 
+-- Upvale for performance
+local CreateAttachedEmitter = CreateAttachedEmitter
+local TrashBagAdd = TrashBag.Add
+
+---@class BROT1BTT2 : AHoverLandUnit
 BROT1BTT2 = Class(AHoverLandUnit){
 	Weapons = {
 		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
@@ -58,14 +59,24 @@ BROT1BTT2 = Class(AHoverLandUnit){
 		},
 		clawgun = Class(TDFHeavyPlasmaCannonWeapon){ FxMuzzleFlashScale = 0.4 },
 	},
+
+	---@param self BROT1BTT2
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		AHoverLandUnit.OnStopBeingBuilt(self, builder, layer)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BROT1BTT2
+	---@param transport Unit
+	---@param bone Bone
 	OnDetachedFromTransport = function(self, transport, bone)
 		AHoverLandUnit.OnDetachedFromTransport(self, transport, bone)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BROT1BTT2
 	SetAIAutoattackWeapon = function(self)
 		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
 			self:SetWeaponEnabledByLabel('autoattack', false)
@@ -73,14 +84,23 @@ BROT1BTT2 = Class(AHoverLandUnit){
 			self:SetWeaponEnabledByLabel('autoattack', true)
 		end
 	end,
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		AHoverLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
+
+	---@param self BROT1BTT2
+	---@param instigator Unit
+	---@param damageType DamageType
+	---@param overkillRatio number
+	OnKilled = function(self, instigator, damageType, overkillRatio)
+		AHoverLandUnit.OnKilled(self, instigator, damageType, overkillRatio)
+		self:CreateTheEffectsDeath()
 	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['AeonBattleShipHit01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'BROT1BT', army, v):ScaleEmitter(0.65))
+
+	---@param self BROT1BTT2
+	CreateTheEffectsDeath = function(self)
+		local army = self.Army
+		local trash = self.Trash
+
+		for _, v in TMEffectTemplate['AeonBattleShipHit01'] do
+			TrashBagAdd(trash,CreateAttachedEmitter(self, 'BROT1BT', army, v):ScaleEmitter(0.65))
 		end
 	end,
 }
