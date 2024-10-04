@@ -9,6 +9,12 @@ local TDFGaussCannonWeapon = WeaponFile.TDFGaussCannonWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local SDFChronotronCannonWeapon = SWeapons.SDFChronotronCannonWeapon
 
+-- Upvalue For Perfomance
+local CreateRotator = CreateRotator
+local TrashBagAdd = TrashBag.Add
+
+
+---@class BROST2ADVBATTLESHIP : ASeaUnit
 BROST2ADVBATTLESHIP = Class(ASeaUnit){
 	Weapons = {
 		Torpedo1 = Class(AANChronoTorpedoWeapon){},
@@ -29,9 +35,15 @@ BROST2ADVBATTLESHIP = Class(ASeaUnit){
 		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
 	},
 	BackWakeEffect = {},
+
+	---@param self BROST2ADVBATTLESHIP
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		ASeaUnit.OnStopBeingBuilt(self, builder, layer)
-		self.Trash:Add(CreateRotator(self, 'Sonara', 'y', nil, 90, 0, 0))
+		local trash = self.Trash
+
+		TrashBagAdd(trash, CreateRotator(self, 'Sonara', 'y', nil, 90, 0, 0))
 
 		ASeaUnit.OnStopBeingBuilt(self, builder, layer)
 

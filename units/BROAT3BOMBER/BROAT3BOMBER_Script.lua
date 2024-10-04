@@ -1,24 +1,32 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UEA0304/UEA0304_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  UEF Strategic Bomber Script
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+--------------------------------------------------------------------------------
+-- File     :  /cdimage/units/UEA0304/UEA0304_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  UEF Strategic Bomber Script
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--------------------------------------------------------------------------------
 local TAirUnit = import('/lua/terranunits.lua').TAirUnit
 local TIFSmallYieldNuclearBombWeapon = import('/lua/terranweapons.lua').TIFSmallYieldNuclearBombWeapon
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
 local util = import('/lua/utilities.lua')
 local fxutil = import('/lua/effectutilities.lua')
 
+-- upvalue local functions
+local CreateAttachedEmitter = CreateAttachedEmitter
+local KillThread = KillThread
+local CreateBeamEmitterOnEntity = CreateBeamEmitterOnEntity
+local WaitSeconds = WaitSeconds
+local TrashBagAdd = TrashBag.Add
+
+---@class BROAT3BOMBER : TAirUnit
 BROAT3BOMBER = Class(TAirUnit){
 	Weapons = { Bomb = Class(TIFSmallYieldNuclearBombWeapon){} },
 	MovementAmbientExhaustBones = { 'ex01', 'ex02', 'ex03', 'ex04' },
 	DestructionPartsChassisToss = { 'BROAT3BOMBER' },
 	DestroyNoFallRandomChance = 1.1,
+
+	---@param self BROAT3BOMBER
+	---@param new VerticalMovementState
+	---@param old VerticalMovementState
 	OnMotionHorzEventChange = function(self, new, old)
 		TAirUnit.OnMotionHorzEventChange(self, new, old)
 
@@ -37,6 +45,8 @@ BROAT3BOMBER = Class(TAirUnit){
 			self.ThrustExhaustTT1 = nil
 		end
 	end,
+
+	---@param self BROAT3BOMBER
 	MovementAmbientExhaustThread = function(self)
 		while not self.Dead do
 			local ExhaustEffects =
@@ -57,14 +67,23 @@ BROAT3BOMBER = Class(TAirUnit){
 			WaitSeconds(util.GetRandomFloat(1, 7))
 		end
 	end,
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		TAirUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
+
+	---@param self BROAT3BOMBER
+	---@param instigator Unit
+	---@param damageType DamageType
+	---@param overkillRatio number
+	OnKilled = function(self, instigator, damageType, overkillRatio)
+		TAirUnit.OnKilled(self, instigator, damageType, overkillRatio)
+		self:CreateTheEffectsDeath()
 	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['UEFDeath02'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'BROAT3BOMBER', army, v):ScaleEmitter(1.25))
+
+	---@param self BROAT3BOMBER
+	CreateTheEffectsDeath = function(self)
+		local army = self.Army
+		local trash = self.Trash
+
+		for _, v in TMEffectTemplate['UEFDeath02'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'BROAT3BOMBER', army, v):ScaleEmitter(1.25))
 		end
 	end,
 }
