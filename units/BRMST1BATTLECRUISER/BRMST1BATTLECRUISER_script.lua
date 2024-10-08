@@ -13,7 +13,7 @@ local CDFProtonCannonWeapon = CybranWeaponsFile.CDFProtonCannonWeapon
 local TDFGaussCannonWeapon = WeaponFile.TDFGaussCannonWeapon
 local CIFMissileLoaWeapon = CybranWeaponsFile.CIFMissileLoaWeapon
 
--- Upvalue for Perfomance
+-- Upvalue for Performance
 local TrashBagAdd = TrashBag.Add
 local CreateRotator = CreateRotator
 

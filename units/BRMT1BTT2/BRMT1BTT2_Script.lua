@@ -9,7 +9,7 @@ local WeaponsFile = import('/lua/terranweapons.lua')
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 
--- Upvalue for perfomance
+-- Upvalue for performance
 local TrashBagAdd = TrashBag.Add
 local CreateAttachedEmitter = CreateAttachedEmitter
 
@@ -40,19 +40,19 @@ BRMT1BTT2 = Class(TLandUnit){
 				local trash = self.Trash
 
 				for _, v in self.FxVentEffect3 do
-					TrashBagAdd(trash,CreateAttachedEmitter(unit, 'BRMT1BTT2', army, v):ScaleEmitter(0.7))
+					army.TrashBagAdd(trash,CreateAttachedEmitter(unit, 'BRMT1BTT2', army, v):ScaleEmitter(0.7))
 				end
 				for _, v in self.FxMuzzleEffect do
-					TrashBagAdd(trash,CreateAttachedEmitter(unit, 'aim', army, v):ScaleEmitter(2.40))
+					army.TrashBagAdd(trash,CreateAttachedEmitter(unit, 'aim', army, v):ScaleEmitter(2.40))
 				end
 				for _, v in self.FxVentEffect do
-					TrashBagAdd(trash,CreateAttachedEmitter(unit, 'vent01', army, v):ScaleEmitter(0.7))
+					army.TrashBagAdd(trash,CreateAttachedEmitter(unit, 'vent01', army, v):ScaleEmitter(0.7))
 				end
 				for _, v in self.FxVentEffect do
-					TrashBagAdd(trash,CreateAttachedEmitter(unit, 'vent02', army, v):ScaleEmitter(0.7))
+					army.TrashBagAdd(trash,CreateAttachedEmitter(unit, 'vent02', army, v):ScaleEmitter(0.7))
 				end
 				for _, v in self.FxVentEffect2 do
-					TrashBagAdd(trash,CreateAttachedEmitter(unit, 'aim', army, v):ScaleEmitter(1.5))
+					army.TrashBagAdd(trash,CreateAttachedEmitter(unit, 'aim', army, v):ScaleEmitter(1.5))
 				end
 			end,
 		},

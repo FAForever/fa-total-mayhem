@@ -5,24 +5,12 @@
 
 local Projectile = import('/lua/sim/projectile.lua').Projectile
 local DefaultProjectileFile = import('/lua/sim/defaultprojectiles.lua')
-local EmitterProjectile = DefaultProjectileFile.EmitterProjectile
-local OnWaterEntryEmitterProjectile = DefaultProjectileFile.OnWaterEntryEmitterProjectile
-local SingleBeamProjectile = DefaultProjectileFile.SingleBeamProjectile
-local SinglePolyTrailProjectile = DefaultProjectileFile.SinglePolyTrailProjectile
-local MultiPolyTrailProjectile = DefaultProjectileFile.MultiPolyTrailProjectile
-local SingleCompositeEmitterProjectile = DefaultProjectileFile.SingleCompositeEmitterProjectile
-local Explosion = import('/lua/defaultexplosions.lua')
-local NullShell = DefaultProjectileFile.NullShell
 local EffectTemplate = import('/lua/EffectTemplates.lua')
-local DefaultExplosion = import('/lua/defaultexplosions.lua')
-local DepthCharge = import('/lua/defaultantiprojectile.lua').DepthCharge
-local util = import('/lua/utilities.lua')
-local EffectTemplate = import('/lua/EffectTemplates.lua')
-
 local TMavaEffectTemplate = import('/mods/fa-total-mayhem/lua/TMavaEffectTemplates.lua')
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
-local DepthCharge = import('/lua/defaultantiprojectile.lua').DepthCharge
-local util = import('/lua/utilities.lua')
+local EmitterProjectile = DefaultProjectileFile.EmitterProjectile
+local SingleBeamProjectile = DefaultProjectileFile.SingleBeamProjectile
+local MultiPolyTrailProjectile = DefaultProjectileFile.MultiPolyTrailProjectile
 
 --- Null Shell
 ---@class EXNullShell : Projectile
@@ -45,7 +33,7 @@ AeonBROAT3PRIDEproj = Class(EmitterProjectile){
 	---@param TargetType string
 	---@param TargetEntity Unit
 	OnImpact = function(self, TargetType, TargetEntity)
-		local army = self:GetArmy()
+		local army = self.Army
 
 		if TargetType == 'Terrain' then
 			CreateSplat(self:GetPosition(), 0, 'scorch_005_albedo', 45, 45, 850, 200, army)
@@ -74,7 +62,7 @@ AeonBROT3HADES2proj = Class(EmitterProjectile){
 	---@param TargetType string
 	---@param TargetEntity Unit
 	OnImpact = function(self, TargetType, TargetEntity)
-		local army = self:GetArmy()
+		local army = self.Army
 
 		if TargetType == 'Terrain' then
 			CreateSplat(self:GetPosition(), 0, 'scorch_002_albedo', 28, 28, 250, 200, army)
@@ -100,7 +88,7 @@ AeonBROT3HADESproj = Class(EmitterProjectile){
 	---@param TargetType string
 	---@param TargetEntity Unit
 	OnImpact = function(self, TargetType, TargetEntity)
-		local army = self:GetArmy()
+		local army = self.Army
 
 		if TargetType == 'Terrain' then
 			CreateSplat(self:GetPosition(), 0, 'scorch_001_albedo', 6, 6, 250, 200, army)
@@ -126,7 +114,7 @@ AeonBROAT3PRIDESMALLproj = Class(EmitterProjectile){
 	---@param TargetType string
 	---@param TargetEntity Unit
 	OnImpact = function(self, TargetType, TargetEntity)
-		local army = self:GetArmy()
+		local army = self.Army
 
 		if TargetType == 'Terrain' then
 			CreateSplat(self:GetPosition(), 0, 'scorch_001_albedo', 6, 6, 250, 200, army)
@@ -151,22 +139,10 @@ AeonBROAT3BOMBERproj = Class(EmitterProjectile){
 	PolyTrails = EffectTemplate.SZthuthaamArtilleryProjectilePolyTrails,
 	PolyTrailOffset = { 0, 0 },
 	OnImpact = function(self, TargetType, TargetEntity)
-		local army = self:GetArmy()
+		local army = self.Army
 
 		if TargetType == 'Terrain' then
 			CreateSplat(self:GetPosition(), 0, 'scorch_002_albedo', 15, 15, 250, 200, army)
-
-			-- local blanketSides = 12
-			-- local blanketAngle = (2*math.pi) / blanketSides
-			-- local blanketStrength = 1
-			-- local blanketVelocity = 2.25
-
-			-- for i = 0, (blanketSides-1) do
-			--    local blanketX = math.sin(i*blanketAngle)
-			--    local blanketZ = math.cos(i*blanketAngle)
-			--    local Blanketparts = self:CreateProjectile('/effects/entities/DestructionDust01/DestructionDust01_proj.bp', blanketX, 0.5, blanketZ, blanketX, 0, blanketZ)
-			--        :SetVelocity(blanketVelocity):SetAcceleration(-0.3)
-			-- end
 		end
 		EmitterProjectile.OnImpact(self, TargetType, TargetEntity)
 	end,
@@ -186,27 +162,14 @@ CybBRMAT2ADVBOMBERproj = Class(EmitterProjectile){
 	FxWaterHitScale = 0.45,
 	FxTrailOffset = -0.5,
 	OnImpact = function(self, TargetType, TargetEntity)
-		local army = self:GetArmy()
+		local army = self.Army
 
 		if TargetType == 'Terrain' then
 			CreateSplat(self:GetPosition(), 0, 'scorch_008_albedo', 5, 5, 250, 200, army)
-
-			-- local blanketSides = 12
-			-- local blanketAngle = (2*math.pi) / blanketSides
-			-- local blanketStrength = 1
-			-- local blanketVelocity = 2.25
-
-			-- for i = 0, (blanketSides-1) do
-			--    local blanketX = math.sin(i*blanketAngle)
-			--    local blanketZ = math.cos(i*blanketAngle)
-			--    local Blanketparts = self:CreateProjectile('/effects/entities/DestructionDust01/DestructionDust01_proj.bp', blanketX, 0.5, blanketZ, blanketX, 0, blanketZ)
-			--        :SetVelocity(blanketVelocity):SetAcceleration(-0.3)
-			-- end
 		end
 		EmitterProjectile.OnImpact(self, TargetType, TargetEntity)
 	end,
 }
-
 
 --- UEF Havoc Bomb
 ---@class UefBRNAT3BOMBERproj : EmitterProjectile
@@ -224,8 +187,10 @@ UefBRNAT3BOMBERproj = Class(EmitterProjectile){
 	---@param TargetType string
 	---@param TargetEntity Unit
 	OnImpact = function(self, TargetType, TargetEntity)
-		local army = self:GetArmy()
+		local army = self.Army
+
 		CreateLightParticle(self, -1, army, 2.75, 4, 'sparkle_03', 'ramp_fire_03')
+
 		if TargetType == 'Terrain' then
 			CreateSplat(self:GetPosition(), 0, 'scorch_008_albedo', 12, 12, 550, 200, army)
 		end
@@ -237,11 +202,11 @@ UefBRNAT3BOMBERproj = Class(EmitterProjectile){
 ---@class AeonBROT3NCM2proj : MultiPolyTrailProjectile
 AeonBROT3NCM2proj = Class(MultiPolyTrailProjectile){
 	PolyTrails = { '/mods/fa-total-mayhem/effects/emitters/AeonT3NCM2_polytrails_emit.bp' },
-	FxImpactUnit = EffectTemplate.SDFExperimentalPhasonProjHit01,
+	FxImpactUnit = EffectTemplate.SDFExperimentalPhasorProjHit01,
 	FxUnitHitScale = 0.85,
-	FxImpactProp = EffectTemplate.SDFExperimentalPhasonProjHit01,
+	FxImpactProp = EffectTemplate.SDFExperimentalPhasorProjHit01,
 	FxPropHitScale = 0.85,
-	FxImpactLand = EffectTemplate.SDFExperimentalPhasonProjHit01,
+	FxImpactLand = EffectTemplate.SDFExperimentalPhasorProjHit01,
 	FxLandHitScale = 0.85,
 	FxTrailOffset = 0,
 	FxImpactUnderWater = {},
@@ -250,7 +215,7 @@ AeonBROT3NCM2proj = Class(MultiPolyTrailProjectile){
 	---@param TargetType string
 	---@param TargetEntity Unit
 	OnImpact = function(self, TargetType, TargetEntity)
-		local army = self:GetArmy()
+		local army = self.Army
 
 		if TargetType == 'Terrain' then
 			CreateSplat(self:GetPosition(), 0, 'scorch_007_albedo', 5, 5, 250, 200, army)
@@ -273,7 +238,6 @@ UefBRNAT1ADVFIGproj = Class(SingleBeamProjectile){
 	FxTrailOffset = 0,
 	FxImpactUnderWater = {},
 }
-
 
 --- UEF T2 Fighter missiles AA
 ---@class UefBRNAT2FIGHTERproj : SingleBeamProjectile
@@ -310,7 +274,7 @@ CybBRMT3AVARLproj = Class(SingleBeamProjectile){
 	---@param TargetType string
 	---@param TargetEntity Unit
 	OnImpact = function(self, TargetType, TargetEntity)
-		local army = self:GetArmy()
+		local army = self.Army
 
 		if TargetType == 'Terrain' then
 			CreateSplat(self:GetPosition(), 0, 'scorch_003_albedo', 18, 18, 250, 200, army)
@@ -338,7 +302,7 @@ UefBRNT3SHBM2proj = Class(MultiPolyTrailProjectile){
 	---@param TargetType string
 	---@param TargetEntity Unit
 	OnImpact = function(self, TargetType, TargetEntity)
-		local army = self:GetArmy()
+		local army = self.Army
 
 		if TargetType == 'Terrain' then
 			CreateSplat(self:GetPosition(), 0, 'scorch_004_albedo', 11, 11, 250, 200, army)
@@ -375,21 +339,6 @@ UefBRNT3SHBMNEWRLAproj = Class(SingleBeamProjectile){
 	FxImpactUnderWater = TMEffectTemplate.UEFmayhemRocketHit,
 	FxImpactWater = TMEffectTemplate.UEFmayhemRocketHit,
 }
-
---- UEF Tech Experimental MAYHEM new rockets
----@class UefBRNT3SHBMNEWRLAproj : SingleBeamProjectile
---UefBRNT3SHBMNEWRLAproj = Class(SingleBeamProjectile){
---	FxTrailOffset = -0.8,
---	FxTrails = EffectTemplate.TMissileExhaust03,
---	FxImpactUnit = TMavaEffectTemplate.UEFmayhemRocketHitA,
---	FxUnitHitScale = 1.2,
---	FxImpactProp = TMavaEffectTemplate.UEFmayhemRocketHitA,
---	FxPropHitScale = 1.2,
---	FxImpactLand = TMavaEffectTemplate.UEFmayhemRocketHitA,
---	FxLandHitScale = 1.2,
---	FxImpactUnderWater = TMavaEffectTemplate.UEFmayhemRocketHitA,
---	FxImpactWater = TMavaEffectTemplate.UEFmayhemRocketHitA,
---}
 
 -- ----------------
 -- UEF MAYHEM mk4 new rockets small

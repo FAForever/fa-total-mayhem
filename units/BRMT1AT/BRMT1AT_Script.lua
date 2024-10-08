@@ -11,7 +11,7 @@ local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua
 local CDFHeavyDisintegratorWeapon = CWeapons.CDFHeavyDisintegratorWeapon
 local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 
--- Upvalue for perfomance
+-- Upvalue for performance
 local TrashBagAdd = TrashBag.Add
 local CreateAttachedEmitter = CreateAttachedEmitter
 

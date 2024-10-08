@@ -8,11 +8,10 @@ local TStructureUnit = import('/lua/terranunits.lua').TStructureUnit
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
 
--- Upvalue for Perfomance
+-- Upvalue for Performance
 local TrashBagAdd = TrashBag.Add
 local CreateAttachedEmitter = CreateAttachedEmitter
-
-
+local CreateRotator = CreateRotator
 
 ---@class BRMBT1PERI : TStructureUnit
 BRMBT1PERI = Class(TStructureUnit){

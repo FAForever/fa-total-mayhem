@@ -19,6 +19,7 @@ local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local TrashBagAdd = TrashBag.Add
 local CreateAttachedEmitter = CreateAttachedEmitter
 local CreateBeamEmitterOnEntity = CreateBeamEmitterOnEntity
+local ForkThread = ForkThread
 
 
 ---@class BRMAT1EXGS : AAirUnit
@@ -68,13 +69,15 @@ BRMAT1EXGS = Class(AAirUnit){
 	OnMotionHorzEventChange = function(self, new, old)
 		AAirUnit.OnMotionHorzEventChange(self, new, old)
 
+		local trash = self.Trash
+
 		if self.ThrustExhaustTT1 == nil then
 			if self.MovementAmbientExhaustEffectsBag then
 				EffectUtils.CleanupEffectBag(self, 'MovementAmbientExhaustEffectsBag')
 			else
 				self.MovementAmbientExhaustEffectsBag = {}
 			end
-			self.ThrustExhaustTT1 = self:ForkThread(self.MovementAmbientExhaustThread)
+			self.ThrustExhaustTT1 = TrashBagAdd(trash,ForkThread(self.MovementAmbientExhaustThread, self))
 		end
 
 		if new == 'Stopped' and self.ThrustExhaustTT1 ~= nil then

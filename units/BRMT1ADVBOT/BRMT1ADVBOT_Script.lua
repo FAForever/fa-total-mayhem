@@ -13,9 +13,11 @@ local CCannonMolecularWeapon = WeaponsFile.CCannonMolecularWeapon
 local CDFHeavyMicrowaveLaserGeneratorCom = WeaponsFile.CDFHeavyMicrowaveLaserGeneratorCom
 local TDFGaussCannonWeapon = WeaponsFile2.TDFLandGaussCannonWeapon
 
--- Upvalue for perfomance
+-- Upvalue for performance
 local TrashBagAdd = TrashBag.Add
 local CreateAttachedEmitter = CreateAttachedEmitter
+local IsUnit = IsUnit
+
 
 ---@class BRMT1ADVBOT : CWalkingLandUnit
 BRMT1ADVBOT = Class(CWalkingLandUnit){

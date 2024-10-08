@@ -14,10 +14,11 @@ local CAAMissileNaniteWeapon = CybranWeaponsFile.CAAMissileNaniteWeapon
 local CDFHeavyMicrowaveLaserGeneratorCom = CybranWeaponsFile.CDFHeavyMicrowaveLaserGeneratorCom
 local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 
--- Upvalue for perfomance
+-- Upvalue for performance
 local TrashBagAdd = TrashBag.Add
 local CreateAttachedEmitter = CreateAttachedEmitter
 local CreateBeamEmitterOnEntity = CreateBeamEmitterOnEntity
+local ForkThread = ForkThread
 
 ---@class BRMAT2GUNSHIP : AAirUnit
 BRMAT2GUNSHIP = Class(AAirUnit){
@@ -50,6 +51,7 @@ BRMAT2GUNSHIP = Class(AAirUnit){
 	---@param old VerticalMovementState
 	OnMotionHorzEventChange = function(self, new, old)
 		AAirUnit.OnMotionHorzEventChange(self, new, old)
+		local trash = self.Trash
 
 		if self.ThrustExhaustTT1 == nil then
 			if self.MovementAmbientExhaustEffectsBag then
@@ -57,7 +59,7 @@ BRMAT2GUNSHIP = Class(AAirUnit){
 			else
 				self.MovementAmbientExhaustEffectsBag = {}
 			end
-			self.ThrustExhaustTT1 = self:ForkThread(self.MovementAmbientExhaustThread)
+			self.ThrustExhaustTT1 = TrashBagAdd(trash,ForkThread(self.MovementAmbientExhaustThread,self))
 		end
 
 		if new == 'Stopped' and self.ThrustExhaustTT1 ~= nil then
