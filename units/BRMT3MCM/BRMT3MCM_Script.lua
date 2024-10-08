@@ -1,24 +1,25 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  BRN Scavenger Medium Tank
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+--------------------------------------------------------------------------------
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Scavenger Medium Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--------------------------------------------------------------------------------
 local CWalkingLandUnit = import('/lua/cybranunits.lua').CWalkingLandUnit
 local WeaponsFile = import('/lua/cybranweapons.lua')
 local WeaponsFile2 = import('/lua/terranweapons.lua')
-local CDFElectronBolterWeapon = WeaponsFile.CDFElectronBolterWeapon
-local TDFRiotWeapon = WeaponsFile2.TDFRiotWeapon
-local CCannonMolecularWeapon = WeaponsFile.CCannonMolecularWeapon
 local SCUDeathWeapon = import('/lua/sim/defaultweapons.lua').SCUDeathWeapon
-local TDFGaussCannonWeapon = WeaponsFile2.TDFLandGaussCannonWeapon
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
 local EffectTemplate = import('/lua/EffectTemplates.lua')
+local CCannonMolecularWeapon = WeaponsFile.CCannonMolecularWeapon
+local CDFElectronBolterWeapon = WeaponsFile.CDFElectronBolterWeapon
+local TDFGaussCannonWeapon = WeaponsFile2.TDFLandGaussCannonWeapon
+local TDFRiotWeapon = WeaponsFile2.TDFRiotWeapon
 
+-- upvalues for performance
+local CreateAttachedEmitter = CreateAttachedEmitter
+local TrashBagAdd = TrashBag.Add
+
+---@class BRMT3MCM : CWalkingLandUnit
 BRMT3MCM = Class(CWalkingLandUnit){
 	Weapons = {
 		HeavyBolter = Class(CDFElectronBolterWeapon){},
@@ -40,6 +41,10 @@ BRMT3MCM = Class(CWalkingLandUnit){
 		rocket4 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.7 },
 		DeathWeapon = Class(SCUDeathWeapon){},
 	},
+
+	---@param self BRMT3MCM
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		CWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
 
@@ -49,14 +54,23 @@ BRMT3MCM = Class(CWalkingLandUnit){
 			self:SetWeaponEnabledByLabel('robottalk', true)
 		end
 	end,
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		CWalkingLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
+
+	---@param self BRMT3MCM
+	---@param instigator Unit
+	---@param damageType DamageType
+	---@param overkillRatio number
+	OnKilled = function(self, instigator, damageType, overkillRatio)
+		CWalkingLandUnit.OnKilled(self, instigator, damageType, overkillRatio)
+		self:CreateTheEffectsDeath()
 	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['MadCatDeath01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'Turret', army, v):ScaleEmitter(1.5))
+
+	---@param self BRMT3MCM
+	CreateTheEffectsDeath = function(self)
+		local army = self.Army
+		local trash = self.Trash
+
+		for _, v in TMEffectTemplate['MadCatDeath01'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'Turret', army, v):ScaleEmitter(1.5))
 		end
 	end,
 }

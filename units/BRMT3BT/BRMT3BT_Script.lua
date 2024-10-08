@@ -1,19 +1,20 @@
 ----------------------------------------------------------------------------
---
---  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
---  Author(s):  John Comes, David Tomandl, Jessica St. Croix
---
---  Summary  :  BRN Scavenger Medium Tank
---
---  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Scavenger Medium Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
 ----------------------------------------------------------------------------
-
 local TLandUnit = import('/lua/terranunits.lua').TLandUnit
 local WeaponsFile = import('/lua/terranweapons.lua')
-local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
+local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 
+-- upvalues for performance
+local CreateAttachedEmitter = CreateAttachedEmitter
+local TrashBagAdd = TrashBag.Add
+
+---@class BRMT3BT : TLandUnit
 BRMT3BT = Class(TLandUnit){
 	Weapons = {
 		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
@@ -32,42 +33,58 @@ BRMT3BT = Class(TLandUnit){
 			FxVentEffect5 = EffectTemplate.CElectronBolterMuzzleFlash01,
 			FxMuzzleEffect = EffectTemplate.CElectronBolterMuzzleFlash01,
 			FxCoolDownEffect = EffectTemplate.CDisruptorCoolDownEffect,
+
+			---@param self TDFGaussCannonWeapon
+			---@param muzzle string Unused
 			PlayFxMuzzleSequence = function(self, muzzle)
-				local army = self.unit:GetArmy()
-				for k, v in self.FxVentEffect3 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'BRMT3BT', army, v):ScaleEmitter(1.5))
+				local unit = self.unit
+				local army = unit.Army
+				local trash = unit.Trash
+
+				for _, v in self.FxVentEffect3 do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'BRMT3BT', army, v):ScaleEmitter(1.5))
 				end
-				for k, v in self.FxMuzzleEffect do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'stikkflamme', army, v):ScaleEmitter(3.45))
+				for _, v in self.FxMuzzleEffect do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'stikkflamme', army, v):ScaleEmitter(3.45))
 				end
-				for k, v in self.FxVentEffect5 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'stikkflamme01', army, v):ScaleEmitter(2.0))
+				for _, v in self.FxVentEffect5 do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'stikkflamme01', army, v):ScaleEmitter(2.0))
 				end
-				for k, v in self.FxVentEffect5 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'stikkflamme02', army, v):ScaleEmitter(2.0))
+				for _, v in self.FxVentEffect5 do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'stikkflamme02', army, v):ScaleEmitter(2.0))
 				end
-				for k, v in self.FxVentEffect do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'vent01', army, v):ScaleEmitter(1.0))
+				for _, v in self.FxVentEffect do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'vent01', army, v):ScaleEmitter(1.0))
 				end
-				for k, v in self.FxVentEffect do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'vent02', army, v):ScaleEmitter(1.0))
+				for _, v in self.FxVentEffect do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'vent02', army, v):ScaleEmitter(1.0))
 				end
-				for k, v in self.FxVentEffect2 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'stikkflamme', army, v):ScaleEmitter(1))
+				for _, v in self.FxVentEffect2 do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'stikkflamme', army, v):ScaleEmitter(1))
 				end
 			end,
 		},
 		rocket = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.4 },
 		rocket2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.4 },
 	},
+
+	---@param self BRMT3BT
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		TLandUnit.OnStopBeingBuilt(self, builder, layer)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BRMT3BT
+	---@param transport Unit
+	---@param bone Bone
 	OnDetachedFromTransport = function(self, transport, bone)
 		TLandUnit.OnDetachedFromTransport(self, transport, bone)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BRMT3BT
 	SetAIAutoattackWeapon = function(self)
 		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
 			self:SetWeaponEnabledByLabel('autoattack', false)
@@ -75,14 +92,22 @@ BRMT3BT = Class(TLandUnit){
 			self:SetWeaponEnabledByLabel('autoattack', true)
 		end
 	end,
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		TLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
+
+	---@param self BRMT3BT
+	---@param instigator Unit
+	---@param damageType DamageType
+	OnKilled = function(self, instigator, damageType, overkillRatio)
+		TLandUnit.OnKilled(self, instigator, damageType, overkillRatio)
+		self:CreateTheEffectsDeath()
 	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['CybranT3BattleTankDeath'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'BRMT3BT', army, v):ScaleEmitter(6.0))
+
+	---@param self BRMT3BT
+	CreateTheEffectsDeath = function(self)
+		local army = self.Army
+		local trash = self.Trash
+
+		for _, v in TMEffectTemplate['CybranT3BattleTankDeath'] do
+			TrashBagAdd(trash, CreateAttachedEmitter(self, 'BRMT3BT', army, v):ScaleEmitter(6.0))
 		end
 	end,
 }

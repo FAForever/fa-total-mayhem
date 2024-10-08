@@ -1,24 +1,21 @@
--- ****************************************************************************
--- **
--- **  File     :  /cdimage/units/UEL0201/UEL0201_script.lua
--- **  Author(s):  John Comes, David Tomandl, Jessica St. Croix
--- **
--- **  Summary  :  BRN Scavenger Medium Tank
--- **
--- **  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
-
+--------------------------------------------------------------------------------
+-- File     :  /cdimage/units/UEL0201/UEL0201_script.lua
+-- Author(s):  John Comes, David Tomandl, Jessica St. Croix
+-- Summary  :  BRN Scavenger Medium Tank
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+--------------------------------------------------------------------------------
 local CWalkingLandUnit = import('/lua/cybranunits.lua').CWalkingLandUnit
 local WeaponsFile2 = import('/lua/terranweapons.lua')
 local CWeapons = import('/lua/cybranweapons.lua')
 local SCUDeathWeapon = import('/lua/sim/defaultweapons.lua').SCUDeathWeapon
+local EffectTemplate = import('/lua/EffectTemplates.lua')
 local CDFParticleCannonWeapon = CWeapons.CDFParticleCannonWeapon
 local TDFGaussCannonWeapon = WeaponsFile2.TDFLandGaussCannonWeapon
 local TDFRiotWeapon = WeaponsFile2.TDFRiotWeapon
 local CDFProtonCannonWeapon = CWeapons.CDFProtonCannonWeapon
 local CAAMissileNaniteWeapon = CWeapons.CAAMissileNaniteWeapon
-local EffectTemplate = import('/lua/EffectTemplates.lua')
 
+---@class BRMT3AVA : CWalkingLandUnit
 BRMT3AVA = Class(CWalkingLandUnit){
 	SwitchAnims = true,
 	IsWaiting = false,
@@ -52,6 +49,10 @@ BRMT3AVA = Class(CWalkingLandUnit){
 		aarockets = Class(CAAMissileNaniteWeapon){},
 		missilebig = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0 },
 	},
+
+	---@param self BRMT3AVA
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		CWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
 
