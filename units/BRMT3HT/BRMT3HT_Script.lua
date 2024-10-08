@@ -32,34 +32,39 @@ BRMT3HT = Class(TLandUnit){
 			FxVentEffect5 = EffectTemplate.CElectronBolterMuzzleFlash01,
 			FxMuzzleEffect = EffectTemplate.CElectronBolterMuzzleFlash01,
 			FxCoolDownEffect = EffectTemplate.CDisruptorCoolDownEffect,
+
+			---@param self TDFGaussCannonWeapon
+			---@param muzzle string Unused
 			PlayFxMuzzleSequence = function(self, muzzle)
-				local army = self.unit:GetArmy()
-				for k, v in self.FxGroundEffect do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'BRMT3HT', army, v):ScaleEmitter(2.25))
+				local unit = self.unit
+				local army = unit.Army
+				local trash = unit.Trash
+				for _, v in self.FxGroundEffect do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'BRMT3HT', army, v):ScaleEmitter(2.25))
 				end
-				for k, v in self.FxVentEffect3 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'BRMT3HT', army, v):ScaleEmitter(1.6))
+				for _, v in self.FxVentEffect3 do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'BRMT3HT', army, v):ScaleEmitter(1.6))
 				end
-				for k, v in self.FxVentEffect3 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'BRMT3HT', army, v):ScaleEmitter(2.1))
+				for _, v in self.FxVentEffect3 do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'BRMT3HT', army, v):ScaleEmitter(2.1))
 				end
-				for k, v in self.FxMuzzleEffect do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'Turret_Muzzle', army, v):ScaleEmitter(4.1))
+				for _, v in self.FxMuzzleEffect do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'Turret_Muzzle', army, v):ScaleEmitter(4.1))
 				end
-				for k, v in self.FxVentEffect do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'vent01', army, v):ScaleEmitter(1.15))
+				for _, v in self.FxVentEffect do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'vent01', army, v):ScaleEmitter(1.15))
 				end
-				for k, v in self.FxVentEffect do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'vent02', army, v):ScaleEmitter(1.15))
+				for _, v in self.FxVentEffect do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'vent02', army, v):ScaleEmitter(1.15))
 				end
-				for k, v in self.FxVentEffect2 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'Turret_Muzzle', army, v):ScaleEmitter(1))
+				for _, v in self.FxVentEffect2 do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'Turret_Muzzle', army, v):ScaleEmitter(1))
 				end
-				for k, v in self.FxVentEffect5 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'Turret_Muzzle01', army, v):ScaleEmitter(2.5))
+				for _, v in self.FxVentEffect5 do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'Turret_Muzzle01', army, v):ScaleEmitter(2.5))
 				end
-				for k, v in self.FxVentEffect5 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'Turret_Muzzle02', army, v):ScaleEmitter(2.5))
+				for _, v in self.FxVentEffect5 do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'Turret_Muzzle02', army, v):ScaleEmitter(2.5))
 				end
 			end,
 		},

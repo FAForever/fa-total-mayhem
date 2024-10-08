@@ -15,10 +15,6 @@ local TDFRiotWeapon = WeaponsFile2.TDFRiotWeapon
 local CDFProtonCannonWeapon = CWeapons.CDFProtonCannonWeapon
 local CAAMissileNaniteWeapon = CWeapons.CAAMissileNaniteWeapon
 
--- upvalues for performance
-local CreateAttachedEmitter = CreateAttachedEmitter
-local TrashBagAdd = TrashBag.Add
-
 ---@class BRMT3AVA : CWalkingLandUnit
 BRMT3AVA = Class(CWalkingLandUnit){
 	SwitchAnims = true,

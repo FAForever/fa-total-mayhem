@@ -42,9 +42,12 @@ BRMT2WILDCAT = Class(CWalkingLandUnit){
 
 			---@param self CDFHeavyDisintegratorWeapon
 			PlayFxRackSalvoChargeSequence = function(self)
+				local trash = self.Trash
+				local unit = self.unit
+
 				if not self.SpinManip then
 					self.SpinManip = CreateRotator(self.unit, 'spinner02', 'z', nil, 270, 180, 60)
-					self.unit.Trash:Add(self.SpinManip)
+					unit.TrashBagAdd(trash, self.SpinManip)
 				end
 
 				if self.SpinManip then

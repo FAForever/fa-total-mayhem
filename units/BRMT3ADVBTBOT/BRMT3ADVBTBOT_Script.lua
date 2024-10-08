@@ -36,16 +36,22 @@ BRMT3ADVBTBOT = Class(CWalkingLandUnit){
 			FxVentEffect5 = EffectTemplate.CElectronBolterMuzzleFlash01,
 			FxMuzzleEffect = EffectTemplate.TPlasmaCannonHeavyMuzzleFlash,
 			FxCoolDownEffect = EffectTemplate.CDisruptorCoolDownEffect,
+
+			---@param self TDFGaussCannonWeapon
+			---@param muzzle string Unused
 			PlayFxMuzzleSequence = function(self, muzzle)
-				local army = self.unit:GetArmy()
-				for k, v in self.FxVentEffect3 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'BRMT3ADVBTBOT', army, v):ScaleEmitter(1.9))
+				local army = self.unit.Army
+				local unit = self.unit
+				local trash = unit.Trash
+
+				for _, v in self.FxVentEffect3 do
+					army.TrashBagAdd(trash, CreateAttachedEmitter(self.unit, 'BRMT3ADVBTBOT', army, v):ScaleEmitter(1.9))
 				end
-				for k, v in self.FxMuzzleEffect do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'eff04', army, v):ScaleEmitter(5.85))
+				for _, v in self.FxMuzzleEffect do
+					army.TrashBagAdd(trash, CreateAttachedEmitter(self.unit, 'eff04', army, v):ScaleEmitter(5.85))
 				end
-				for k, v in self.FxVentEffect2 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'muzzle01', army, v):ScaleEmitter(1))
+				for _, v in self.FxVentEffect2 do
+					army.TrashBagAdd(trash, CreateAttachedEmitter(self.unit, 'muzzle01', army, v):ScaleEmitter(1))
 				end
 			end,
 		},

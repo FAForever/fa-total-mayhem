@@ -48,7 +48,9 @@ BRMT3EXBM = Class(CWalkingLandUnit){
 
 		TrashBagAdd(trash, CreateRotator(self, 'Object01', 'z', nil, 150, 0, 0))
 		TrashBagAdd(trash, CreateRotator(self, 'Object02', 'z', nil, -150, 0, 0))
+
 		self:CreateTheEffects()
+
 		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
 			self:SetWeaponEnabledByLabel('autoattack', false)
 		else

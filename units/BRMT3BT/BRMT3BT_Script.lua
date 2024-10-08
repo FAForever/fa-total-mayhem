@@ -33,28 +33,34 @@ BRMT3BT = Class(TLandUnit){
 			FxVentEffect5 = EffectTemplate.CElectronBolterMuzzleFlash01,
 			FxMuzzleEffect = EffectTemplate.CElectronBolterMuzzleFlash01,
 			FxCoolDownEffect = EffectTemplate.CDisruptorCoolDownEffect,
+
+			---@param self TDFGaussCannonWeapon
+			---@param muzzle string Unused
 			PlayFxMuzzleSequence = function(self, muzzle)
-				local army = self.unit:GetArmy()
-				for k, v in self.FxVentEffect3 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'BRMT3BT', army, v):ScaleEmitter(1.5))
+				local unit = self.unit
+				local army = unit.Army
+				local trash = unit.Trash
+
+				for _, v in self.FxVentEffect3 do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'BRMT3BT', army, v):ScaleEmitter(1.5))
 				end
-				for k, v in self.FxMuzzleEffect do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'stikkflamme', army, v):ScaleEmitter(3.45))
+				for _, v in self.FxMuzzleEffect do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'stikkflamme', army, v):ScaleEmitter(3.45))
 				end
-				for k, v in self.FxVentEffect5 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'stikkflamme01', army, v):ScaleEmitter(2.0))
+				for _, v in self.FxVentEffect5 do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'stikkflamme01', army, v):ScaleEmitter(2.0))
 				end
-				for k, v in self.FxVentEffect5 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'stikkflamme02', army, v):ScaleEmitter(2.0))
+				for _, v in self.FxVentEffect5 do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'stikkflamme02', army, v):ScaleEmitter(2.0))
 				end
-				for k, v in self.FxVentEffect do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'vent01', army, v):ScaleEmitter(1.0))
+				for _, v in self.FxVentEffect do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'vent01', army, v):ScaleEmitter(1.0))
 				end
-				for k, v in self.FxVentEffect do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'vent02', army, v):ScaleEmitter(1.0))
+				for _, v in self.FxVentEffect do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'vent02', army, v):ScaleEmitter(1.0))
 				end
-				for k, v in self.FxVentEffect2 do
-					self.unit.Trash:Add(CreateAttachedEmitter(self.unit, 'stikkflamme', army, v):ScaleEmitter(1))
+				for _, v in self.FxVentEffect2 do
+					unit.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'stikkflamme', army, v):ScaleEmitter(1))
 				end
 			end,
 		},

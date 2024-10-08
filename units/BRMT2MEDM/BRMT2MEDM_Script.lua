@@ -42,6 +42,7 @@ BRMT2MEDM = Class(CWalkingLandUnit){
 
 		TrashBagAdd(trash, CreateRotator(self, 'Object13', 'z', nil, -690, 0, 0))
 		TrashBagAdd(trash, CreateRotator(self, 'Object14', 'z', nil, 690, 0, 0))
+
 		self:CreateTheEffects()
 		self.SetAIAutoattackWeapon(self)
 	end,

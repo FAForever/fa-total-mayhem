@@ -10,10 +10,6 @@ local WeaponsFile2 = import('/lua/terranweapons.lua')
 local CDFElectronBolterWeapon = WeaponsFile.CDFElectronBolterWeapon
 local TDFGaussCannonWeapon = WeaponsFile2.TDFLandGaussCannonWeapon
 
--- upvalues for performance
-local CreateAttachedEmitter = CreateAttachedEmitter
-local TrashBagAdd = TrashBag.Add
-
 ---@class BRMT3CLOAKER : CWalkingLandUnit
 BRMT3CLOAKER = Class(CWalkingLandUnit){
 	Weapons = {

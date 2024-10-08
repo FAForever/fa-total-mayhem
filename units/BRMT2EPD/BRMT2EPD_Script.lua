@@ -40,19 +40,19 @@ BRMT2EPD = Class(TStructureUnit){
 				local trash = self.Trash
 
 				for _, v in self.FxVentEffect3 do
-					TrashBagAdd(trash, CreateAttachedEmitter(unit, 'BRMT2EPD', army, v):ScaleEmitter(1.35))
+					army.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'BRMT2EPD', army, v):ScaleEmitter(1.35))
 				end
 				for _, v in self.FxMuzzleEffect do
-					TrashBagAdd(trash, CreateAttachedEmitter(unit, 'Turret_Muzzle', army, v):ScaleEmitter(3.15))
+					army.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'Turret_Muzzle', army, v):ScaleEmitter(3.15))
 				end
 				for _, v in self.FxVentEffect do
-					TrashBagAdd(trash, CreateAttachedEmitter(unit, 'vent01', army, v):ScaleEmitter(1))
+					army.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'vent01', army, v):ScaleEmitter(1))
 				end
 				for _, v in self.FxVentEffect do
-					TrashBagAdd(trash, CreateAttachedEmitter(unit, 'vent02', army, v):ScaleEmitter(1))
+					army.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'vent02', army, v):ScaleEmitter(1))
 				end
 				for _, v in self.FxVentEffect2 do
-					TrashBagAdd(trash, CreateAttachedEmitter(unit, 'smoke01', army, v):ScaleEmitter(1))
+					army.TrashBagAdd(trash, CreateAttachedEmitter(unit, 'smoke01', army, v):ScaleEmitter(1))
 				end
 			end,
 		},
