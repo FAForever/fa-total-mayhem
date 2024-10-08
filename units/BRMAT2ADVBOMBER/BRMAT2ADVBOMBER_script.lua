@@ -1,11 +1,8 @@
 ----------------------------------------------------------------------------
---
---  File     :  /cdimage/units/UEAconcpt1/UEAconcpt1_script.lua
---  Author(s):  Jessica St. Croix, David Tomandl
---
---  Summary  :  UEF Spy Plane Script
---
---  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
+-- File     :  /cdimage/units/UEAconcpt1/UEAconcpt1_script.lua
+-- Author(s):  Jessica St. Croix, David Tomandl
+-- Summary  :  UEF Spy Plane Script
+-- Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
 ----------------------------------------------------------------------------
 
 local TAirUnit = import('/lua/terranunits.lua').TAirUnit
@@ -13,6 +10,7 @@ local WeaponsFile = import('/lua/terranweapons.lua')
 local TIFSmallYieldNuclearBombWeapon = WeaponsFile.TIFSmallYieldNuclearBombWeapon
 local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 
+---@class BRMAT2ADVBOMBER : TAirUnit
 BRMAT2ADVBOMBER = Class(TAirUnit){
 	Weapons = {
 		aamissiles1 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
@@ -20,14 +18,24 @@ BRMAT2ADVBOMBER = Class(TAirUnit){
 		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
 		autoattack2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
 	},
+
+	---@param self BRMAT2ADVBOMBER
+	---@param builder Unit
+	---@param layer Layer
 	OnStopBeingBuilt = function(self, builder, layer)
 		TAirUnit.OnStopBeingBuilt(self, builder, layer)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BRMAT2ADVBOMBER
+	---@param transport Unit
+	---@param bone Bone
 	OnDetachedFromTransport = function(self, transport, bone)
 		TAirUnit.OnDetachedFromTransport(self, transport, bone)
 		self.SetAIAutoattackWeapon(self)
 	end,
+
+	---@param self BRMAT2ADVBOMBER
 	SetAIAutoattackWeapon = function(self)
 		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
 			self:SetWeaponEnabledByLabel('autoattack', false)
