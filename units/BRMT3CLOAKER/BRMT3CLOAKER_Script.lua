@@ -29,17 +29,19 @@ BRMT3CLOAKER = Class(CWalkingLandUnit){
 		else
 			self:SetWeaponEnabledByLabel('robottalk', true)
 		end
+		self:DisableUnitIntel('Enhancement', 'RadarStealth')
+		self:DisableUnitIntel('Enhancement', 'SonarStealth')
+		self:DisableUnitIntel('Enhancement', 'Cloak')
+		self:DisableUnitIntel('Enhancement', 'CloakField')
 		self.DelayedCloakThread = self:ForkThread(self.CloakDelayed)
 	end,
 	CloakDelayed = function(self)
 		if not self.Dead then
 			WaitSeconds(2)
-			self.IntelDisables['RadarStealth']['ToggleBit5'] = true
-			self.IntelDisables['Cloak']['ToggleBit8'] = true -- not needed after cloakfied fixed
-			self.IntelDisables['CloakField']['ToggleBit3'] = true
-			self:EnableUnitIntel('ToggleBit5', 'RadarStealth')
-			self:EnableUnitIntel('ToggleBit8', 'Cloak') -- not needed after cloakfied fixed
-			self:EnableUnitIntel('ToggleBit3', 'CloakField')
+			self:EnableUnitIntel('Enhancement', 'RadarStealth')
+			self:EnableUnitIntel('Enhancement', 'SonarStealth')
+			self:EnableUnitIntel('Enhancement', 'Cloak')
+			self:EnableUnitIntel('Enhancement', 'CloakField')
 		end
 		KillThread(self.DelayedCloakThread)
 		self.DelayedCloakThread = nil
