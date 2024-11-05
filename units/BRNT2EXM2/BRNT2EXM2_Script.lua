@@ -41,7 +41,7 @@ BRNT2EXM2 = Class(TLandUnit){
 	end,
 	ActiveState = State{ Main = function(self)
 		self:SetImmobile(true)
-		self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationTransform)
+		self.AnimManip:PlayAnim(self.Blueprint.Display.AnimationTransform)
 		self.AnimManip:SetRate(0.5)
 		WaitFor(self.AnimManip)
 		self:SetWeaponEnabledByLabel('rocket', true)
@@ -52,7 +52,7 @@ BRNT2EXM2 = Class(TLandUnit){
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:SetWeaponEnabledByLabel('rocket', false)
 		self.AnimManip:SetRate(-1)
-		self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationTransform)
+		self.AnimManip:PlayAnim(self.Blueprint.Display.AnimationTransform)
 		self.AnimManip:SetAnimationFraction(1)
 		WaitFor(self.AnimManip)
 		self:SetImmobile(false)

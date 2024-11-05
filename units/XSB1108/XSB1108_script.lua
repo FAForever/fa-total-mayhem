@@ -24,7 +24,7 @@ XSB1103 = Class(SMassCollectionUnit){
 			self.AnimationManipulator = CreateAnimator(self)
 			self.Trash:Add(self.AnimationManipulator)
 		end
-		self.AnimationManipulator:PlayAnim(self:GetBlueprint().Display.AnimationActivate, true)
+		self.AnimationManipulator:PlayAnim(self.Blueprint.Display.AnimationActivate, true)
 	end,
 	OnProductionPaused = function(self)
 		SMassCollectionUnit.OnProductionPaused(self)

@@ -33,7 +33,7 @@ UEB1107 = Class(TEnergyCreationUnit){
 			--self.Effect1 = CreateAttachedEmitter(self,'Exhaust01',self:GetArmy(), MyModPath .. '/hook/effects/emitters/uec1501_smoke_03_emit.bp')
 			--self.Trash:Add(self.Effecct1)
 		end
-		self.AnimationManipulator:PlayAnim(self:GetBlueprint().Display.AnimationOpen, true)
+		self.AnimationManipulator:PlayAnim(self.Blueprint.Display.AnimationOpen, true)
 	end,
 	OnProductionPaused = function(self)
 		TEnergyCreationUnit.OnProductionPaused(self)

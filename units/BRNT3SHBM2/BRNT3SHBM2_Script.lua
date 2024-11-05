@@ -64,7 +64,7 @@ BRNT3SHBM2 = Class(TWalkingLandUnit){
 			self.AnimationManipulator = CreateAnimator(self)
 			self.Trash:Add(self.AnimationManipulator)
 		end
-		self.AnimationManipulator:PlayAnim(self:GetBlueprint().Display.AnimationActivate, false):SetRate(0)
+		self.AnimationManipulator:PlayAnim(self.Blueprint.Display.AnimationActivate, false):SetRate(0)
 	end,
 	OnStopBeingBuilt = function(self, builder, layer)
 		TWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)

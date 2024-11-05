@@ -38,7 +38,7 @@ URB1107 = Class(CEnergyCreationUnit){
 			)
 			self.Trash:Add(CreateAttachedEmitter(self, 'URB02', self:GetArmy(), '/effects/emitters/geyser_01_emit.bp'))
 		end
-		self.AnimationManipulator:PlayAnim(self:GetBlueprint().Display.AnimationOpen, true)
+		self.AnimationManipulator:PlayAnim(self.Blueprint.Display.AnimationOpen, true)
 	end,
 	OnProductionPaused = function(self)
 		CEnergyCreationUnit.OnProductionPaused(self)
