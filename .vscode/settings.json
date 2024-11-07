@@ -1,16 +1,39 @@
 {
-  "Lua.runtime.version": "Lua 5.1",
-  "Lua.runtime.path": ["?.lua", "?/init.lua", "/?"],
+  "Lua.runtime.version": "Lua 5.3",
+  "Lua.runtime.path": [
+      "?.lua",
+      "?/init.lua",
+      "/?"
+  ],
   "Lua.completion.showWord": "Disable",
   "Lua.runtime.special": {
-    "import": "require",
-    "doscript": "require"
+      "import": "require",
+      "doscript": "require",
+      "LazyImport": "require",
   },
-  "Lua.runtime.nonstandardSymbol": ["!="],
+  "Lua.runtime.nonstandardSymbol": [
+      "continue",
+      "!="
+  ],
   "Lua.completion.requireSeparator": "/",
   "Lua.runtime.exportEnvDefault": true,
-  "Lua.diagnostics.globals": ["moho"],
   "Lua.runtime.plugin": "${3rd}/fa/plugin.lua",
-  "Lua.workspace.library": ["${3rd}/fa/library"],
-  "Lua.workspace.checkThirdParty": false
+  "Lua.diagnostics.globals": [
+      "moho",
+      "ScenarioInfo"
+  ],
+  "Lua.workspace.library": [
+      "C:\\Users\\rowjo\\Documents\\GitHub\\fa",
+  ],
+  "Lua.workspace.checkThirdParty": false,
+  "cSpell.words": [
+    "BRMAT2ADVBOMBERproj",
+    "BRMST3BOMproj",
+    "BRMT1ADVBOTRLproj",
+    "BRMT1BTRLproj",
+    "CybBRMAT2ADVBOMBERproj",
+    "CybBRMST3BOMproj",
+    "CybBRMT1ADVBOTRLproj",
+    "TMavaprojectiles"
+]
 }

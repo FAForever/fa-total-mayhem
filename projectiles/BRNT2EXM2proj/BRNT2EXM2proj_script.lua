@@ -1,19 +1,16 @@
--- ****************************************************************************
--- **
--- **  File     :
--- **  Author(s):
--- **
--- **  Summary  :
--- **
--- **  Copyright � 2007 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
 local UefBRNT2EXM2proj = import('/mods/fa-total-mayhem/lua/TMprojectiles.lua').UefBRNT2EXM2proj
+
+---@class BRNT2EXM2proj : UefBRNT2EXM2proj
 BRNT2EXM2proj = Class(UefBRNT2EXM2proj){
+
+	---@param self BRNT2EXM2proj
 	OnCreate = function(self)
 		UefBRNT2EXM2proj.OnCreate(self)
 		self:SetCollisionShape('Sphere', 0, 0, 0, 2)
 		self.MoveThread = self:ForkThread(self.MovementThread)
 	end,
+
+	---@param self BRNT2EXM2proj
 	MovementThread = function(self)
 		self.WaitTime = 0.1
 		self.Distance = self:GetDistanceToTarget()
@@ -24,6 +21,8 @@ BRNT2EXM2proj = Class(UefBRNT2EXM2proj){
 			WaitSeconds(self.WaitTime)
 		end
 	end,
+
+	---@param self BRNT2EXM2proj
 	SetTurnRateByDist = function(self)
 		local dist = self:GetDistanceToTarget()
 		if dist > self.Distance then
@@ -48,6 +47,9 @@ BRNT2EXM2proj = Class(UefBRNT2EXM2proj){
 			KillThread(self.MoveThread)
 		end
 	end,
+
+	---@param self BRNT2EXM2proj
+	---@return number
 	GetDistanceToTarget = function(self)
 		local tpos = self:GetCurrentTargetPosition()
 		local mpos = self:GetPosition()
