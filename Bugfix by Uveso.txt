@@ -1,3 +1,11 @@
+V138 (not relased)
+
+Unit BRPT3SHBM (Experimental Mega Bot) Fixed position of laser beam. (thanks to zhanghm18)
+Unit brnt3doomsday (Prototype Mobile Fortress) Fixed turret animation (thanks to Saver)
+Unit BRMT3CLOAKER (Experimental Mobile Cloakfield Generator) Fix cloak not init on OnStopBeingBuilt
+Unit brmt3pd (Heavy Point Defense) changed name from Triple Threat to Tripple Threat (thanks to Deribus)
+
+*************************************************************************************************************************************
 V137 (04.Jun.2020)
 
 Updated all units inside CustomUnits folder for AI support
