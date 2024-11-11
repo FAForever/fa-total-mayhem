@@ -91,8 +91,3 @@ TMMadCatmk4Beam = Class(TMCollisionBeam){
 	SplatTexture = 'czar_mark01_albedo',
 	ScorchSplatDropTime = 0.25,
 }
----------------------------------------------------
---#region Mod Compatibilty
-local Util = import('/lua/utilities.lua')
-
---#endregion

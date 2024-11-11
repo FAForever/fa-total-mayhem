@@ -1,4 +1,10 @@
+
 local OLDAddGlobalBaseTemplate = AddGlobalBaseTemplate
+
+
+---@param aiBrain AIBrain
+---@param locationType string
+---@param baseBuilderName string
 function AddGlobalBaseTemplate(aiBrain, locationType, baseBuilderName)
 	-- Don't use this with AI-Uveso
 	if not aiBrain.Uveso then

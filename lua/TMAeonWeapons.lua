@@ -56,20 +56,3 @@ TMMadCatmk4laserweapon = Class(DefaultBeamWeapon){
 	FxUpackingChargeEffects = EffectTemplate.CMicrowaveLaserCharge01,
 	FxUpackingChargeEffectScale = 1,
 }
----------------------------------------------
---#region Mod Compatability
-
-local DefaultProjectileWeapon = WeaponFile.DefaultProjectileWeapon
-local BareBonesWeapon = WeaponFile.BareBonesWeapon
-local KamikazeWeapon = WeaponFile.KamikazeWeapon
-local CollisionBeamFile = import('/lua/defaultcollisionbeams.lua')
-local Explosion = import('/lua/defaultexplosions.lua')
-local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
-local Util = import('/lua/utilities.lua')
-local TMNovaCatBlueLaserBeam = TMCollisionBeamFile.TMNovaCatBlueLaserBeam
-local TMNovaCatGreenLaserBeam = TMCollisionBeamFile.TMNovaCatGreenLaserBeam
-local TMMizuraBlueLaserBeam = TMCollisionBeamFile.TMMizuraBlueLaserBeam
-local TMMadCatmk4Beam = TMCollisionBeamFile.TMMadCatmk4Beam
-local TMSpiderBeam = TMCollisionBeamFile.TMSpiderBeam
-
---#endregion
