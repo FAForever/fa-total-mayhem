@@ -69,6 +69,10 @@ BROT3BT2 = Class(TLandUnit){
 			FxMuzzleFlash = { '/effects/emitters/sonic_pulse_muzzle_flash_02_emit.bp' },
 		},
 	},
+	OnCreate = function(self)
+		TLandUnit.OnCreate(self)
+		self.Blueprint.Display.BuildMeshBlueprint = false
+	end,
 	OnStopBeingBuilt = function(self, builder, layer)
 		TLandUnit.OnStopBeingBuilt(self, builder, layer)
 		self.SetAIAutoattackWeapon(self)

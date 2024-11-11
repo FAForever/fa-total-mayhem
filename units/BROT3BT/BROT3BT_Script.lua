@@ -60,6 +60,10 @@ BROT3BT = Class(TLandUnit){
 			end,
 		},
 	},
+	OnCreate = function(self)
+		TLandUnit.OnCreate(self)
+		self.Blueprint.Display.BuildMeshBlueprint = false
+	end,
 	OnStopBeingBuilt = function(self, builder, layer)
 		TLandUnit.OnStopBeingBuilt(self, builder, layer)
 		self.SetAIAutoattackWeapon(self)

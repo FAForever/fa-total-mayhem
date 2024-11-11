@@ -57,6 +57,10 @@ BROT1BTT2 = Class(AHoverLandUnit){
 		},
 		clawgun = Class(TDFHeavyPlasmaCannonWeapon){ FxMuzzleFlashScale = 0.4 },
 	},
+	OnCreate = function(self)
+		AHoverLandUnit.OnCreate(self)
+		self.Blueprint.Display.BuildMeshBlueprint = false
+	end,
 	OnStopBeingBuilt = function(self, builder, layer)
 		AHoverLandUnit.OnStopBeingBuilt(self, builder, layer)
 		self.SetAIAutoattackWeapon(self)

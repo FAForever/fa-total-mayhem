@@ -4,6 +4,11 @@ Unit BRPT3SHBM (Experimental Mega Bot) Fixed position of laser beam. (thanks to 
 Unit brnt3doomsday (Prototype Mobile Fortress) Fixed turret animation (thanks to Saver)
 Unit BRMT3CLOAKER (Experimental Mobile Cloakfield Generator) Fix cloak not init on OnStopBeingBuilt
 Unit brmt3pd (Heavy Point Defense) changed name from Triple Threat to Tripple Threat (thanks to Deribus)
+Unit brot1bt (Fate MK1) fixed issue of sliding across the map during construction.
+Unit brot1btt2 (Fate MK2) fixed issue of sliding across the map during construction.
+Unit brot2mt (Pumice) fixed issue of sliding across the map during construction.
+Unit brot3bt (Rhyolite) fixed issue of sliding across the map during construction.
+Unit brot3bt2 (Rhyolite II) fixed issue of sliding across the map during construction.
 
 *************************************************************************************************************************************
 V137 (04.Jun.2020)
