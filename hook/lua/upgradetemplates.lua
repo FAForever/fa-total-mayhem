@@ -1,28 +1,28 @@
 PlatoonTemplate{
-	Name = 'T1PointDefensUpgrade',
-	Plan = 'UnitUpgradeAI',
-	FactionSquads = {
-		UEF = { { 'brnt1hpd', 0, 1, 'support', 'None' } },
-		Cybran = { { 'brmt1pd', 0, 1, 'support', 'None' } },
-	},
+    Name = 'T1PointDefensUpgrade',
+    Plan = 'UnitUpgradeAI',
+    FactionSquads = {
+        UEF = { { 'brnt1hpd', 0, 1, 'support', 'None' } },
+        Cybran = { { 'brmt1pd', 0, 1, 'support', 'None' } },
+    },
 }
 
 PlatoonTemplate{
-	Name = 'T1PointDefensUpgradeEXP',
-	Plan = 'UnitUpgradeAI',
-	FactionSquads = {
-		UEF = { { 'brnt1expd', 0, 1, 'support', 'None' } },
-		Cybran = { { 'brmt1expd', 0, 1, 'support', 'None' } },
-	},
+    Name = 'T1PointDefensUpgradeEXP',
+    Plan = 'UnitUpgradeAI',
+    FactionSquads = {
+        UEF = { { 'brnt1expd', 0, 1, 'support', 'None' } },
+        Cybran = { { 'brmt1expd', 0, 1, 'support', 'None' } },
+    },
 }
 
 PlatoonTemplate{
-	Name = 'T2PointDefensUpgrade',
-	Plan = 'UnitUpgradeAI',
-	FactionSquads = {
-		UEF = { { 'brnt2epd', 0, 1, 'support', 'None' } },
-		Cybran = { { 'brmt2pd', 0, 1, 'support', 'None' } },
-	},
+    Name = 'T2PointDefensUpgrade',
+    Plan = 'UnitUpgradeAI',
+    FactionSquads = {
+        UEF = { { 'brnt2epd', 0, 1, 'support', 'None' } },
+        Cybran = { { 'brmt2pd', 0, 1, 'support', 'None' } },
+    },
 }
 
 -- earth structure upgrades
