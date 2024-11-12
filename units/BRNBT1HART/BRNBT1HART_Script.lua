@@ -12,7 +12,7 @@ local TStructureUnit = import('/lua/terranunits.lua').TStructureUnit
 local TIFArtilleryWeapon = import('/lua/terranweapons.lua').TIFArtilleryWeapon
 
 BRNBT1HART = Class(TStructureUnit){
-	Weapons = { MainGun = Class(TIFArtilleryWeapon){} },
+    Weapons = { MainGun = Class(TIFArtilleryWeapon){} },
 }
 
 TypeClass = BRNBT1HART

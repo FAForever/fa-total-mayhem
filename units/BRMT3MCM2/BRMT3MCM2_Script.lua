@@ -22,47 +22,47 @@ local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua
 local CIFGrenadeWeapon = RobotTalkFile.CIFGrenadeWeapon
 
 BRMT3MCM2 = Class(CWalkingLandUnit){
-	Weapons = {
-		robottalk = Class(CIFGrenadeWeapon){ FxMuzzleFlashScale = 0 },
-		mgweapon = Class(TDFRiotWeapon){
-			FxMuzzleFlash = EffectTemplate.TRiotGunMuzzleFxTank,
-			FxMuzzleFlashScale = 0.75,
-		},
-		lefthandweapon = Class(CCannonMolecularWeapon){
-			FxMuzzleFlash = EffectTemplate.CHvyProtonCannonMuzzleflash,
-			FxMuzzleFlashScale = 1.6,
-		},
-		righthandweapon = Class(CCannonMolecularWeapon){
-			FxMuzzleFlash = EffectTemplate.CHvyProtonCannonMuzzleflash,
-			FxMuzzleFlashScale = 1.6,
-		},
-		rocket1 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.7 },
-		rocket2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.7 },
-		rocket3 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.7 },
-		rocket4 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.7 },
-		laserfire = Class(CDFHeavyMicrowaveLaserGeneratorCom){},
-		HeavyBolter = Class(CCannonMolecularWeapon){ FxMuzzleFlashScale = 2.15 },
-		DeathWeapon = Class(SCUDeathWeapon){},
-	},
-	OnStopBeingBuilt = function(self, builder, layer)
-		CWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
+    Weapons = {
+        robottalk = Class(CIFGrenadeWeapon){ FxMuzzleFlashScale = 0 },
+        mgweapon = Class(TDFRiotWeapon){
+            FxMuzzleFlash = EffectTemplate.TRiotGunMuzzleFxTank,
+            FxMuzzleFlashScale = 0.75,
+        },
+        lefthandweapon = Class(CCannonMolecularWeapon){
+            FxMuzzleFlash = EffectTemplate.CHvyProtonCannonMuzzleflash,
+            FxMuzzleFlashScale = 1.6,
+        },
+        righthandweapon = Class(CCannonMolecularWeapon){
+            FxMuzzleFlash = EffectTemplate.CHvyProtonCannonMuzzleflash,
+            FxMuzzleFlashScale = 1.6,
+        },
+        rocket1 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.7 },
+        rocket2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.7 },
+        rocket3 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.7 },
+        rocket4 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.7 },
+        laserfire = Class(CDFHeavyMicrowaveLaserGeneratorCom){},
+        HeavyBolter = Class(CCannonMolecularWeapon){ FxMuzzleFlashScale = 2.15 },
+        DeathWeapon = Class(SCUDeathWeapon){},
+    },
+    OnStopBeingBuilt = function(self, builder, layer)
+        CWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
 
-		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
-			self:SetWeaponEnabledByLabel('robottalk', false)
-		else
-			self:SetWeaponEnabledByLabel('robottalk', true)
-		end
-	end,
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		CWalkingLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
-	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['MadCatDeath02'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'Turret', army, v):ScaleEmitter(1.5))
-		end
-	end,
+        if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
+            self:SetWeaponEnabledByLabel('robottalk', false)
+        else
+            self:SetWeaponEnabledByLabel('robottalk', true)
+        end
+    end,
+    OnKilled = function(self, instigator, damagetype, overkillRatio)
+        CWalkingLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
+        self:CreatTheEffectsDeath()
+    end,
+    CreatTheEffectsDeath = function(self)
+        local army = self:GetArmy()
+        for k, v in TMEffectTemplate['MadCatDeath02'] do
+            self.Trash:Add(CreateAttachedEmitter(self, 'Turret', army, v):ScaleEmitter(1.5))
+        end
+    end,
 }
 
 TypeClass = BRMT3MCM2

@@ -17,35 +17,35 @@ local CCannonMolecularWeapon = WeaponsFile.CCannonMolecularWeapon
 local TDFGaussCannonWeapon = WeaponsFile2.TDFLandGaussCannonWeapon
 
 BRMT3CLOAKER = Class(CWalkingLandUnit){
-	Weapons = {
-		HeavyBolter = Class(CDFElectronBolterWeapon){},
-		HeavyBolter2 = Class(CDFElectronBolterWeapon){},
-		robottalk = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0 },
-	},
-	OnStopBeingBuilt = function(self, builder, layer)
-		CWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
-		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
-			self:SetWeaponEnabledByLabel('robottalk', false)
-		else
-			self:SetWeaponEnabledByLabel('robottalk', true)
-		end
-		self:DisableUnitIntel('Enhancement', 'RadarStealth')
-		self:DisableUnitIntel('Enhancement', 'SonarStealth')
-		self:DisableUnitIntel('Enhancement', 'Cloak')
-		self:DisableUnitIntel('Enhancement', 'CloakField')
-		self.DelayedCloakThread = self:ForkThread(self.CloakDelayed)
-	end,
-	CloakDelayed = function(self)
-		if not self.Dead then
-			WaitSeconds(2)
-			self:EnableUnitIntel('Enhancement', 'RadarStealth')
-			self:EnableUnitIntel('Enhancement', 'SonarStealth')
-			self:EnableUnitIntel('Enhancement', 'Cloak')
-			self:EnableUnitIntel('Enhancement', 'CloakField')
-		end
-		KillThread(self.DelayedCloakThread)
-		self.DelayedCloakThread = nil
-	end,
+    Weapons = {
+        HeavyBolter = Class(CDFElectronBolterWeapon){},
+        HeavyBolter2 = Class(CDFElectronBolterWeapon){},
+        robottalk = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0 },
+    },
+    OnStopBeingBuilt = function(self, builder, layer)
+        CWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
+        if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
+            self:SetWeaponEnabledByLabel('robottalk', false)
+        else
+            self:SetWeaponEnabledByLabel('robottalk', true)
+        end
+        self:DisableUnitIntel('Enhancement', 'RadarStealth')
+        self:DisableUnitIntel('Enhancement', 'SonarStealth')
+        self:DisableUnitIntel('Enhancement', 'Cloak')
+        self:DisableUnitIntel('Enhancement', 'CloakField')
+        self.DelayedCloakThread = self:ForkThread(self.CloakDelayed)
+    end,
+    CloakDelayed = function(self)
+        if not self.Dead then
+            WaitSeconds(2)
+            self:EnableUnitIntel('Enhancement', 'RadarStealth')
+            self:EnableUnitIntel('Enhancement', 'SonarStealth')
+            self:EnableUnitIntel('Enhancement', 'Cloak')
+            self:EnableUnitIntel('Enhancement', 'CloakField')
+        end
+        KillThread(self.DelayedCloakThread)
+        self.DelayedCloakThread = nil
+    end,
 }
 
 TypeClass = BRMT3CLOAKER

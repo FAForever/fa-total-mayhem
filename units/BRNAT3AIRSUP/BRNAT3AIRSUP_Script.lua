@@ -12,10 +12,10 @@ local TAirUnit = import('/lua/terranunits.lua').TAirUnit
 local TAAGinsuRapidPulseWeapon = import('/lua/terranweapons.lua').TAAGinsuRapidPulseWeapon
 
 BRNAT3AIRSUP = Class(TAirUnit){
-	Weapons = {
-		RightBeam = Class(TAAGinsuRapidPulseWeapon){},
-		LeftBeam = Class(TAAGinsuRapidPulseWeapon){},
-	},
+    Weapons = {
+        RightBeam = Class(TAAGinsuRapidPulseWeapon){},
+        LeftBeam = Class(TAAGinsuRapidPulseWeapon){},
+    },
 }
 
 TypeClass = BRNAT3AIRSUP

@@ -12,13 +12,13 @@ local TAirUnit = import('/lua/terranunits.lua').TAirUnit
 local TSAMLauncher = import('/lua/terranweapons.lua').TSAMLauncher
 
 BRNAT1INTC = Class(TAirUnit){
-	PlayDestructionEffects = true,
-	DamageEffectPullback = 0.25,
-	DestroySeconds = 7.5,
-	Weapons = {
-		MissileRack01 = Class(TSAMLauncher){},
-		aircraft = Class(TSAMLauncher){ FxMuzzleFlashScale = 0 },
-	},
+    PlayDestructionEffects = true,
+    DamageEffectPullback = 0.25,
+    DestroySeconds = 7.5,
+    Weapons = {
+        MissileRack01 = Class(TSAMLauncher){},
+        aircraft = Class(TSAMLauncher){ FxMuzzleFlashScale = 0 },
+    },
 }
 
 TypeClass = BRNAT1INTC

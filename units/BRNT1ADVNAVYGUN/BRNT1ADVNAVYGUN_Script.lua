@@ -12,9 +12,9 @@ local TSubUnit = import('/lua/terranunits.lua').TSubUnit
 local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
 
 BRNT1ADVNAVYGUN = Class(TSubUnit){
-	SwitchAnims = true,
-	IsWaiting = false,
-	Weapons = { MainGun = Class(TDFGaussCannonWeapon){} },
+    SwitchAnims = true,
+    IsWaiting = false,
+    Weapons = { MainGun = Class(TDFGaussCannonWeapon){} },
 }
 
 TypeClass = BRNT1ADVNAVYGUN

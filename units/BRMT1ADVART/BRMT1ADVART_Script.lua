@@ -13,7 +13,7 @@ local CWeapons = import('/lua/cybranweapons.lua')
 local CDFHeavyDisintegratorWeapon = CWeapons.CDFHeavyDisintegratorWeapon
 
 BRMT1ADVART = Class(TStructureUnit){
-	Weapons = { MainGun = Class(CDFHeavyDisintegratorWeapon){ FxMuzzleFlashScale = 1.85 } },
+    Weapons = { MainGun = Class(CDFHeavyDisintegratorWeapon){ FxMuzzleFlashScale = 1.85 } },
 }
 
 TypeClass = BRMT1ADVART

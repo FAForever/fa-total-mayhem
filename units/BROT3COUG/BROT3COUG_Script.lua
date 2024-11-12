@@ -18,25 +18,25 @@ local SCUDeathWeapon = import('/lua/sim/defaultweapons.lua').SCUDeathWeapon
 local ADFQuantumAutogunWeapon = WeaponsFile2.ADFQuantumAutogunWeapon
 
 BROT3COUG = Class(CWalkingLandUnit){
-	Weapons = {
-		DeathWeapon = Class(SCUDeathWeapon){},
-		rightarmweapon = Class(TMAnovacatbluelaserweapon){},
-		leftarmweapon = Class(TMAnovacatbluelaserweapon){},
-		robottalk = Class(ADFQuantumAutogunWeapon){ FxMuzzleFlashScale = 0 },
-		minilaser1 = Class(ADFQuantumAutogunWeapon){},
-		minilaser2 = Class(ADFQuantumAutogunWeapon){},
-		aalaser = Class(ADFQuantumAutogunWeapon){},
-		MainGun1 = Class(TDFGaussCannonWeapon){},
-	},
-	OnStopBeingBuilt = function(self, builder, layer)
-		CWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
+    Weapons = {
+        DeathWeapon = Class(SCUDeathWeapon){},
+        rightarmweapon = Class(TMAnovacatbluelaserweapon){},
+        leftarmweapon = Class(TMAnovacatbluelaserweapon){},
+        robottalk = Class(ADFQuantumAutogunWeapon){ FxMuzzleFlashScale = 0 },
+        minilaser1 = Class(ADFQuantumAutogunWeapon){},
+        minilaser2 = Class(ADFQuantumAutogunWeapon){},
+        aalaser = Class(ADFQuantumAutogunWeapon){},
+        MainGun1 = Class(TDFGaussCannonWeapon){},
+    },
+    OnStopBeingBuilt = function(self, builder, layer)
+        CWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
 
-		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
-			self:SetWeaponEnabledByLabel('robottalk', false)
-		else
-			self:SetWeaponEnabledByLabel('robottalk', true)
-		end
-	end,
+        if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
+            self:SetWeaponEnabledByLabel('robottalk', false)
+        else
+            self:SetWeaponEnabledByLabel('robottalk', true)
+        end
+    end,
 }
 
 TypeClass = BROT3COUG

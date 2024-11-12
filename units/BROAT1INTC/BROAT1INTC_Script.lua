@@ -12,21 +12,21 @@ local aWeapons = import('/lua/aeonweapons.lua')
 local AAASonicPulseBatteryWeapon = aWeapons.AAASonicPulseBatteryWeapon
 
 BROAT1INTC = Class(AAirUnit){
-	Weapons = {
-		SonicPulseBattery1 = Class(AAASonicPulseBatteryWeapon){
-			FxMuzzleFlash = { '/effects/emitters/sonic_pulse_muzzle_flash_02_emit.bp' },
-		},
-		SonicPulseBattery2 = Class(AAASonicPulseBatteryWeapon){
-			FxMuzzleFlash = { '/effects/emitters/sonic_pulse_muzzle_flash_02_emit.bp' },
-		},
-		SonicPulseBattery3 = Class(AAASonicPulseBatteryWeapon){
-			FxMuzzleFlash = { '/effects/emitters/sonic_pulse_muzzle_flash_02_emit.bp' },
-		},
-		SonicPulseBattery4 = Class(AAASonicPulseBatteryWeapon){
-			FxMuzzleFlash = { '/effects/emitters/sonic_pulse_muzzle_flash_02_emit.bp' },
-		},
-		aircraft = Class(AAASonicPulseBatteryWeapon){ FxMuzzleFlashScale = 0 },
-	},
+    Weapons = {
+        SonicPulseBattery1 = Class(AAASonicPulseBatteryWeapon){
+            FxMuzzleFlash = { '/effects/emitters/sonic_pulse_muzzle_flash_02_emit.bp' },
+        },
+        SonicPulseBattery2 = Class(AAASonicPulseBatteryWeapon){
+            FxMuzzleFlash = { '/effects/emitters/sonic_pulse_muzzle_flash_02_emit.bp' },
+        },
+        SonicPulseBattery3 = Class(AAASonicPulseBatteryWeapon){
+            FxMuzzleFlash = { '/effects/emitters/sonic_pulse_muzzle_flash_02_emit.bp' },
+        },
+        SonicPulseBattery4 = Class(AAASonicPulseBatteryWeapon){
+            FxMuzzleFlash = { '/effects/emitters/sonic_pulse_muzzle_flash_02_emit.bp' },
+        },
+        aircraft = Class(AAASonicPulseBatteryWeapon){ FxMuzzleFlashScale = 0 },
+    },
 }
 
 TypeClass = BROAT1INTC

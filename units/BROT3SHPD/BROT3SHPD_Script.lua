@@ -17,14 +17,14 @@ local AAAZealotMissileWeapon = AWeapons.AAAZealotMissileWeapon
 local SDFChronotronCannonWeapon = SWeapons.SDFChronotronCannonWeapon
 
 BROT3SHPD = Class(TStructureUnit){
-	Weapons = {
-		cannonweapon = Class(SDFChronotronCannonWeapon){
-			FxMuzzleFlashScale = 4.85,
-			FxMuzzleFlash = EffectTemplate.ASDisruptorCannonMuzzle01,
-		},
-		DeathWeapon = Class(SCUDeathWeapon){},
-		AntiAirMissiles = Class(AAAZealotMissileWeapon){},
-	},
+    Weapons = {
+        cannonweapon = Class(SDFChronotronCannonWeapon){
+            FxMuzzleFlashScale = 4.85,
+            FxMuzzleFlash = EffectTemplate.ASDisruptorCannonMuzzle01,
+        },
+        DeathWeapon = Class(SCUDeathWeapon){},
+        AntiAirMissiles = Class(AAAZealotMissileWeapon){},
+    },
 }
 
 TypeClass = BROT3SHPD

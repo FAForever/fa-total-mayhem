@@ -15,27 +15,27 @@ local CCannonMolecularWeapon = WeaponsFile.CCannonMolecularWeapon
 local TDFGaussCannonWeapon = WeaponsFile2.TDFLandGaussCannonWeapon
 
 BRMT2BM = Class(CWalkingLandUnit){
-	Weapons = {
-		HeavyBolter = Class(CCannonMolecularWeapon){ FxMuzzleFlashScale = 0.75 },
-		rocket = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.45 },
-		rocket2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.45 },
-		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
-	},
-	OnStopBeingBuilt = function(self, builder, layer)
-		CWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
-		self.SetAIAutoattackWeapon(self)
-	end,
-	OnDetachedFromTransport = function(self, transport, bone)
-		CWalkingLandUnit.OnDetachedFromTransport(self, transport, bone)
-		self.SetAIAutoattackWeapon(self)
-	end,
-	SetAIAutoattackWeapon = function(self)
-		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
-			self:SetWeaponEnabledByLabel('autoattack', false)
-		else
-			self:SetWeaponEnabledByLabel('autoattack', true)
-		end
-	end,
+    Weapons = {
+        HeavyBolter = Class(CCannonMolecularWeapon){ FxMuzzleFlashScale = 0.75 },
+        rocket = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.45 },
+        rocket2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.45 },
+        autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
+    },
+    OnStopBeingBuilt = function(self, builder, layer)
+        CWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
+        self.SetAIAutoattackWeapon(self)
+    end,
+    OnDetachedFromTransport = function(self, transport, bone)
+        CWalkingLandUnit.OnDetachedFromTransport(self, transport, bone)
+        self.SetAIAutoattackWeapon(self)
+    end,
+    SetAIAutoattackWeapon = function(self)
+        if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
+            self:SetWeaponEnabledByLabel('autoattack', false)
+        else
+            self:SetWeaponEnabledByLabel('autoattack', true)
+        end
+    end,
 }
 
 TypeClass = BRMT2BM

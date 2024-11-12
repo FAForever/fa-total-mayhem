@@ -14,28 +14,28 @@ local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 
 BRMT2ST = Class(TLandUnit){
-	Weapons = {
-		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
-		MainGun = Class(TDFGaussCannonWeapon){
-			FxMuzzleFlash = EffectTemplate.CElectronBolterMuzzleFlash01,
-			FxMuzzleFlashScale = 1.25,
-		},
-	},
-	OnStopBeingBuilt = function(self, builder, layer)
-		TLandUnit.OnStopBeingBuilt(self, builder, layer)
-		self.SetAIAutoattackWeapon(self)
-	end,
-	OnDetachedFromTransport = function(self, transport, bone)
-		TLandUnit.OnDetachedFromTransport(self, transport, bone)
-		self.SetAIAutoattackWeapon(self)
-	end,
-	SetAIAutoattackWeapon = function(self)
-		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
-			self:SetWeaponEnabledByLabel('autoattack', false)
-		else
-			self:SetWeaponEnabledByLabel('autoattack', true)
-		end
-	end,
+    Weapons = {
+        autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
+        MainGun = Class(TDFGaussCannonWeapon){
+            FxMuzzleFlash = EffectTemplate.CElectronBolterMuzzleFlash01,
+            FxMuzzleFlashScale = 1.25,
+        },
+    },
+    OnStopBeingBuilt = function(self, builder, layer)
+        TLandUnit.OnStopBeingBuilt(self, builder, layer)
+        self.SetAIAutoattackWeapon(self)
+    end,
+    OnDetachedFromTransport = function(self, transport, bone)
+        TLandUnit.OnDetachedFromTransport(self, transport, bone)
+        self.SetAIAutoattackWeapon(self)
+    end,
+    SetAIAutoattackWeapon = function(self)
+        if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
+            self:SetWeaponEnabledByLabel('autoattack', false)
+        else
+            self:SetWeaponEnabledByLabel('autoattack', true)
+        end
+    end,
 }
 
 TypeClass = BRMT2ST

@@ -14,11 +14,11 @@ local CAirUnit = import('/lua/cybranunits.lua').CAirUnit
 local CAAAutocannon = import('/lua/cybranweapons.lua').CAAAutocannon
 
 BRMAT1INTC = Class(CAirUnit){
-	Weapons = {
-		aircraft = Class(CAAAutocannon){ FxMuzzleFlashScale = 0 },
-		AutoCannon = Class(CAAAutocannon){},
-		AutoCannon2 = Class(CAAAutocannon){},
-	},
+    Weapons = {
+        aircraft = Class(CAAAutocannon){ FxMuzzleFlashScale = 0 },
+        AutoCannon = Class(CAAAutocannon){},
+        AutoCannon2 = Class(CAAAutocannon){},
+    },
 }
 
 TypeClass = BRMAT1INTC

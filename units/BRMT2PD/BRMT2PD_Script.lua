@@ -14,10 +14,10 @@ local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 
 BRMT2PD = Class(TStructureUnit){
-	Weapons = { MainGun = Class(TDFGaussCannonWeapon){
-		FxMuzzleFlashScale = 2.0,
-		FxMuzzleFlash = EffectTemplate.CElectronBolterMuzzleFlash01,
-	} },
+    Weapons = { MainGun = Class(TDFGaussCannonWeapon){
+        FxMuzzleFlashScale = 2.0,
+        FxMuzzleFlash = EffectTemplate.CElectronBolterMuzzleFlash01,
+    } },
 }
 
 TypeClass = BRMT2PD

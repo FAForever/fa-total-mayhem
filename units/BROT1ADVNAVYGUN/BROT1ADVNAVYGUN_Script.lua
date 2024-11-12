@@ -13,7 +13,7 @@ local AeonWeapons = import('/lua/aeonweapons.lua')
 local ADFCannonQuantumWeapon = AeonWeapons.ADFCannonQuantumWeapon
 
 BROT1ADVNAVYGUN = Class(AStructureUnit){
-	Weapons = { MissileRack = Class(ADFCannonQuantumWeapon){} },
+    Weapons = { MissileRack = Class(ADFCannonQuantumWeapon){} },
 }
 
 TypeClass = BROT1ADVNAVYGUN

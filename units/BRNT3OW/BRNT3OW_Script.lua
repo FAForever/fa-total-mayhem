@@ -16,28 +16,28 @@ local TDFRiotWeapon = WeaponsFile.TDFRiotWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 
 BRNT3OW = Class(TWalkingLandUnit){
-	Weapons = {
-		Riotgun = Class(TDFRiotWeapon){
-			FxMuzzleFlash = EffectTemplate.TRiotGunMuzzleFxTank,
-			FxMuzzleFlashScale = 0.75,
-		},
-		topgunaa = Class(TDFRiotWeapon){
-			FxMuzzleFlash = EffectTemplate.TRiotGunMuzzleFxTank,
-			FxMuzzleFlashScale = 0.75,
-		},
-		rocket = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.45 },
-		robottalk = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
-		DeathWeapon = Class(SCUDeathWeapon){},
-	},
-	OnStopBeingBuilt = function(self, builder, layer)
-		TWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
+    Weapons = {
+        Riotgun = Class(TDFRiotWeapon){
+            FxMuzzleFlash = EffectTemplate.TRiotGunMuzzleFxTank,
+            FxMuzzleFlashScale = 0.75,
+        },
+        topgunaa = Class(TDFRiotWeapon){
+            FxMuzzleFlash = EffectTemplate.TRiotGunMuzzleFxTank,
+            FxMuzzleFlashScale = 0.75,
+        },
+        rocket = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.45 },
+        robottalk = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
+        DeathWeapon = Class(SCUDeathWeapon){},
+    },
+    OnStopBeingBuilt = function(self, builder, layer)
+        TWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
 
-		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
-			self:SetWeaponEnabledByLabel('robottalk', false)
-		else
-			self:SetWeaponEnabledByLabel('robottalk', true)
-		end
-	end,
+        if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
+            self:SetWeaponEnabledByLabel('robottalk', false)
+        else
+            self:SetWeaponEnabledByLabel('robottalk', true)
+        end
+    end,
 }
 
 TypeClass = BRNT3OW

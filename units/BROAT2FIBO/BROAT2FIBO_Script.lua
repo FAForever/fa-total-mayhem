@@ -14,13 +14,13 @@ local AAASonicPulseBatteryWeapon = aWeapons.AAASonicPulseBatteryWeapon
 local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 
 BROAT2FIBO = Class(AAirUnit){
-	Weapons = {
-		SonicPulseBattery1 = Class(AAASonicPulseBatteryWeapon){
-			FxMuzzleFlash = { '/effects/emitters/sonic_pulse_muzzle_flash_02_emit.bp' },
-		},
-		aircraft = Class(AAASonicPulseBatteryWeapon){ FxMuzzleFlashScale = 0 },
-		rocket1 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.1 },
-	},
+    Weapons = {
+        SonicPulseBattery1 = Class(AAASonicPulseBatteryWeapon){
+            FxMuzzleFlash = { '/effects/emitters/sonic_pulse_muzzle_flash_02_emit.bp' },
+        },
+        aircraft = Class(AAASonicPulseBatteryWeapon){ FxMuzzleFlashScale = 0 },
+        rocket1 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.1 },
+    },
 }
 
 TypeClass = BROAT2FIBO

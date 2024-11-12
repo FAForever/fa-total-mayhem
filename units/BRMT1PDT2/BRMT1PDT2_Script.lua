@@ -13,7 +13,7 @@ local CybranWeaponsFile = import('/lua/cybranweapons.lua')
 local CAAAutocannon = CybranWeaponsFile.CAAAutocannon
 
 BRMT1PDT2 = Class(TStructureUnit){
-	Weapons = { MainGun = Class(CAAAutocannon){} },
+    Weapons = { MainGun = Class(CAAAutocannon){} },
 }
 
 TypeClass = BRMT1PDT2

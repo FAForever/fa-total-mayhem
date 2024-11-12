@@ -18,38 +18,38 @@ local EffectTemplate = import('/lua/EffectTemplates.lua')
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
 
 BRMT1ADVBOT = Class(CWalkingLandUnit){
-	Weapons = {
-		HeavyBolter = Class(CCannonMolecularWeapon){
-			FxMuzzleFlash = EffectTemplate.CElectronBolterMuzzleFlash01,
-			FxMuzzleFlashScale = 0.4,
-		},
-		HeavyBolter2 = Class(CCannonMolecularWeapon){
-			FxMuzzleFlash = EffectTemplate.CElectronBolterMuzzleFlash01,
-			FxMuzzleFlashScale = 0.8,
-		},
-		rocket = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.45 },
-		MainGun = Class(CDFHeavyMicrowaveLaserGeneratorCom){},
-		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
-	},
-	OnStopBeingBuilt = function(self, builder, layer)
-		CWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
+    Weapons = {
+        HeavyBolter = Class(CCannonMolecularWeapon){
+            FxMuzzleFlash = EffectTemplate.CElectronBolterMuzzleFlash01,
+            FxMuzzleFlashScale = 0.4,
+        },
+        HeavyBolter2 = Class(CCannonMolecularWeapon){
+            FxMuzzleFlash = EffectTemplate.CElectronBolterMuzzleFlash01,
+            FxMuzzleFlashScale = 0.8,
+        },
+        rocket = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.45 },
+        MainGun = Class(CDFHeavyMicrowaveLaserGeneratorCom){},
+        autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
+    },
+    OnStopBeingBuilt = function(self, builder, layer)
+        CWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
 
-		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
-			self:SetWeaponEnabledByLabel('autoattack', false)
-		else
-			self:SetWeaponEnabledByLabel('autoattack', true)
-		end
-	end,
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		CWalkingLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
-	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['CybranT2BeetleHit01'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'BRMT1ADVBOT', army, v):ScaleEmitter(1.25))
-		end
-	end,
+        if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
+            self:SetWeaponEnabledByLabel('autoattack', false)
+        else
+            self:SetWeaponEnabledByLabel('autoattack', true)
+        end
+    end,
+    OnKilled = function(self, instigator, damagetype, overkillRatio)
+        CWalkingLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
+        self:CreatTheEffectsDeath()
+    end,
+    CreatTheEffectsDeath = function(self)
+        local army = self:GetArmy()
+        for k, v in TMEffectTemplate['CybranT2BeetleHit01'] do
+            self.Trash:Add(CreateAttachedEmitter(self, 'BRMT1ADVBOT', army, v):ScaleEmitter(1.25))
+        end
+    end,
 }
 
 TypeClass = BRMT1ADVBOT

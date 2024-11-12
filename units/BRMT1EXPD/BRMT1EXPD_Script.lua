@@ -13,7 +13,7 @@ local CybranWeaponsFile = import('/lua/cybranweapons.lua')
 local CDFHeavyMicrowaveLaserGeneratorCom = CybranWeaponsFile.CDFHeavyMicrowaveLaserGeneratorCom
 
 BRMT1EXPD = Class(TStructureUnit){
-	Weapons = { MainGun = Class(CDFHeavyMicrowaveLaserGeneratorCom){} },
+    Weapons = { MainGun = Class(CDFHeavyMicrowaveLaserGeneratorCom){} },
 }
 
 TypeClass = BRMT1EXPD

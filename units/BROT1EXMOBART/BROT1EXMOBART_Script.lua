@@ -17,35 +17,35 @@ local AutoAttackWeapon = WeaponsFileAutoAttack.TDFLandGaussCannonWeapon
 local SDFChronotronCannonWeapon = SWeapons.SDFChronotronCannonWeapon
 
 BROT1EXMOBART = Class(AHoverLandUnit){
-	Weapons = {
-		autoattack = Class(AutoAttackWeapon){ FxMuzzleFlashScale = 0.0 },
-		MainGun = Class(SDFChronotronCannonWeapon){
-			FxMuzzleFlashScale = 3.55,
-			FxMuzzleFlash = EffectTemplate.ASDisruptorCannonMuzzle01,
-		},
-	},
-	OnStopBeingBuilt = function(self, builder, layer)
-		AHoverLandUnit.OnStopBeingBuilt(self, builder, layer)
+    Weapons = {
+        autoattack = Class(AutoAttackWeapon){ FxMuzzleFlashScale = 0.0 },
+        MainGun = Class(SDFChronotronCannonWeapon){
+            FxMuzzleFlashScale = 3.55,
+            FxMuzzleFlash = EffectTemplate.ASDisruptorCannonMuzzle01,
+        },
+    },
+    OnStopBeingBuilt = function(self, builder, layer)
+        AHoverLandUnit.OnStopBeingBuilt(self, builder, layer)
 
-		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
-			self:SetWeaponEnabledByLabel('autoattack', false)
-		else
-			self:SetWeaponEnabledByLabel('autoattack', true)
-		end
-	end,
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		AHoverLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
-	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['AeonUnitDeathRing02'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'BROT1EXMOBART', army, v):ScaleEmitter(1.10))
-		end
-		for k, v in TMEffectTemplate['UEFHEAVYROCKET02'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'BROT1EXMOBART', army, v):ScaleEmitter(1.0))
-		end
-	end,
+        if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
+            self:SetWeaponEnabledByLabel('autoattack', false)
+        else
+            self:SetWeaponEnabledByLabel('autoattack', true)
+        end
+    end,
+    OnKilled = function(self, instigator, damagetype, overkillRatio)
+        AHoverLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
+        self:CreatTheEffectsDeath()
+    end,
+    CreatTheEffectsDeath = function(self)
+        local army = self:GetArmy()
+        for k, v in TMEffectTemplate['AeonUnitDeathRing02'] do
+            self.Trash:Add(CreateAttachedEmitter(self, 'BROT1EXMOBART', army, v):ScaleEmitter(1.10))
+        end
+        for k, v in TMEffectTemplate['UEFHEAVYROCKET02'] do
+            self.Trash:Add(CreateAttachedEmitter(self, 'BROT1EXMOBART', army, v):ScaleEmitter(1.0))
+        end
+    end,
 }
 
 TypeClass = BROT1EXMOBART

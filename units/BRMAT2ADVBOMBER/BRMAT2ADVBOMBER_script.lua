@@ -14,27 +14,27 @@ local TIFSmallYieldNuclearBombWeapon = WeaponsFile.TIFSmallYieldNuclearBombWeapo
 local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 
 BRMAT2ADVBOMBER = Class(TAirUnit){
-	Weapons = {
-		aamissiles1 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
-		Bomb = Class(TIFSmallYieldNuclearBombWeapon){},
-		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
-		autoattack2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
-	},
-	OnStopBeingBuilt = function(self, builder, layer)
-		TAirUnit.OnStopBeingBuilt(self, builder, layer)
-		self.SetAIAutoattackWeapon(self)
-	end,
-	OnDetachedFromTransport = function(self, transport, bone)
-		TAirUnit.OnDetachedFromTransport(self, transport, bone)
-		self.SetAIAutoattackWeapon(self)
-	end,
-	SetAIAutoattackWeapon = function(self)
-		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
-			self:SetWeaponEnabledByLabel('autoattack', false)
-		else
-			self:SetWeaponEnabledByLabel('autoattack', true)
-		end
-	end,
+    Weapons = {
+        aamissiles1 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
+        Bomb = Class(TIFSmallYieldNuclearBombWeapon){},
+        autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
+        autoattack2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
+    },
+    OnStopBeingBuilt = function(self, builder, layer)
+        TAirUnit.OnStopBeingBuilt(self, builder, layer)
+        self.SetAIAutoattackWeapon(self)
+    end,
+    OnDetachedFromTransport = function(self, transport, bone)
+        TAirUnit.OnDetachedFromTransport(self, transport, bone)
+        self.SetAIAutoattackWeapon(self)
+    end,
+    SetAIAutoattackWeapon = function(self)
+        if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
+            self:SetWeaponEnabledByLabel('autoattack', false)
+        else
+            self:SetWeaponEnabledByLabel('autoattack', true)
+        end
+    end,
 }
 
 TypeClass = BRMAT2ADVBOMBER

@@ -15,32 +15,32 @@ local EffectTemplate = import('/lua/EffectTemplates.lua')
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
 
 BRNT1EXTK = Class(TLandUnit){
-	Weapons = {
-		MainGun = Class(TDFGaussCannonWeapon){
-			FxMuzzleFlashScale = 6.5,
-			FxMuzzleFlash = EffectTemplate.TFlakCannonMuzzleFlash01,
-		},
-		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
-	},
-	OnStopBeingBuilt = function(self, builder, layer)
-		TLandUnit.OnStopBeingBuilt(self, builder, layer)
+    Weapons = {
+        MainGun = Class(TDFGaussCannonWeapon){
+            FxMuzzleFlashScale = 6.5,
+            FxMuzzleFlash = EffectTemplate.TFlakCannonMuzzleFlash01,
+        },
+        autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
+    },
+    OnStopBeingBuilt = function(self, builder, layer)
+        TLandUnit.OnStopBeingBuilt(self, builder, layer)
 
-		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
-			self:SetWeaponEnabledByLabel('autoattack', false)
-		else
-			self:SetWeaponEnabledByLabel('autoattack', true)
-		end
-	end,
-	OnKilled = function(self, instigator, damagetype, overkillRatio)
-		TLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
-		self:CreatTheEffectsDeath()
-	end,
-	CreatTheEffectsDeath = function(self)
-		local army = self:GetArmy()
-		for k, v in TMEffectTemplate['UEFDeath03'] do
-			self.Trash:Add(CreateAttachedEmitter(self, 'Turret', army, v):ScaleEmitter(1.3))
-		end
-	end,
+        if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
+            self:SetWeaponEnabledByLabel('autoattack', false)
+        else
+            self:SetWeaponEnabledByLabel('autoattack', true)
+        end
+    end,
+    OnKilled = function(self, instigator, damagetype, overkillRatio)
+        TLandUnit.OnKilled(self, instigator, damagetype, overkillRatio)
+        self:CreatTheEffectsDeath()
+    end,
+    CreatTheEffectsDeath = function(self)
+        local army = self:GetArmy()
+        for k, v in TMEffectTemplate['UEFDeath03'] do
+            self.Trash:Add(CreateAttachedEmitter(self, 'Turret', army, v):ScaleEmitter(1.3))
+        end
+    end,
 }
 
 TypeClass = BRNT1EXTK

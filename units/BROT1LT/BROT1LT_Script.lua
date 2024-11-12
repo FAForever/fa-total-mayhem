@@ -12,6 +12,6 @@ local AHoverLandUnit = import('/lua/aeonunits.lua').AHoverLandUnit
 local ADFDisruptorCannonWeapon = import('/lua/aeonweapons.lua').ADFDisruptorCannonWeapon
 
 BROT1LT = Class(AHoverLandUnit){
-	Weapons = { MainGun = Class(ADFDisruptorCannonWeapon){} },
+    Weapons = { MainGun = Class(ADFDisruptorCannonWeapon){} },
 }
 TypeClass = BROT1LT

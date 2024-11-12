@@ -13,7 +13,7 @@ local WeaponsFile = import('/lua/terranweapons.lua')
 local TDFGaussCannonWeapon = WeaponsFile.TDFLandGaussCannonWeapon
 
 BRNT2EXART = Class(TStructureUnit){
-	Weapons = { MainGun = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 3.12 } },
+    Weapons = { MainGun = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 3.12 } },
 }
 
 TypeClass = BRNT2EXART

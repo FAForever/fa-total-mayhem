@@ -12,7 +12,7 @@ local AAirUnit = import('/lua/aeonunits.lua').AAirUnit
 local AAAAutocannonQuantumWeapon = import('/lua/aeonweapons.lua').AAAAutocannonQuantumWeapon
 
 BROAT3ASUP = Class(AAirUnit){
-	Weapons = { AutoCannon1 = Class(AAAAutocannonQuantumWeapon){} },
+    Weapons = { AutoCannon1 = Class(AAAAutocannonQuantumWeapon){} },
 }
 
 TypeClass = BROAT3ASUP

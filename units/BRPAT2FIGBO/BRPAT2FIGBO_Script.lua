@@ -14,26 +14,26 @@ local SDFAireauBolterWeapon = import('/lua/seraphimweapons.lua').SDFAireauBolter
 local CDFHeavyDisintegratorWeapon = CWeapons.CDFHeavyDisintegratorWeapon
 
 BRPAT2FIGBO = Class(CAirUnit){
-	Weapons = {
-		aircraft = Class(CDFHeavyDisintegratorWeapon){ FxMuzzleFlashScale = 0 },
-		MainGun = Class(SDFAireauBolterWeapon){ FxMuzzleFlashScale = 2.4 },
-		autoattack = Class(SDFAireauBolterWeapon){ FxMuzzleFlashScale = 0 },
-	},
-	OnStopBeingBuilt = function(self, builder, layer)
-		CAirUnit.OnStopBeingBuilt(self, builder, layer)
-		self.SetAIAutoattackWeapon(self)
-	end,
-	OnDetachedFromTransport = function(self, transport, bone)
-		CAirUnit.OnDetachedFromTransport(self, transport, bone)
-		self.SetAIAutoattackWeapon(self)
-	end,
-	SetAIAutoattackWeapon = function(self)
-		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
-			self:SetWeaponEnabledByLabel('autoattack', false)
-		else
-			self:SetWeaponEnabledByLabel('autoattack', true)
-		end
-	end,
+    Weapons = {
+        aircraft = Class(CDFHeavyDisintegratorWeapon){ FxMuzzleFlashScale = 0 },
+        MainGun = Class(SDFAireauBolterWeapon){ FxMuzzleFlashScale = 2.4 },
+        autoattack = Class(SDFAireauBolterWeapon){ FxMuzzleFlashScale = 0 },
+    },
+    OnStopBeingBuilt = function(self, builder, layer)
+        CAirUnit.OnStopBeingBuilt(self, builder, layer)
+        self.SetAIAutoattackWeapon(self)
+    end,
+    OnDetachedFromTransport = function(self, transport, bone)
+        CAirUnit.OnDetachedFromTransport(self, transport, bone)
+        self.SetAIAutoattackWeapon(self)
+    end,
+    SetAIAutoattackWeapon = function(self)
+        if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
+            self:SetWeaponEnabledByLabel('autoattack', false)
+        else
+            self:SetWeaponEnabledByLabel('autoattack', true)
+        end
+    end,
 }
 
 TypeClass = BRPAT2FIGBO

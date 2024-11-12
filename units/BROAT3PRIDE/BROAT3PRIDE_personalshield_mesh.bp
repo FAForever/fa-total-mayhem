@@ -1,13 +1,13 @@
 MeshBlueprint{
-	IconFadeInZoom = 220,
-	LODs = { {
-		MeshName = '/mods/fa-total-mayhem/units/BROAT3PRIDE/BROAT3PRIDE_lod0.scm',
-		AlbedoName = '/mods/fa-total-mayhem/units/BROAT3PRIDE/BROAT3PRIDE_albedo.dds',
-		NormalsName = '/mods/fa-total-mayhem/units/BROAT3PRIDE/BROAT3PRIDE_normalsTS.dds',
-		SpecularName = '/mods/fa-total-mayhem/units/BROAT3PRIDE/BROAT3PRIDE_specteam.dds',
-		LookupName = '/effects/entities/PhaseShield/PhaseShieldLookup.dds',
-		LODCutoff = 1450,
-		Scrolling = false,
-		ShaderName = 'PhaseShield',
-	} },
+    IconFadeInZoom = 220,
+    LODs = { {
+        MeshName = '/mods/fa-total-mayhem/units/BROAT3PRIDE/BROAT3PRIDE_lod0.scm',
+        AlbedoName = '/mods/fa-total-mayhem/units/BROAT3PRIDE/BROAT3PRIDE_albedo.dds',
+        NormalsName = '/mods/fa-total-mayhem/units/BROAT3PRIDE/BROAT3PRIDE_normalsTS.dds',
+        SpecularName = '/mods/fa-total-mayhem/units/BROAT3PRIDE/BROAT3PRIDE_specteam.dds',
+        LookupName = '/effects/entities/PhaseShield/PhaseShieldLookup.dds',
+        LODCutoff = 1450,
+        Scrolling = false,
+        ShaderName = 'PhaseShield',
+    } },
 }

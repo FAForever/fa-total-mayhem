@@ -17,32 +17,32 @@ local TDFRiotWeapon = WeaponsFile.TDFRiotWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 
 BRNT3BLASP = Class(TWalkingLandUnit){
-	Weapons = {
-		Riotgun = Class(TDFRiotWeapon){
-			FxMuzzleFlash = EffectTemplate.TRiotGunMuzzleFxTank,
-			FxMuzzleFlashScale = 0.75,
-		},
-		Riotgun2 = Class(TDFRiotWeapon){
-			FxMuzzleFlash = EffectTemplate.TRiotGunMuzzleFxTank,
-			FxMuzzleFlashScale = 0.75,
-		},
-		rocket = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.45 },
-		robottalk = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
-		DeathWeapon = Class(SCUDeathWeapon){},
-		laser = Class(TOrbitalDeathLaserBeamWeapon){ FxMuzzleFlashScale = 0.02 },
-		laser2 = Class(TOrbitalDeathLaserBeamWeapon){ FxMuzzleFlashScale = 0.02 },
-		gauss1 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 1.2 },
-		gauss2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 1.2 },
-	},
-	OnStopBeingBuilt = function(self, builder, layer)
-		TWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
+    Weapons = {
+        Riotgun = Class(TDFRiotWeapon){
+            FxMuzzleFlash = EffectTemplate.TRiotGunMuzzleFxTank,
+            FxMuzzleFlashScale = 0.75,
+        },
+        Riotgun2 = Class(TDFRiotWeapon){
+            FxMuzzleFlash = EffectTemplate.TRiotGunMuzzleFxTank,
+            FxMuzzleFlashScale = 0.75,
+        },
+        rocket = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.45 },
+        robottalk = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
+        DeathWeapon = Class(SCUDeathWeapon){},
+        laser = Class(TOrbitalDeathLaserBeamWeapon){ FxMuzzleFlashScale = 0.02 },
+        laser2 = Class(TOrbitalDeathLaserBeamWeapon){ FxMuzzleFlashScale = 0.02 },
+        gauss1 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 1.2 },
+        gauss2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 1.2 },
+    },
+    OnStopBeingBuilt = function(self, builder, layer)
+        TWalkingLandUnit.OnStopBeingBuilt(self, builder, layer)
 
-		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
-			self:SetWeaponEnabledByLabel('robottalk', false)
-		else
-			self:SetWeaponEnabledByLabel('robottalk', true)
-		end
-	end,
+        if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
+            self:SetWeaponEnabledByLabel('robottalk', false)
+        else
+            self:SetWeaponEnabledByLabel('robottalk', true)
+        end
+    end,
 }
 
 TypeClass = BRNT3BLASP

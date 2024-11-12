@@ -16,28 +16,28 @@ local TDFMachineGunWeapon = WeaponsFile.TDFMachineGunWeapon
 local CDFHeavyDisintegratorWeapon = CWeapons.CDFHeavyDisintegratorWeapon
 
 BRMT2HTT3 = Class(TLandUnit){
-	Weapons = {
-		autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
-		MainGun = Class(CDFHeavyDisintegratorWeapon){ FxMuzzleFlashScale = 0.5 },
-		rocket = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.45 },
-		rocket2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.45 },
-		commanderw = Class(TDFMachineGunWeapon){},
-	},
-	OnStopBeingBuilt = function(self, builder, layer)
-		TLandUnit.OnStopBeingBuilt(self, builder, layer)
-		self.SetAIAutoattackWeapon(self)
-	end,
-	OnDetachedFromTransport = function(self, transport, bone)
-		TLandUnit.OnDetachedFromTransport(self, transport, bone)
-		self.SetAIAutoattackWeapon(self)
-	end,
-	SetAIAutoattackWeapon = function(self)
-		if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
-			self:SetWeaponEnabledByLabel('autoattack', false)
-		else
-			self:SetWeaponEnabledByLabel('autoattack', true)
-		end
-	end,
+    Weapons = {
+        autoattack = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.0 },
+        MainGun = Class(CDFHeavyDisintegratorWeapon){ FxMuzzleFlashScale = 0.5 },
+        rocket = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.45 },
+        rocket2 = Class(TDFGaussCannonWeapon){ FxMuzzleFlashScale = 0.45 },
+        commanderw = Class(TDFMachineGunWeapon){},
+    },
+    OnStopBeingBuilt = function(self, builder, layer)
+        TLandUnit.OnStopBeingBuilt(self, builder, layer)
+        self.SetAIAutoattackWeapon(self)
+    end,
+    OnDetachedFromTransport = function(self, transport, bone)
+        TLandUnit.OnDetachedFromTransport(self, transport, bone)
+        self.SetAIAutoattackWeapon(self)
+    end,
+    SetAIAutoattackWeapon = function(self)
+        if self:GetAIBrain().BrainType == 'Human' and IsUnit(self) then
+            self:SetWeaponEnabledByLabel('autoattack', false)
+        else
+            self:SetWeaponEnabledByLabel('autoattack', true)
+        end
+    end,
 }
 
 TypeClass = BRMT2HTT3

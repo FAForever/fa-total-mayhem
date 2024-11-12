@@ -15,13 +15,13 @@ local AAAZealotMissileWeapon = AWeapons.AAAZealotMissileWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 
 BROT1HPD = Class(TStructureUnit){
-	Weapons = {
-		MainGun = Class(TDFGaussCannonWeapon){
-			FxMuzzleFlashScale = 1.2,
-			FxMuzzleFlash = EffectTemplate.ASDisruptorCannonMuzzle01,
-		},
-		AntiAirMissiles = Class(AAAZealotMissileWeapon){},
-	},
+    Weapons = {
+        MainGun = Class(TDFGaussCannonWeapon){
+            FxMuzzleFlashScale = 1.2,
+            FxMuzzleFlash = EffectTemplate.ASDisruptorCannonMuzzle01,
+        },
+        AntiAirMissiles = Class(AAAZealotMissileWeapon){},
+    },
 }
 
 TypeClass = BROT1HPD

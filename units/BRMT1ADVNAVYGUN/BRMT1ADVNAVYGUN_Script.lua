@@ -16,10 +16,10 @@ local CDFLaserDisintegratorWeapon = cWeapons.CDFLaserDisintegratorWeapon01
 local CIFSmartCharge = cWeapons.CIFSmartCharge
 
 BRMT1ADVNAVYGUN = Class(CStructureUnit){
-	Weapons = {
-		Disintigrator = Class(CDFLaserDisintegratorWeapon){},
-		AntiTorpedo = Class(CIFSmartCharge){},
-	},
+    Weapons = {
+        Disintigrator = Class(CDFLaserDisintegratorWeapon){},
+        AntiTorpedo = Class(CIFSmartCharge){},
+    },
 }
 
 TypeClass = BRMT1ADVNAVYGUN

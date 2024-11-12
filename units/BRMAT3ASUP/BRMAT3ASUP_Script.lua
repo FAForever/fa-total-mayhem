@@ -12,12 +12,12 @@ local CAirUnit = import('/lua/cybranunits.lua').CAirUnit
 local CAAMissileNaniteWeapon = import('/lua/cybranweapons.lua').CAAMissileNaniteWeapon
 
 BRMAT3ASUP = Class(CAirUnit){
-	ExhaustBones = { 'ex01', 'ex02' },
-	ContrailBones = { 'Contrail_L', 'Contrail_R' },
-	Weapons = {
-		Missiles1 = Class(CAAMissileNaniteWeapon){},
-		Missiles2 = Class(CAAMissileNaniteWeapon){},
-	},
+    ExhaustBones = { 'ex01', 'ex02' },
+    ContrailBones = { 'Contrail_L', 'Contrail_R' },
+    Weapons = {
+        Missiles1 = Class(CAAMissileNaniteWeapon){},
+        Missiles2 = Class(CAAMissileNaniteWeapon){},
+    },
 }
 
 TypeClass = BRMAT3ASUP
