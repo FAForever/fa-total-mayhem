@@ -1,0 +1,14 @@
+# https://docs.github.com/en/repositories/working-with-files/using-files/viewing-a-file#ignore-commits-in-the-blame-view
+
+# convert effects tab -> 4 space (Uveso)
+dba8fcc046469fa79282ff129eb16cf8da34fd27
+# convert hook tab -> 4 space (Uveso)
+b5b7a213368b79fdc7192ee12080ff6277760b55
+# convert lua tab -> 4 space (Uveso)
+619b822846a6d937115ec96445732e0f8fcb72a5
+# convert Projectiles tab -> 4 space (Uveso)
+a0513290a2f83158ed008592ce72257e70463f44
+# convert units tab -> 4 space (Uveso)
+07cdf4270bb22721935c6127db64815d511c3e5b
+# Update fa-plugin.lua (Uveso)
+6558d1b6b7d8a969a1c87049d9cb68875f271755
