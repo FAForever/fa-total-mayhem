@@ -1,9 +1,16 @@
-V138 (not relased)
+V138 (14.Nov.2024)
 
+Removed T1HydroCarbon from AI builder. (was eco stalling the AI on gamestart)
+Added missing buildcondition for panic builder
 Unit BRPT3SHBM (Experimental Mega Bot) Fixed position of laser beam. (thanks to zhanghm18)
 Unit brnt3doomsday (Prototype Mobile Fortress) Fixed turret animation (thanks to Saver)
 Unit BRMT3CLOAKER (Experimental Mobile Cloakfield Generator) Fix cloak not init on OnStopBeingBuilt
 Unit brmt3pd (Heavy Point Defense) changed name from Triple Threat to Tripple Threat (thanks to Deribus)
+brot1bt (Fate MK1) fixed build animation bug (thanks to Saver)
+brot1btt2 (Fate MK2) fixed build animation bug (thanks to Saver)
+brot2mt (Pumice) fixed build animation bug (thanks to Saver)
+brot3bt (Rhyolite) fixed build animation bug (thanks to Saver)
+brot3bt2 (Rhyolite II) fixed build animation bug (thanks to Saver)
 
 *************************************************************************************************************************************
 V137 (04.Jun.2020)
