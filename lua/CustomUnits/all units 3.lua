@@ -21,9 +21,6 @@ UnitList = {
         Cybran = { 'brmt2bm', 50 }, -- Cybermech (Battle Mech)
         Aeon = { 'brot2ht', 50 }, -- Gheel (Heavy Hover Tank)
     },
-    T1HydroCarbon = {
-        UEF = { 'ueb1107', 50 }, -- HPG X100 (Hydroelectric Power Generator)
-    },
     T3ArmoredAssault = {
         UEF = { 'brnt1mtt3', 50 }, -- Marmor MK3 (Medium Tank)
         Cybran = { 'brmt2abtt3', 50 }, -- Caminara MK3 (Advanced Battle Tank)

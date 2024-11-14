@@ -32,12 +32,6 @@ UnitList = {
         Cybran = { 'brmt1btt2', 50 }, -- Reaper MK2 (Battle Tank)
         Aeon = { 'brot1mtt2', 50 }, -- Lintea MK2 (Medium Tank)
     },
-    T1HydroCarbon = {
-        UEF = { 'brnbt1peri', 50 }, -- Overlook (HydroCarbon Perimeter Monitoring System)
-        Cybran = { 'urb1107', 50 }, -- Cabin (Hydroelectric Power Generator)
-        Aeon = { 'uab1107', 50 }, -- Fordyce (Hydroelectric Power Generator)
-        Seraphim = { 'brpbt1peri', 50 }, -- Uyal Ha-Esel (HydroCarbon Perimeter Monitoring System)
-    },
     T1SeaFrigate = {
         UEF = { 'brnst1artillery', 50 }, -- Polestar Class (Artilleryship)
         Cybran = { 'brmst1battlecruiser', 50 }, -- Coelacanth Class (Battlecruiser)

@@ -58,12 +58,6 @@ UnitList = {
     T3SeaBattleship = {
         Aeon = { 'brost3bship', 50 }, -- Lupen Class (Advanced Battle Ship)
     },
-    T1HydroCarbon = {
-        UEF = { 'brnbaafac', 50 }, -- Sky-Force (HydroCarbon Anti-Air Perimeter Control System)
-        Cybran = { 'brmbt1peri', 50 }, -- Hacker (HydroCarbon Perimeter Monitoring System)
-        Aeon = { 'brobt1peri', 50 }, -- Finther (HydroCarbon Perimeter Monitoring System)
-        Seraphim = { 'xsb1107', 50 }, -- Eruya-leatoh (Hydroelectric Power Generator)
-    },
     T2LandArtillery = {
         UEF = { 'brnt2potshot', 50 }, -- Pot Shot (Medium Artillery)
     },
