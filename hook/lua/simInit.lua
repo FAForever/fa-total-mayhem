@@ -17,7 +17,7 @@ function ValidateModFilesTotalMayhem()
     local ModName = '* ' .. 'Total Mayhem'
     local ModDirectory = 'fa-total-mayhem'
     local Files = 2188
-    local Bytes = 755164096
+    local Bytes = 755178688
     LOG(
         '' .. ModName .. ': [' .. string.gsub(debug.getinfo(1).source, '.*\\(.*.lua)', '%1') .. ', line:' .. debug.getinfo(
             1
