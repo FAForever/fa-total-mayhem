@@ -2,7 +2,7 @@ BuilderGroup{
     BuilderGroupName = 'SorianMobileExperimentalEngineersGroup',
     BuildersType = 'EngineerBuilder',
     Builder{
-        BuilderName = 'Uveso T3 Land Exp1 Engineer 1 Group',
+        BuilderName = 'Sorian T3 Land Exp1 Engineer 1 Group',
         PlatoonTemplate = 'T3EngineerBuilderSorian',
         Priority = 950,
         BuilderConditions = {
@@ -143,7 +143,7 @@ BuilderGroup{
     BuilderGroupName = 'SorianMobileLandExperimentalEngineers',
     BuildersType = 'EngineerBuilder',
     Builder{
-        BuilderName = 'Uveso T3 Land Exp1 Engineer 1',
+        BuilderName = 'Sorian T3 Land Exp1 Engineer 1',
         PlatoonTemplate = 'T3EngineerBuilderSorian',
         Priority = 950,
         BuilderConditions = {
@@ -532,7 +532,7 @@ BuilderGroup{
     BuilderGroupName = 'SorianMobileAirExperimentalEngineers',
     BuildersType = 'EngineerBuilder',
     Builder{
-        BuilderName = 'Uveso T3 Air Exp1 Engineer 1',
+        BuilderName = 'Sorian T3 Air Exp1 Engineer 1',
         PlatoonTemplate = 'T3EngineerBuilderSorian',
         Priority = 949,
         BuilderConditions = {
