@@ -10,14 +10,13 @@ local OLDSetupSessionTotalMayhem = SetupSession
 function SetupSession()
     OLDSetupSessionTotalMayhem()
     import('/mods/fa-total-mayhem/lua/AI/AIBuilders/TotalMayhemBuilder.lua')
-    import('/mods/fa-total-mayhem/lua/AI/AIBuilders/TotalMayhemDefenseUpgrade.lua')
 end
 
 function ValidateModFilesTotalMayhem()
     local ModName = '* ' .. 'Total Mayhem'
     local ModDirectory = 'fa-total-mayhem'
-    local Files = 2188
-    local Bytes = 755178688
+    local Files = 2186
+    local Bytes = 755176512
     LOG(
         '' .. ModName .. ': [' .. string.gsub(debug.getinfo(1).source, '.*\\(.*.lua)', '%1') .. ', line:' .. debug.getinfo(
             1

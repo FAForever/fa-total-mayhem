@@ -19,3 +19,11 @@ end
 function EnemyUnitsLessAtLocationRadius(aiBrain, radius, locationType, unitCount, categoryEnemy)
     return HaveEnemyUnitAtLocation(aiBrain, radius, locationType, unitCount, categoryEnemy, '<')
 end
+
+--            { UCBC, 'HaveUnitRatioVersusCap', { 0.024, '<=', categories.STRUCTURE * categories.FACTORY * categories.LAND } }, -- Maximal 3 factories at 125 unitcap, 12 factories at 500 unitcap...
+function HaveUnitRatioVersusCap(aiBrain, ratio, compareType, categoryOwn)
+    local numOwnUnits = aiBrain:GetCurrentUnits(categoryOwn)
+    local cap = GetArmyUnitCap(aiBrain:GetArmyIndex())
+    --AILog(aiBrain:GetArmyIndex()..' CompareBody {World} ( '..numOwnUnits..' '..compareType..' '..cap..' ) -- ['..ratio..'] -- '..repr(DEBUG)..' :: '..(numOwnUnits / cap)..' '..compareType..' '..cap..' return '..repr(CompareBody(numOwnUnits / cap, ratio, compareType)))
+    return CompareBody(numOwnUnits / cap, ratio, compareType)
+end

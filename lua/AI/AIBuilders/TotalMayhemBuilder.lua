@@ -9,7 +9,7 @@ local MaxAttackForce = 0.45     -- 45% of all units can be attacking units (cate
 -- ==                                        HEAVYASSAULT Builder                                            == --
 -- ===================================================-======================================================== --
 BuilderGroup {
-    BuilderGroupName = 'HEAVYASSAULT Builder',                           -- BuilderGroupName, initalized from AIBaseTemplates in "\lua\AI\AIBaseTemplates\"
+    BuilderGroupName = 'Total Mayhem HEAVYASSAULT Builder',                           -- BuilderGroupName, initalized from AIBaseTemplates in "\lua\AI\AIBaseTemplates\"
     BuildersType = 'EngineerBuilder',
 -- cheap Tech1 land bots
     Builder {
@@ -206,15 +206,15 @@ BuilderGroup {
     },
 }
 -- ===================================================-======================================================== --
--- ==                                         HEAVYASSAULT Former                                            == --
+-- ==                                         PlatoonFormBuilder                                             == --
 -- ===================================================-======================================================== --
 BuilderGroup {
-    BuilderGroupName = 'HEAVYASSAULT Former',                               -- BuilderGroupName, initalized from AIBaseTemplates in "\lua\AI\AIBaseTemplates\"
+    BuilderGroupName = 'Total Mayhem Former',                                   -- BuilderGroupName, initalized from AIBaseTemplates in "\lua\AI\AIBaseTemplates\"
     BuildersType = 'PlatoonFormBuilder',                                        -- BuilderTypes are: EngineerBuilder, FactoryBuilder, PlatoonFormBuilder.
 -- land
     Builder {
         BuilderName = 'TM1 HEAVY Land Fearless',
-        PlatoonTemplate = 'TM1 HEAVYASSAULT LAND',                               -- Template Name. These units will be formed. See: "\Mods\fa-total-mayhem\hook\lua\AI\PlatoonTemplates\LandPlatoonTemplates.lua"
+        PlatoonTemplate = 'TM1 HEAVYASSAULT LAND',                              -- Template Name. These units will be formed. See: "\Mods\fa-total-mayhem\hook\lua\AI\PlatoonTemplates\LandPlatoonTemplates.lua"
         Priority = 500,                                                         -- Priority. 1000 is normal.
         InstanceCount = 2,                                                      -- Number of plattons that will be formed.
         BuilderData = {
