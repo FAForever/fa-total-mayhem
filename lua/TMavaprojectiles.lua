@@ -5,24 +5,12 @@
 
 local Projectile = import('/lua/sim/projectile.lua').Projectile
 local DefaultProjectileFile = import('/lua/sim/defaultprojectiles.lua')
-local EmitterProjectile = DefaultProjectileFile.EmitterProjectile
-local OnWaterEntryEmitterProjectile = DefaultProjectileFile.OnWaterEntryEmitterProjectile
-local SingleBeamProjectile = DefaultProjectileFile.SingleBeamProjectile
-local SinglePolyTrailProjectile = DefaultProjectileFile.SinglePolyTrailProjectile
-local MultiPolyTrailProjectile = DefaultProjectileFile.MultiPolyTrailProjectile
-local SingleCompositeEmitterProjectile = DefaultProjectileFile.SingleCompositeEmitterProjectile
-local Explosion = import('/lua/defaultexplosions.lua')
-local NullShell = DefaultProjectileFile.NullShell
 local EffectTemplate = import('/lua/EffectTemplates.lua')
-local DefaultExplosion = import('/lua/defaultexplosions.lua')
-local DepthCharge = import('/lua/defaultantiprojectile.lua').DepthCharge
-local util = import('/lua/utilities.lua')
-local EffectTemplate = import('/lua/EffectTemplates.lua')
-
 local TMavaEffectTemplate = import('/mods/fa-total-mayhem/lua/TMavaEffectTemplates.lua')
 local TMEffectTemplate = import('/mods/fa-total-mayhem/lua/TMEffectTemplates.lua')
-local DepthCharge = import('/lua/defaultantiprojectile.lua').DepthCharge
-local util = import('/lua/utilities.lua')
+local EmitterProjectile = DefaultProjectileFile.EmitterProjectile
+local SingleBeamProjectile = DefaultProjectileFile.SingleBeamProjectile
+local MultiPolyTrailProjectile = DefaultProjectileFile.MultiPolyTrailProjectile
 
 --- Null Shell
 ---@class EXNullShell : Projectile
@@ -263,7 +251,6 @@ AeonBROT3NCM2proj = Class(MultiPolyTrailProjectile){
 ---@class UefBRNAT1ADVFIGproj : SingleBeamProjectile
 UefBRNAT1ADVFIGproj = Class(SingleBeamProjectile){
     FxTrails = EffectTemplate.TMissileExhaust02,
-    FxTrailOffset = -0.5,
     BeamName = '/effects/emitters/missile_munition_exhaust_beam_01_emit.bp',
     FxImpactUnit = EffectTemplate.TShipGaussCannonHit02,
     FxUnitHitScale = 0.55,

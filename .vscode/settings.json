@@ -1,39 +1,62 @@
 {
-  "Lua.runtime.version": "Lua 5.3",
-  "Lua.runtime.path": [
-      "?.lua",
-      "?/init.lua",
-      "/?"
-  ],
-  "Lua.completion.showWord": "Disable",
-  "Lua.runtime.special": {
+    "Lua.runtime.version": "Lua 5.1",
+    "Lua.runtime.path": ["?.lua", "?/init.lua", "/?"],
+    "Lua.completion.showWord": "Disable",
+    "Lua.runtime.special": {
       "import": "require",
-      "doscript": "require",
-      "LazyImport": "require",
-  },
-  "Lua.runtime.nonstandardSymbol": [
-      "continue",
-      "!="
-  ],
-  "Lua.completion.requireSeparator": "/",
-  "Lua.runtime.exportEnvDefault": true,
-  "Lua.runtime.plugin": "${3rd}/fa/plugin.lua",
-  "Lua.diagnostics.globals": [
-      "moho",
-      "ScenarioInfo"
-  ],
-  "Lua.workspace.library": [
-      "C:\\Users\\rowjo\\Documents\\GitHub\\fa",
-  ],
-  "Lua.workspace.checkThirdParty": false,
-  "cSpell.words": [
-    "BRMAT2ADVBOMBERproj",
-    "BRMST3BOMproj",
-    "BRMT1ADVBOTRLproj",
-    "BRMT1BTRLproj",
-    "CybBRMAT2ADVBOMBERproj",
-    "CybBRMST3BOMproj",
-    "CybBRMT1ADVBOTRLproj",
-    "TMavaprojectiles"
-]
+      "doscript": "require"
+    },
+    "Lua.runtime.nonstandardSymbol": ["!="],
+    "Lua.completion.requireSeparator": "/",
+    "Lua.runtime.exportEnvDefault": true,
+    "Lua.diagnostics.globals": ["moho"],
+    "Lua.runtime.plugin": "${3rd}/fa/plugin.lua",
+    "Lua.workspace.library": ["${3rd}/fa/library"],
+    "Lua.workspace.checkThirdParty": false,
+    "cSpell.words": [
+      "AeonBROAT1FIGproj",
+      "AeonBROST2ADVBATTLESHIPproj",
+      "AeonBROT1BTCLAWproj",
+      "AeonBROT1EXMOBART2proj",
+      "AeonBROT1EXMOBARTproj",
+      "AeonBROT1PDROproj",
+      "AeonBROT2EXBMproj",
+      "AeonBROT2HTproj",
+      "AeonBROT2MTRLproj",
+      "AeonBROT3BTBOT2proj",
+      "AeonBROT3COUGproj",
+      "AeonBROT3HTproj",
+      "AeonBROT3NCMPproj",
+      "AeonBROT3NCMproj",
+      "AeonBROT3NCNlaserproj",
+      "AeonBROT3PBMproj",
+      "AeonBROT3PDROproj",
+      "AeonBROT3SHBMEMPproj",
+      "AeonBROT3SHBMproj",
+      "AeonHvyClawproj",
+      "Akuma",
+      "battlebot",
+      "BRMAT2ADVBOMBERproj",
+      "BRMST3BOMproj",
+      "BRMT1ADVBOTRLproj",
+      "BRMT1BTRLproj",
+      "Clawgun",
+      "CybBRMAT2ADVBOMBERproj",
+      "CybBRMST3BOMproj",
+      "CybBRMT1ADVBOTRLproj",
+      "CybBRMT1BTRLproj",
+      "CybBRMT1EXTANKproj",
+      "CybBRMT2HVYproj",
+      "CybBRMT3HAMRLproj",
+      "CybNULLWEAPONproj",
+      "maingun",
+      "NULLWEAPON",
+      "proj",
+      "Quadrobot",
+      "SerBRPT1EXTANK2proj",
+      "SerBRPT3SHBMproj",
+      "TMavaprojectiles",
+      "uefBRNT3ARGUSLASERproj",
+      "UefBRNT3ARGUSMINIproj"
+    ]
 }

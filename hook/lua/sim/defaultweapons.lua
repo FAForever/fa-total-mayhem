@@ -1,4 +1,3 @@
-
 ---@class SCUDeathWeapon : BareBonesWeapon
 SCUDeathWeapon = Class(BareBonesWeapon){
 

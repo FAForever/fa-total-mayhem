@@ -2,14 +2,23 @@
 -- Add locals for BuilderConditions
 local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
 local EBC = '/lua/editor/EconomyBuildConditions.lua'
+<<<<<<< Updated upstream
 local MIBC = '/lua/editor/MiscBuildConditions.lua'
 local MaxDefense = 0.15         -- 15% of all units can be defenses (categories.STRUCTURE * categories.DEFENSE)
 local MaxAttackForce = 0.45     -- 45% of all units can be attacking units (categories.MOBILE - categories.ENGINEER)
+=======
+local TBC = '/lua/editor/threatbuildconditions.lua'
+
+>>>>>>> Stashed changes
 -- ===================================================-======================================================== --
 -- ==                                        HEAVYASSAULT Builder                                            == --
 -- ===================================================-======================================================== --
 BuilderGroup {
+<<<<<<< Updated upstream
     BuilderGroupName = 'Total Mayhem HEAVYASSAULT Builder',                           -- BuilderGroupName, initalized from AIBaseTemplates in "\lua\AI\AIBaseTemplates\"
+=======
+    BuilderGroupName = 'HEAVYASSAULT Builder', -- BuilderGroupName, initalized from AIBaseTemplates in "\lua\AI\AIBaseTemplates\"
+>>>>>>> Stashed changes
     BuildersType = 'EngineerBuilder',
 -- cheap Tech1 land bots
     Builder {

@@ -1,6 +1,4 @@
-
 local OLDAddGlobalBaseTemplate = AddGlobalBaseTemplate
-
 
 ---@param aiBrain AIBrain
 ---@param locationType string
