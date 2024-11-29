@@ -182,6 +182,7 @@ UnitBlueprint{
     SizeZ = 10,
     StrategicIconName = "icon_experimental_generic",
     StrategicIconSortPriority = 155,
+    Transport = { TransportClass = 10 },
     Veteran = {
         Level1 = 25,
         Level2 = 75,

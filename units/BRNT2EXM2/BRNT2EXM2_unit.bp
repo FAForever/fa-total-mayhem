@@ -225,7 +225,7 @@ UnitBlueprint{
     SizeZ = 1.9,
     StrategicIconName = "icon_experimental_generic",
     StrategicIconSortPriority = 125,
-    Transport = { TransportClass = 3 },
+    Transport = { TransportClass = 10 },
     Veteran = {
         Level1 = 8,
         Level2 = 16,

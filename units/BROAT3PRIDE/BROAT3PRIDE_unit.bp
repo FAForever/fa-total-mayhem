@@ -229,7 +229,7 @@ UnitBlueprint{
     Transport = {
         AirClass = false,
         ClassGenericUpTo = 4,
-        TransportClass = 4,
+        TransportClass = 10,
     },
     Veteran = {
         Level1 = 50,

@@ -167,7 +167,7 @@ UnitBlueprint{
     StrategicIconSortPriority = 105,
     Transport = {
         AirClass = true,
-        TransportClass = 5,
+        TransportClass = 10,
     },
     Weapon = {
         {
