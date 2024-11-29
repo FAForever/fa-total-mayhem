@@ -139,7 +139,7 @@ UnitBlueprint{
         UnitName = "Uziel",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 35 },
+    Intel = { VisionRadius = 36 },
     Interface = { HelpText = "Experimental Medium Mech" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 1.55,

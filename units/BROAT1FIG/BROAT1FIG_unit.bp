@@ -166,7 +166,7 @@ UnitBlueprint{
         UnitName = "Vaikana",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 29 },
+    Intel = { VisionRadius = 30 },
     Interface = { HelpText = "Fighter" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.5,

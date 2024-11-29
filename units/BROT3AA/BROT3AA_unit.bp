@@ -117,7 +117,7 @@ UnitBlueprint{
         UnitName = "Tachylite",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 45 },
+    Intel = { VisionRadius = 46 },
     Interface = { HelpText = "Mobile Anti-Air" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.85,

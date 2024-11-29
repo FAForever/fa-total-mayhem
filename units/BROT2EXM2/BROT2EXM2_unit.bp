@@ -128,7 +128,7 @@ UnitBlueprint{
     },
     Intel = {
         RadarRadius = 60,
-        VisionRadius = 31,
+        VisionRadius = 32,
     },
     Interface = { HelpText = "Advanced Battle Tank" },
     LifeBarHeight = 0.075,

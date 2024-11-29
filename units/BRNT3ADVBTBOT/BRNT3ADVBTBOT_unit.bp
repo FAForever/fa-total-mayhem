@@ -165,7 +165,7 @@ UnitBlueprint{
     Intel = {
         OmniRadius = 40,
         RadarRadius = 80,
-        VisionRadius = 35,
+        VisionRadius = 36,
     },
     Interface = { HelpText = "Advanced Battlemech" },
     LifeBarHeight = 0.075,

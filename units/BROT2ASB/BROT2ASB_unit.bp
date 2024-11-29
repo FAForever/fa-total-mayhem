@@ -139,8 +139,8 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        OmniRadius = 15,
-        RadarRadius = 50,
+        OmniRadius = 16,
+        RadarRadius = 52,
         VisionRadius = 40,
     },
     Interface = { HelpText = "Advanced Laser Bot" },

@@ -162,8 +162,8 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        RadarRadius = 70,
-        VisionRadius = 47,
+        RadarRadius = 72,
+        VisionRadius = 48,
     },
     Interface = { HelpText = "Advanced Battle Bot" },
     LifeBarHeight = 0.15,

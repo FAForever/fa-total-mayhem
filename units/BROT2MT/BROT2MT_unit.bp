@@ -117,7 +117,7 @@ UnitBlueprint{
         UnitName = "Pumice",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 27 },
+    Intel = { VisionRadius = 28 },
     Interface = { HelpText = "Medium Tank" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.35,

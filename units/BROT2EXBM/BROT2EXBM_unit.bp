@@ -144,7 +144,7 @@ UnitBlueprint{
         UnitName = "Akuma",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 45 },
+    Intel = { VisionRadius = 46 },
     Interface = { HelpText = "Advanced Battle Mech" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 1.55,

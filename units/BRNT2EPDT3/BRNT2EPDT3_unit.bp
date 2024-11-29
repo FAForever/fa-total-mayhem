@@ -111,7 +111,7 @@ UnitBlueprint{
         UpgradesFrom = "brnt2epd",
         UpgradesFromBase = "brnt2epd",
     },
-    Intel = { VisionRadius = 31 },
+    Intel = { VisionRadius = 32 },
     Interface = { HelpText = "Experimental Plasmacannon" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 1.25,

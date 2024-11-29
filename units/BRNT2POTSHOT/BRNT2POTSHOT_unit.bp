@@ -118,7 +118,7 @@ UnitBlueprint{
         UnitName = "Pot Shot",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 23 },
+    Intel = { VisionRadius = 24 },
     Interface = { HelpText = "Medium Artillery" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.6,

@@ -116,7 +116,7 @@ UnitBlueprint{
         UnitName = "Predator MK1",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 27 },
+    Intel = { VisionRadius = 28 },
     Interface = { HelpText = "Heavy Tank" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.55,

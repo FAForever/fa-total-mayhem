@@ -130,7 +130,7 @@ UnitBlueprint{
     },
     Intel = {
         RadarRadius = 60,
-        VisionRadius = 35,
+        VisionRadius = 36,
     },
     Interface = { HelpText = "Advanced Mobile Defense System" },
     LifeBarHeight = 0.075,

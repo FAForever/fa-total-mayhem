@@ -117,7 +117,7 @@ UnitBlueprint{
         UnitName = "Carnage",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 35 },
+    Intel = { VisionRadius = 36 },
     Interface = { HelpText = "Medium Tank" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.8,

@@ -151,7 +151,7 @@ UnitBlueprint{
     },
     Intel = {
         RadarRadius = 60,
-        VisionRadius = 55,
+        VisionRadius = 56,
     },
     Interface = { HelpText = "Experimental Battlemech" },
     LifeBarHeight = 0.075,

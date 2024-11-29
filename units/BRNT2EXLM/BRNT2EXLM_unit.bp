@@ -153,7 +153,7 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        RadarRadius = 65,
+        RadarRadius = 68,
         VisionRadius = 50,
     },
     Interface = { HelpText = "Advanced Light Assault Mech" },

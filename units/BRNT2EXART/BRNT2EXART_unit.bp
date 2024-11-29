@@ -107,7 +107,7 @@ UnitBlueprint{
         UnitName = "Big Jack",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 35 },
+    Intel = { VisionRadius = 36 },
     Interface = { HelpText = "Experimental Artillery Installation" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 1.5,

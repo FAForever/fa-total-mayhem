@@ -160,7 +160,7 @@ UnitBlueprint{
         UnitName = "Vulture",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 45 },
+    Intel = { VisionRadius = 46 },
     Interface = { HelpText = "Experimental Medium Mech" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 1.46,

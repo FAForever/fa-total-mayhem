@@ -115,7 +115,7 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        RadarRadius = 85,
+        RadarRadius = 88,
         VisionRadius = 34,
     },
     Interface = { HelpText = "Experimental Point Defense" },

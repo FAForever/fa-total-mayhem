@@ -117,7 +117,7 @@ UnitBlueprint{
         UnitName = "LaserBot",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 25 },
+    Intel = { VisionRadius = 26 },
     Interface = { HelpText = "Advanced Light Mech" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.76,

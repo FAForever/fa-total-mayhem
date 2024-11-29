@@ -153,10 +153,10 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        OmniRadius = 70,
+        OmniRadius = 72,
         RadarRadius = 120,
-        VisionRadius = 65,
-        WaterVisionRadius = 30,
+        VisionRadius = 66,
+        WaterVisionRadius = 32,
     },
     Interface = { HelpText = "Prototype Ultraheavy Battlebot" },
     LifeBarHeight = 0.075,

@@ -146,7 +146,7 @@ UnitBlueprint{
         UnitName = "Eclipse",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 35 },
+    Intel = { VisionRadius = 36 },
     Interface = { HelpText = "Advanced Gunship" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 1.35,

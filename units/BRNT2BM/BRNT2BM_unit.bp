@@ -143,7 +143,7 @@ UnitBlueprint{
     },
     Intel = {
         RadarRadius = 60,
-        VisionRadius = 55,
+        VisionRadius = 56,
     },
     Interface = { HelpText = "Advanced Gatling Mech" },
     LifeBarHeight = 0.075,

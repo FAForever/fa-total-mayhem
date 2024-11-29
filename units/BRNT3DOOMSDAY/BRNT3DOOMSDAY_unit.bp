@@ -194,8 +194,8 @@ UnitBlueprint{
     },
     Intel = {
         OmniRadius = 60,
-        RadarRadius = 150,
-        VisionRadius = 55,
+        RadarRadius = 152,
+        VisionRadius = 56,
     },
     Interface = { HelpText = "Prototype Mobile Fortress" },
     LifeBarHeight = 0.075,

@@ -251,7 +251,7 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        RadarRadius = 150,
+        RadarRadius = 152,
         VisionRadius = 40,
     },
     Interface = { HelpText = "Experimental Mobile Artillery" },

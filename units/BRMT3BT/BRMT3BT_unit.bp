@@ -142,7 +142,7 @@ UnitBlueprint{
         UnitName = "Demon",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 35 },
+    Intel = { VisionRadius = 36 },
     Interface = { HelpText = "Battle Tank" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.8,

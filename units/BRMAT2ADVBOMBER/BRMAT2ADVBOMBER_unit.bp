@@ -171,7 +171,7 @@ UnitBlueprint{
         RadarStealth = true,
         ReactivateTime = 5,
         ShowIntelOnSelect = true,
-        VisionRadius = 35,
+        VisionRadius = 36,
     },
     Interface = { HelpText = "Advanced Stealth Bomber" },
     LifeBarHeight = 0.075,

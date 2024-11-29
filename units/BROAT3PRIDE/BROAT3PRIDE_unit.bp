@@ -184,7 +184,7 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        RadarRadius = 95,
+        RadarRadius = 96,
         VisionRadius = 50,
     },
     Interface = { HelpText = "Prototype Flying Fortress" },

@@ -160,9 +160,9 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        OmniRadius = 70,
+        OmniRadius = 72,
         RadarStealth = true,
-        SonarRadius = 50,
+        SonarRadius = 52,
         VisionRadius = 50,
     },
     Interface = { HelpText = "Prototype Battle Bot" },

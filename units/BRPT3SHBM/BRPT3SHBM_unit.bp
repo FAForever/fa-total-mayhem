@@ -229,7 +229,7 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        OmniRadius = 90,
+        OmniRadius = 92,
         VisionRadius = 50,
     },
     Interface = { HelpText = "Experimental Mega Bot" },

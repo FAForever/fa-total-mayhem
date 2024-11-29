@@ -117,7 +117,7 @@ UnitBlueprint{
         UnitName = "Leeroy MK2",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 25 },
+    Intel = { VisionRadius = 26 },
     Interface = { HelpText = "Heavy Armored Tank" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.7,

@@ -174,8 +174,8 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        OmniRadius = 55,
-        VisionRadius = 47,
+        OmniRadius = 56,
+        VisionRadius = 48,
     },
     Interface = { HelpText = "Battle Tank" },
     LifeBarHeight = 0.075,

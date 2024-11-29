@@ -132,8 +132,8 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        RadarRadius = 45,
-        VisionRadius = 45,
+        RadarRadius = 48,
+        VisionRadius = 46,
     },
     Interface = { HelpText = "Siege Mech" },
     LifeBarHeight = 0.075,

@@ -119,7 +119,7 @@ UnitBlueprint{
         UnitName = "Kruger",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 27 },
+    Intel = { VisionRadius = 28 },
     Interface = { HelpText = "Advanced Assault Tank" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.8,

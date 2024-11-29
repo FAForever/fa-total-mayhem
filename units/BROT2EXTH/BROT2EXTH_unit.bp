@@ -158,8 +158,8 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        RadarRadius = 50,
-        VisionRadius = 31,
+        RadarRadius = 52,
+        VisionRadius = 32,
     },
     Interface = { HelpText = "Advanced Tank Hunter" },
     LifeBarHeight = 0.075,

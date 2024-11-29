@@ -116,7 +116,7 @@ UnitBlueprint{
         UnitName = "Twister MK2",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 23 },
+    Intel = { VisionRadius = 24 },
     Interface = { HelpText = "Heavy Armored Tank" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.6,

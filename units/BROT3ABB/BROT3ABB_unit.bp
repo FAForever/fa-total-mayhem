@@ -157,7 +157,7 @@ UnitBlueprint{
         UnitName = "Serval",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 41 },
+    Intel = { VisionRadius = 42 },
     Interface = { HelpText = "Armored Battle Bot" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.5,

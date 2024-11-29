@@ -128,8 +128,8 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        OmniRadius = 70,
-        VisionRadius = 35,
+        OmniRadius = 72,
+        VisionRadius = 36,
     },
     Interface = { HelpText = "Advanced Support Tank" },
     LifeBarHeight = 0.075,

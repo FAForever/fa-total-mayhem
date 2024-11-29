@@ -146,9 +146,9 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        OmniRadius = 50,
+        OmniRadius = 52,
         VisionRadius = 50,
-        WaterVisionRadius = 50,
+        WaterVisionRadius = 52,
     },
     Interface = { HelpText = "Experimental Heavy Mech" },
     LifeBarHeight = 0.075,

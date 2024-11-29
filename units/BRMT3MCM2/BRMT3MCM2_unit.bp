@@ -163,8 +163,8 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        OmniRadius = 70,
-        VisionRadius = 55,
+        OmniRadius = 72,
+        VisionRadius = 56,
     },
     Interface = { HelpText = "Experimental Heavy Assault Mech" },
     LifeBarHeight = 0.075,

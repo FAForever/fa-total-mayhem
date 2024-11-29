@@ -127,7 +127,7 @@ UnitBlueprint{
         UnitName = "Hervour MK2",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 25 },
+    Intel = { VisionRadius = 26 },
     Interface = { HelpText = "Battle Tank" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.6,

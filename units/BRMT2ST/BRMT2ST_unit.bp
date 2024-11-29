@@ -120,7 +120,7 @@ UnitBlueprint{
         RadarStealth = true,
         ReactivateTime = 5,
         ShowIntelOnSelect = true,
-        VisionRadius = 25,
+        VisionRadius = 26,
     },
     Interface = { HelpText = "Stealth Tank" },
     LifeBarHeight = 0.075,

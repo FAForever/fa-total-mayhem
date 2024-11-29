@@ -158,7 +158,7 @@ UnitBlueprint{
     },
     Intel = {
         RadarRadius = 40,
-        VisionRadius = 35,
+        VisionRadius = 36,
     },
     Interface = { HelpText = "Advanced Gunship" },
     LifeBarHeight = 0.075,

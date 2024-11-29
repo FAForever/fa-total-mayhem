@@ -123,7 +123,7 @@ UnitBlueprint{
         UnitName = "Raptor",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 35 },
+    Intel = { VisionRadius = 36 },
     Interface = { HelpText = "Assault Mech" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.76,

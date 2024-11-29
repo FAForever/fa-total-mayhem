@@ -152,7 +152,7 @@ UnitBlueprint{
     },
     Intel = {
         OmniRadius = 20,
-        RadarRadius = 90,
+        RadarRadius = 92,
         RadarStealth = true,
         ReactivateTime = 5,
         ShowIntelOnSelect = true,

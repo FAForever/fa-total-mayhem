@@ -161,10 +161,10 @@ UnitBlueprint{
         UnitWeight = 1,
     },
     Intel = {
-        RadarRadius = 55,
-        SonarRadius = 35,
+        RadarRadius = 56,
+        SonarRadius = 36,
         VisionRadius = 30,
-        WaterVisionRadius = 30,
+        WaterVisionRadius = 32,
     },
     Interface = { HelpText = "Battleship" },
     LifeBarHeight = 0.075,

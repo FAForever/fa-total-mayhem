@@ -140,7 +140,7 @@ UnitBlueprint{
         UnitName = "Crawler",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 35 },
+    Intel = { VisionRadius = 36 },
     Interface = { HelpText = "Heavy Tank" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.9,

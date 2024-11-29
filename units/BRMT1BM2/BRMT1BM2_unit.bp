@@ -134,7 +134,7 @@ UnitBlueprint{
         UnitName = "Aes",
         UnitWeight = 1,
     },
-    Intel = { VisionRadius = 23 },
+    Intel = { VisionRadius = 24 },
     Interface = { HelpText = "Light Battle Mech" },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.46,
