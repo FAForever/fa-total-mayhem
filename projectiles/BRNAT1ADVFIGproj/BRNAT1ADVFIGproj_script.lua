@@ -1,4 +1,6 @@
 local UefBRNAT1ADVFIGproj = import('/mods/fa-total-mayhem/lua/TMavaprojectiles.lua').UefBRNAT1ADVFIGproj
+local TrashBagAdd = TrashBag.Add
+
 
 ---@class BRNAT1ADVFIGproj : UefBRNAT1ADVFIGproj
 BRNAT1ADVFIGproj = Class(UefBRNAT1ADVFIGproj){
@@ -6,7 +8,8 @@ BRNAT1ADVFIGproj = Class(UefBRNAT1ADVFIGproj){
     ---@param self BRNAT1ADVFIGproj
     OnCreate = function(self)
         UefBRNAT1ADVFIGproj.OnCreate(self)
-        self:ForkThread(self.UpdateThread)
+        local trash = self.Trash
+        TrashBagAdd(trash, ForkThread(self.UpdateThread, self))
     end,
 
     ---@param self BRNAT1ADVFIGproj

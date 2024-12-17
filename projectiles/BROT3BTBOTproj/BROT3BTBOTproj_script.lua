@@ -7,15 +7,13 @@ local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
 BROT3BTBOTproj = Class(AeonBROT3BTBOTproj){
 
     ---@param self BROT3BTBOTproj
-    ---@param TargetType string unused
-    ---@param TargetEntity Entity unused
-    OnImpact = function(self, TargetType, TargetEntity)
+    OnImpact = function(self)
         local FxFragEffect = EffectTemplate.AIFBallisticMortarHit01
         local ChildProjectileBP = '/mods/fa-total-mayhem/projectiles/BROT3BTBOT2proj/BROT3BTBOT2proj_proj.bp'
 
         -- Split effects
-        for k, v in FxFragEffect do
-            CreateEmitterAtEntity(self, self:GetArmy(), v)
+        for _, v in FxFragEffect do
+            CreateEmitterAtEntity(self, self.Army, v)
             self:Destroy()
         end
 
@@ -48,7 +46,6 @@ BROT3BTBOTproj = Class(AeonBROT3BTBOTproj){
             proj:SetVelocity(velocity)
             proj:PassDamageData(self.DamageData)
         end
-        local pos = self:GetPosition()
     end
 }
 

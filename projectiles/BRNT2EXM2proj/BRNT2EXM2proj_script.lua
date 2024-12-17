@@ -1,4 +1,5 @@
 local UefBRNT2EXM2proj = import('/mods/fa-total-mayhem/lua/TMprojectiles.lua').UefBRNT2EXM2proj
+local TrashBagAdd = TrashBag.Add
 
 ---@class BRNT2EXM2proj : UefBRNT2EXM2proj
 BRNT2EXM2proj = Class(UefBRNT2EXM2proj){
@@ -6,8 +7,10 @@ BRNT2EXM2proj = Class(UefBRNT2EXM2proj){
     ---@param self BRNT2EXM2proj
     OnCreate = function(self)
         UefBRNT2EXM2proj.OnCreate(self)
+        local trash = self.Trash
+
         self:SetCollisionShape('Sphere', 0, 0, 0, 2)
-        self.MoveThread = self:ForkThread(self.MovementThread)
+        self.MoveThread = TrashBagAdd(trash, ForkThread(self.MovementThread, self))
     end,
 
     ---@param self BRNT2EXM2proj

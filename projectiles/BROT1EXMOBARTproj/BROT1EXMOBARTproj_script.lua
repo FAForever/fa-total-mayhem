@@ -7,15 +7,13 @@ local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
 BROT1EXMOBARTproj = Class(AeonBROT1EXMOBARTproj){
 
     ---@param self BROT1EXMOBARTproj
-    ---@param TargetType string unused
-    ---@param TargetEntity Entity unused
-    OnImpact = function(self, TargetType, TargetEntity)
+    OnImpact = function(self)
         local FxFragEffect = TMEffectTemplate.AeonUnitDeathRing02
         local ChildProjectileBP = '/mods/fa-total-mayhem/projectiles/BROT1EXMOBART2proj/BROT1EXMOBART2proj_proj.bp'
 
         -- Split effects
-        for k, v in FxFragEffect do
-            CreateEmitterAtEntity(self, self:GetArmy(), v)
+        for _, v in FxFragEffect do
+            CreateEmitterAtEntity(self, self.Army, v)
             self:Destroy()
         end
 
@@ -48,7 +46,6 @@ BROT1EXMOBARTproj = Class(AeonBROT1EXMOBARTproj){
             proj:SetVelocity(velocity)
             proj:PassDamageData(self.DamageData)
         end
-        local pos = self:GetPosition()
     end
 }
 

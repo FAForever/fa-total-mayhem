@@ -11,24 +11,38 @@
 local TConstructionUnit = import('/lua/terranunits.lua').TConstructionUnit
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 
+---@class BROAT1ENGINEERDRONE : TConstructionUnit
 BROAT1ENGINEERDRONE = Class(TConstructionUnit){
+
+    ---@param self BROAT1ENGINEERDRONE
     OnCreate = function(self)
         TConstructionUnit.OnCreate(self)
         self.docked = true
         self.returning = false
         self:CreatTheEffects()
     end,
+
+    ---@param self BROAT1ENGINEERDRONE
+    ---@param parent Unit
+    ---@param podName string
     SetParent = function(self, parent, podName)
         self.Parent = parent
         self.PodName = podName
         self:SetCreator(parent)
     end,
+
+    ---@param self BROAT1ENGINEERDRONE
     CreatTheEffects = function(self)
-        local army = self:GetArmy()
-        for k, v in EffectTemplate['SIFInainoPlumeFxTrails01'] do
+        local army = self.Army
+        for _, v in EffectTemplate['SIFInainoPlumeFxTrails01'] do
             CreateAttachedEmitter(self, 'AttachPoint', army, v):ScaleEmitter(0.22)
         end
     end,
+
+    ---@param self BROAT1ENGINEERDRONE
+    ---@param instigator Unit
+    ---@param type string
+    ---@param overkillRatio number
     OnKilled = function(self, instigator, type, overkillRatio)
         if self.Parent and not self.Parent.Dead then
             self.Parent:NotifyOfPodDeath(self.PodName)
@@ -36,18 +50,31 @@ BROAT1ENGINEERDRONE = Class(TConstructionUnit){
         end
         TConstructionUnit.OnKilled(self, instigator, type, overkillRatio)
     end,
+
+    ---@param self BROAT1ENGINEERDRONE
+    ---@param unitBeingBuilt Unit
+    ---@param order string
     OnStartBuild = function(self, unitBeingBuilt, order)
         TConstructionUnit.OnStartBuild(self, unitBeingBuilt, order)
         self.returning = false
     end,
+
+    ---@param self BROAT1ENGINEERDRONE
+    ---@param unitBuilding Unit
     OnStopBuild = function(self, unitBuilding)
         TConstructionUnit.OnStopBuild(self, unitBuilding)
         self.ReturnHome(self)
     end,
+
+    ---@param self BROAT1ENGINEERDRONE
     OnFailedToBuild = function(self)
         TConstructionUnit.OnFailedToBuild(self)
         self.ReturnHome(self)
     end,
+
+    ---@param self BROAT1ENGINEERDRONE
+    ---@param new string
+    ---@param old string
     OnMotionHorzEventChange = function(self, new, old)
         if self and not self.Dead then
             if self.Parent and not self.Parent.Dead then
@@ -68,6 +95,8 @@ BROAT1ENGINEERDRONE = Class(TConstructionUnit){
             end
         end
     end,
+
+    ---@param self BROAT1ENGINEERDRONE
     ReturnHome = function(self)
         local parentPosition = self.Parent:GetPosition(self.Parent.PodData[self.PodName].PodAttachpoint)
         self.returning = true

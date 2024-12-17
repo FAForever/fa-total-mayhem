@@ -1,4 +1,5 @@
 local UefBRNAT2FIGHTERproj = import('/mods/fa-total-mayhem/lua/TMavaprojectiles.lua').UefBRNAT2FIGHTERproj
+local TrashBagAdd = TrashBag.Add
 
 ---@class BRNAT2FIGHTERproj : UefBRNAT2FIGHTERproj
 BRNAT2FIGHTERproj = Class(UefBRNAT2FIGHTERproj){
@@ -6,7 +7,8 @@ BRNAT2FIGHTERproj = Class(UefBRNAT2FIGHTERproj){
     ---@param self BRNAT2FIGHTERproj
     OnCreate = function(self)
         UefBRNAT2FIGHTERproj.OnCreate(self)
-        self:ForkThread(self.UpdateThread)
+        local trash = self.Trash
+        TrashBagAdd(trash, ForkThread(self.UpdateThread, self))
     end,
 
     ---@param self BRNAT2FIGHTERproj
