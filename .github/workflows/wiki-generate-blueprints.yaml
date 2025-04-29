@@ -52,7 +52,8 @@ jobs:
                 repository: FAForever/fa
                 path: fa
                 ref: develop
-                sparse-checkout-cone-mode: |
+                sparse-checkout-cone-mode: false 
+                sparse-checkout: |
                   loc
                   lua/ui/help/unitscription.lua
                   lua/ui/help/tooltips.lua
@@ -65,7 +66,8 @@ jobs:
                   repository: FAForever/fa-total-mayhem
                   path: mods/fa-total-mayhem
                   ref: master
-                  sparse-checkout-cone-mode: |
+                  sparse-checkout-cone-mode: false
+                  sparse-checkout: |
                       mod_info.lua
                       wiki
                       units/*_unit.bp
