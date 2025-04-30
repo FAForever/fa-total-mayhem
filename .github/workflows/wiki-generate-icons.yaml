@@ -21,7 +21,8 @@ jobs:
               repository: FAForever/fa-total-mayhem
               path: mods/fa-total-mayhem
               ref: master
-              sparse-checkout-cone-mode: |
+              sparse-checkout-cone-mode: false 
+              sparse-checkout: |
                 icons/units
 
         # Install Image Magick
